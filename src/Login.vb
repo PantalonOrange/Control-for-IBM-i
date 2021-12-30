@@ -1,6 +1,17 @@
+'Login.vb
+'This form handles the credentials and exit point to the webservice
+'Copyright (C)2021 by Christian Brunner
+
+
 Public Class Login
 
+    Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Initial load
+        HostTextBox.Text = "https://10.1.1.1:20210/system/activejobs"
+    End Sub
+
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
+        'Check data, login in -> save credentials to structure and load main-form
         Dim Success As Boolean = True
         If UsernameTextBox.Text = "" Then
             UsernameTextBox.Select()
@@ -14,14 +25,14 @@ Public Class Login
         End If
         If Success And HostTextBox.Text = "" Then
             HostTextBox.Select()
-            MessageBox.Show("No host-address inserted!", "No host", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("No webservice-address inserted!", "No webservice", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Success = False
         End If
         If Success Then
-            ActiveJobs.Credentials.User = UsernameTextBox.Text
-            ActiveJobs.Credentials.Password = PasswordTextBox.Text
-            ActiveJobs.Host = HostTextBox.Text
-            ActiveJobs.Show()
+            Main.Credentials.User = UsernameTextBox.Text
+            Main.Credentials.Password = PasswordTextBox.Text
+            Main.Host = HostTextBox.Text
+            Main.Show()
             Me.Hide()
         End If
     End Sub
@@ -30,7 +41,4 @@ Public Class Login
         Me.Close()
     End Sub
 
-    Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        HostTextBox.Text = "https://10.1.1.1:20210/system/activejobs"
-    End Sub
 End Class

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ActiveJobs
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,11 @@ Partial Class ActiveJobs
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ActiveJobs))
+        Me.DtaGrdActJob = New System.Windows.Forms.DataGridView()
         Me.LblSuccess = New System.Windows.Forms.Label()
         Me.LblResults = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -41,29 +42,32 @@ Partial Class ActiveJobs
         Me.CntMnu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CntMnuMsgw = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntMnuEndJob = New System.Windows.Forms.ToolStripMenuItem()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PrgBar = New System.Windows.Forms.ProgressBar()
+        Me.CntMnuExcCmd = New System.Windows.Forms.ToolStripMenuItem()
+        CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CntMnu.SuspendLayout()
         Me.SuspendLayout()
         '
-        'DataGridView1
+        'DtaGrdActJob
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AllowUserToResizeColumns = False
-        Me.DataGridView1.AllowUserToResizeRows = False
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.DataGridView1.Location = New System.Drawing.Point(11, 70)
-        Me.DataGridView1.MultiSelect = False
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.ShowEditingIcon = False
-        Me.DataGridView1.Size = New System.Drawing.Size(1584, 749)
-        Me.DataGridView1.TabIndex = 0
+        Me.DtaGrdActJob.AllowUserToAddRows = False
+        Me.DtaGrdActJob.AllowUserToDeleteRows = False
+        Me.DtaGrdActJob.AllowUserToResizeColumns = False
+        Me.DtaGrdActJob.AllowUserToResizeRows = False
+        Me.DtaGrdActJob.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DtaGrdActJob.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DtaGrdActJob.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.DtaGrdActJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DtaGrdActJob.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.DtaGrdActJob.Location = New System.Drawing.Point(9, 68)
+        Me.DtaGrdActJob.MultiSelect = False
+        Me.DtaGrdActJob.Name = "DtaGrdActJob"
+        Me.DtaGrdActJob.ReadOnly = True
+        Me.DtaGrdActJob.RowHeadersWidth = 62
+        Me.DtaGrdActJob.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DtaGrdActJob.ShowEditingIcon = False
+        Me.DtaGrdActJob.Size = New System.Drawing.Size(1584, 709)
+        Me.DtaGrdActJob.TabIndex = 0
         '
         'LblSuccess
         '
@@ -116,9 +120,9 @@ Partial Class ActiveJobs
         Me.LblWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblWait.Location = New System.Drawing.Point(22, 79)
         Me.LblWait.Name = "LblWait"
-        Me.LblWait.Size = New System.Drawing.Size(137, 42)
+        Me.LblWait.Size = New System.Drawing.Size(183, 42)
         Me.LblWait.TabIndex = 7
-        Me.LblWait.Text = "Label3"
+        Me.LblWait.Text = "LblStatus"
         '
         'LblJobSts
         '
@@ -198,31 +202,48 @@ Partial Class ActiveJobs
         '
         'CntMnu
         '
-        Me.CntMnu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuMsgw, Me.CntMnuEndJob})
+        Me.CntMnu.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.CntMnu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuMsgw, Me.CntMnuEndJob, Me.CntMnuExcCmd})
         Me.CntMnu.Name = "CntMnu"
-        Me.CntMnu.Size = New System.Drawing.Size(153, 48)
+        Me.CntMnu.Size = New System.Drawing.Size(181, 92)
         '
         'CntMnuMsgw
         '
         Me.CntMnuMsgw.Name = "CntMnuMsgw"
-        Me.CntMnuMsgw.Size = New System.Drawing.Size(152, 22)
-        Me.CntMnuMsgw.Text = "&Answer MSGW"
+        Me.CntMnuMsgw.Size = New System.Drawing.Size(173, 22)
+        Me.CntMnuMsgw.Text = "&Send reply"
         '
         'CntMnuEndJob
         '
         Me.CntMnuEndJob.Name = "CntMnuEndJob"
-        Me.CntMnuEndJob.Size = New System.Drawing.Size(152, 22)
+        Me.CntMnuEndJob.Size = New System.Drawing.Size(173, 22)
         Me.CntMnuEndJob.Text = "&End job"
+        '
+        'PrgBar
+        '
+        Me.PrgBar.Location = New System.Drawing.Point(8, 55)
+        Me.PrgBar.MarqueeAnimationSpeed = 70
+        Me.PrgBar.Name = "PrgBar"
+        Me.PrgBar.Size = New System.Drawing.Size(127, 10)
+        Me.PrgBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.PrgBar.TabIndex = 16
+        '
+        'CntMnuExcCmd
+        '
+        Me.CntMnuExcCmd.Name = "CntMnuExcCmd"
+        Me.CntMnuExcCmd.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuExcCmd.Text = "E&xecute command"
         '
         'ActiveJobs
         '
         Me.AcceptButton = Me.BtnGet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1607, 831)
+        Me.ClientSize = New System.Drawing.Size(1607, 788)
+        Me.Controls.Add(Me.PrgBar)
+        Me.Controls.Add(Me.LblWait)
         Me.Controls.Add(Me.TxtBoxFunction)
         Me.Controls.Add(Me.LblFunction)
-        Me.Controls.Add(Me.LblWait)
         Me.Controls.Add(Me.TxtBoxUsr)
         Me.Controls.Add(Me.LblUsr)
         Me.Controls.Add(Me.TxtBoxSubSys)
@@ -234,20 +255,23 @@ Partial Class ActiveJobs
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblResults)
         Me.Controls.Add(Me.LblSuccess)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Controls.Add(Me.DtaGrdActJob)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "ActiveJobs"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "IBM i Active jobs"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CntMnu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents DtaGrdActJob As DataGridView
     Friend WithEvents LblSuccess As Label
     Friend WithEvents LblResults As Label
     Friend WithEvents Label1 As Label
@@ -265,4 +289,6 @@ Partial Class ActiveJobs
     Friend WithEvents CntMnu As ContextMenuStrip
     Friend WithEvents CntMnuMsgw As ToolStripMenuItem
     Friend WithEvents CntMnuEndJob As ToolStripMenuItem
+    Friend WithEvents PrgBar As ProgressBar
+    Friend WithEvents CntMnuExcCmd As ToolStripMenuItem
 End Class

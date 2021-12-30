@@ -54,7 +54,7 @@ Partial Class Login
         '
         'UsernameLabel
         '
-        Me.UsernameLabel.Location = New System.Drawing.Point(172, 24)
+        Me.UsernameLabel.Location = New System.Drawing.Point(171, 9)
         Me.UsernameLabel.Name = "UsernameLabel"
         Me.UsernameLabel.Size = New System.Drawing.Size(220, 23)
         Me.UsernameLabel.TabIndex = 0
@@ -63,7 +63,7 @@ Partial Class Login
         '
         'PasswordLabel
         '
-        Me.PasswordLabel.Location = New System.Drawing.Point(174, 67)
+        Me.PasswordLabel.Location = New System.Drawing.Point(173, 52)
         Me.PasswordLabel.Name = "PasswordLabel"
         Me.PasswordLabel.Size = New System.Drawing.Size(220, 23)
         Me.PasswordLabel.TabIndex = 2
@@ -73,7 +73,7 @@ Partial Class Login
         'UsernameTextBox
         '
         Me.UsernameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
-        Me.UsernameTextBox.Location = New System.Drawing.Point(174, 44)
+        Me.UsernameTextBox.Location = New System.Drawing.Point(173, 29)
         Me.UsernameTextBox.MaxLength = 10
         Me.UsernameTextBox.Name = "UsernameTextBox"
         Me.UsernameTextBox.Size = New System.Drawing.Size(218, 20)
@@ -82,7 +82,7 @@ Partial Class Login
         'PasswordTextBox
         '
         Me.PasswordTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
-        Me.PasswordTextBox.Location = New System.Drawing.Point(176, 87)
+        Me.PasswordTextBox.Location = New System.Drawing.Point(175, 72)
         Me.PasswordTextBox.MaxLength = 10
         Me.PasswordTextBox.Name = "PasswordTextBox"
         Me.PasswordTextBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -91,7 +91,7 @@ Partial Class Login
         '
         'OK
         '
-        Me.OK.Location = New System.Drawing.Point(195, 170)
+        Me.OK.Location = New System.Drawing.Point(194, 148)
         Me.OK.Name = "OK"
         Me.OK.Size = New System.Drawing.Size(94, 23)
         Me.OK.TabIndex = 4
@@ -100,7 +100,7 @@ Partial Class Login
         'Cancel
         '
         Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel.Location = New System.Drawing.Point(298, 170)
+        Me.Cancel.Location = New System.Drawing.Point(297, 148)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(94, 23)
         Me.Cancel.TabIndex = 5
@@ -109,7 +109,7 @@ Partial Class Login
         'HostTextBox
         '
         Me.HostTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
-        Me.HostTextBox.Location = New System.Drawing.Point(176, 130)
+        Me.HostTextBox.Location = New System.Drawing.Point(175, 115)
         Me.HostTextBox.MaxLength = 5000
         Me.HostTextBox.Name = "HostTextBox"
         Me.HostTextBox.Size = New System.Drawing.Size(216, 20)
@@ -117,11 +117,11 @@ Partial Class Login
         '
         'HostLabel
         '
-        Me.HostLabel.Location = New System.Drawing.Point(174, 110)
+        Me.HostLabel.Location = New System.Drawing.Point(173, 95)
         Me.HostLabel.Name = "HostLabel"
         Me.HostLabel.Size = New System.Drawing.Size(220, 23)
         Me.HostLabel.TabIndex = 6
-        Me.HostLabel.Text = "&Host"
+        Me.HostLabel.Text = "&Webservice"
         Me.HostLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Login
@@ -130,7 +130,7 @@ Partial Class Login
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
-        Me.ClientSize = New System.Drawing.Size(401, 203)
+        Me.ClientSize = New System.Drawing.Size(401, 180)
         Me.Controls.Add(Me.HostTextBox)
         Me.Controls.Add(Me.HostLabel)
         Me.Controls.Add(Me.Cancel)
@@ -146,7 +146,7 @@ Partial Class Login
         Me.Name = "Login"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Please insert your credentials"
+        Me.Text = "Please insert your credentials - IBM i - Control"
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

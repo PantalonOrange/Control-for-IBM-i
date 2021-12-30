@@ -7,10 +7,10 @@
 \\10.0.0.4\home\VS Codes\IBMi-Control\bin\Debug\IBMi-Control.xml
 \\10.0.0.4\home\VS Codes\IBMi-Control\bin\Debug\Newtonsoft.Json.dll
 \\10.0.0.4\home\VS Codes\IBMi-Control\bin\Debug\Newtonsoft.Json.xml
-\\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi-Control.vbproj.AssemblyReference.cache
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi-Control.vbproj.CopyComplete
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi-Control.exe
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi-Control.xml
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi-Control.pdb
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi_Control.ActiveJobs.resources
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi_Control.Login.resources
+\\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi_Control.Main.resources

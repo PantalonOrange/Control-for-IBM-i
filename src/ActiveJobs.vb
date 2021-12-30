@@ -1,84 +1,87 @@
-﻿Imports System.Net
+﻿'ActiveJobs.vb
+'This form shows active job informations with different options to select
+'Copyright (C)2021 by Christian Brunner
+
+
+Imports System.Net
 Imports System.IO
 Imports System.Text
 Imports Newtonsoft.Json.Linq
 
 Public Class ActiveJobs
 
-    Public Host As String
-    Public Credentials As New Credentials_T
-    Private ActiveJobInfo As New ActiveJobInfo_T
     Private ResponseStream As New ResponseFromServer_T
 
-    Private GetActiveJobs As New DoRestStuffGet
-
     Private Sub ActiveJobs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Initial load
         LblSuccess.Text = "-"
         LblResults.Text = "-"
-        LblJobSts.Text = "Job-Status:"
-        LblSubSys.Text = "Subsystem:"
-        LblUsr.Text = "User:"
-        LblFunction.Text = "Function:"
-        LblWait.Text = "Please wait, load data..."
         LblWait.Visible = False
-    End Sub
-
-    Private Sub ActiveJobs_Close(sender As Object, e As EventArgs) Handles MyBase.Closed
-        Login.Close()
+        PrgBar.Minimum = 0
+        PrgBar.Maximum = 100
+        PrgBar.Value = 0
+        PrgBar.Step = 20
+        PrgBar.Style = ProgressBarStyle.Marquee
+        PrgBar.MarqueeAnimationSpeed = 80
+        PrgBar.Visible = False
     End Sub
 
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
-        StartProcessGETActiveJobs()
+        'Start communication, etrieve json stream and fill datagridview
+        BtnGet.Enabled = False
+        DtaGrdActJob.Enabled = False
+        DisplayInformation("Please wait, load data...")
+        StartProcessGETActiveJobs(Main.Host, TxtBoxUsr.Text, TxtBoxJobSts.Text, TxtBoxSubSys.Text, TxtBoxFunction.Text)
+        RemoveInformation()
+        BtnGet.Enabled = True
+        DtaGrdActJob.Enabled = True
     End Sub
 
-    Private Sub StartProcessGETActiveJobs()
-        BtnGet.Enabled = False
-        DataGridView1.Enabled = False
-        LblWait.Visible = True
-        Dim URL As String = Host.Trim() + "?"
+    Private Async Sub StartProcessGETActiveJobs(ByVal pURL As String, ByVal pSelUsr As String, ByVal pSelJobSts As String, ByVal pSelSubSys As String, ByVal pSelFct As String)
+        Dim GetActiveJobs As New DoRestStuffGet
+        Dim URL As String = pURL.Trim() + "?"
         If TxtBoxUsr.Text <> "" Then
-            URL = URL.Trim() + "&usr=" + TxtBoxUsr.Text.Trim()
+            URL = URL.Trim() + "&usr=" + pSelUsr.Trim()
         End If
         If TxtBoxJobSts.Text <> "" Then
-            URL = URL.Trim() + "&jobsts=" + TxtBoxJobSts.Text.Trim()
+            URL = URL.Trim() + "&jobsts=" + pSelJobSts.Trim()
         End If
         If TxtBoxSubSys.Text <> "" Then
-            URL = URL.Trim() + "&sbs=" + TxtBoxSubSys.Text.Trim()
+            URL = URL.Trim() + "&sbs=" + pSelSubSys.Trim()
         End If
         If TxtBoxFunction.Text <> "" Then
-            URL = URL.Trim() + "&fct=" + TxtBoxFunction.Text.Trim()
+            URL = URL.Trim() + "&fct=" + pSelFct.Trim()
         End If
 
         Try
-            GetActiveJobs.GetJSONData(URL, Credentials.User, Credentials.Password)
+            GetActiveJobs.GetJSONData(URL, Main.Credentials.User, Main.Credentials.Password)
             ResponseStream = GetActiveJobs._returnJSONStream
+            Await Task.Run(Function() GetActiveJobs._returnJSONStream())
             If Not String.IsNullOrEmpty(ResponseStream.Response) Then
                 If ResponseStream.Code = HttpStatusCode.OK Then
                     ParseJsonStream(ResponseStream.Response)
-                    DataGridView1.Select()
+                    DtaGrdActJob.Select()
                 ElseIf ResponseStream.Code = HttpStatusCode.Unauthorized Then
                     LblSuccess.Text = "false"
                     LblResults.Text = ResponseStream.Response.Trim() + " (" + ResponseStream.Code.Trim() + ")"
                     MessageBox.Show(LblResults.Text, "WS-Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             Else
-                DataGridView1.Visible = False
+                DtaGrdActJob.Visible = False
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, "WS-Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
-        BtnGet.Enabled = True
-        DataGridView1.Enabled = True
-        LblWait.Visible = False
     End Sub
 
-    Private Sub ParseJsonStream(ByVal JSON As String)
-        Dim Ser As JObject = JObject.Parse(JSON)
+    Private Sub ParseJsonStream(ByVal pJSON As String)
+        'Parse incomming json stream and fill in the data to datagridview
+        Dim ActiveJobInfo As New ActiveJobInfo_T
+        Dim Ser As JObject = JObject.Parse(pJSON)
         Dim Data As List(Of JToken) = Ser.Children().ToList()
         Dim Index As Integer = 0
 
-        With DataGridView1
+        With DtaGrdActJob
             .Columns.Clear()
             .Columns.Add("Position", "Position")
             .Columns.Add("JobName", "JobName")
@@ -141,7 +144,7 @@ Public Class ActiveJobs
                             ActiveJobInfo.ClientIPAddress = Nothing
                         End Try
                         ActiveJobInfo.JobActiveTime = Entry("jobActiveTime").ToString
-                        With DataGridView1
+                        With DtaGrdActJob
                             .Rows.Add(ActiveJobInfo.OrdinalPosition)
                             .Rows(Index).Cells(1).Value = ActiveJobInfo.JobName
                             .Rows(Index).Cells(2).Value = ActiveJobInfo.JobType
@@ -160,24 +163,191 @@ Public Class ActiveJobs
                     Next
             End Select
         Next
-        DataGridView1.Refresh()
+        DtaGrdActJob.Refresh()
     End Sub
 
-End Class
+    Private Async Sub EndJobImmed(ByVal pJobName As String)
+        'Process end job requests
+        Dim PostEndJob As New DoRestStuffPost
+        Dim endJob As New EndJob_T
+        Dim URL As String = Main.Host.Trim()
+        Dim Success As String
+        endJob.endJobList(0).jobName = pJobName
+        Dim JsonStream As String = JObject.FromObject(endJob).ToString
+        PostEndJob.PostJSONData(URL, JsonStream, Main.Credentials.User, Main.Credentials.Password)
+        ResponseStream = PostEndJob._returnJSONStream()
+        Await Task.Run(Function() PostEndJob._returnJSONStream)
 
-Public Class ActiveJobInfo_T
-    Public OrdinalPosition As String
-    Public SubSystem As String
-    Public JobName As String
-    Public JobType As String
-    Public JobStatus As String
-    Public JobMessage As String
-    Public MessageKey As String
-    Public AuthorizationName As String
-    Public AuthorizationDescription As String
-    Public FunctionType As String
-    Public FunctionName As String
-    Public StorageUsed As Integer
-    Public ClientIPAddress As String
-    Public JobActiveTime As String
+        If ResponseStream.Code = HttpStatusCode.OK Then
+            Dim Ser As JObject = JObject.Parse(ResponseStream.Response)
+            Dim Data As List(Of JToken) = Ser.Children().ToList()
+            For Each Item As JProperty In Data
+                Item.CreateReader()
+                Select Case Item.Name
+                    Case "endJobResults"
+                        For Each Entry As JObject In Item.Values()
+                            Try
+                                Success = Entry("success").ToString.ToLower()
+                                If Success = "false" Then
+                                    MessageBox.Show(Entry("errorMessage").ToString(), "WS-Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                End If
+                            Catch ex As Exception
+                            End Try
+                        Next
+                End Select
+            Next
+
+        ElseIf ResponseStream.Code <> HttpStatusCode.OK Then
+            MessageBox.Show(ResponseStream.Response.Trim() + " (" + ResponseStream.Code.Trim(), "WS-Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+    End Sub
+
+    Private Async Sub ReplyMessage(ByVal pMessageKey As String)
+        'Process reply messages
+        Dim PostReplyMessage As New DoRestStuffPost
+        Dim replyMessage As New ReplyMessage_T
+        Dim URL As String = Main.Host.Trim()
+        Dim Success As String
+        replyMessage.replyList(0).replyMessage = "C"
+        replyMessage.replyList(0).messageKey = pMessageKey
+        Dim JsonStream As String = JObject.FromObject(replyMessage).ToString
+        PostReplyMessage.PostJSONData(URL, JsonStream, Main.Credentials.User, Main.Credentials.Password)
+        ResponseStream = PostReplyMessage._returnJSONStream()
+        Await Task.Run(Function() PostReplyMessage._returnJSONStream)
+
+        If ResponseStream.Code = HttpStatusCode.OK Then
+            Dim Ser As JObject = JObject.Parse(ResponseStream.Response)
+            Dim Data As List(Of JToken) = Ser.Children().ToList()
+            For Each Item As JProperty In Data
+                Item.CreateReader()
+                Select Case Item.Name
+                    Case "replyResults"
+                        For Each Entry As JObject In Item.Values()
+                            Try
+                                Success = Entry("success").ToString.ToLower()
+                                If Success = "false" Then
+                                    MessageBox.Show(Entry("errorMessage").ToString(), "WS-Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                End If
+                            Catch ex As Exception
+                            End Try
+                        Next
+                End Select
+            Next
+
+        ElseIf ResponseStream.Code <> HttpStatusCode.OK Then
+            MessageBox.Show(ResponseStream.Response.Trim() + " (" + ResponseStream.Code.Trim(), "WS-Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+    End Sub
+
+    Private Async Sub ExecuteCommandOnHost(ByVal pCommand As String)
+        'Process execute command on host system
+        Dim PostReplyMessage As New DoRestStuffPost
+        Dim executeCommand As New ExecuteCommand_T
+        Dim URL As String = Main.Host.Trim()
+        Dim Success As String
+        executeCommand.executeCommandList(0).command = pCommand
+        Dim JsonStream As String = JObject.FromObject(executeCommand).ToString
+        PostReplyMessage.PostJSONData(URL, JsonStream, Main.Credentials.User, Main.Credentials.Password)
+        ResponseStream = PostReplyMessage._returnJSONStream()
+        Await Task.Run(Function() PostReplyMessage._returnJSONStream)
+
+        If ResponseStream.Code = HttpStatusCode.OK Then
+            Dim Ser As JObject = JObject.Parse(ResponseStream.Response)
+            Dim Data As List(Of JToken) = Ser.Children().ToList()
+            For Each Item As JProperty In Data
+                Item.CreateReader()
+                Select Case Item.Name
+                    Case "executeCommandResults"
+                        For Each Entry As JObject In Item.Values()
+                            Try
+                                Success = Entry("success").ToString.ToLower()
+                                If Success = "false" Then
+                                    MessageBox.Show(Entry("errorMessage").ToString(), "WS-Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                End If
+                            Catch ex As Exception
+                            End Try
+                        Next
+                End Select
+            Next
+
+        ElseIf ResponseStream.Code <> HttpStatusCode.OK Then
+            MessageBox.Show(ResponseStream.Response.Trim() + " (" + ResponseStream.Code.Trim(), "WS-Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+    End Sub
+
+    Private Sub DisplayInformation(ByVal pMessage As String)
+        PrgBar.Visible = True
+        PrgBar.Refresh()
+        LblWait.Text = pMessage
+        LblWait.Visible = True
+    End Sub
+
+    Private Sub RemoveInformation()
+        PrgBar.Visible = False
+        PrgBar.Refresh()
+        LblWait.Visible = False
+    End Sub
+
+    Private Sub DtaGrdActJob_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DtaGrdActJob.CellFormatting
+        If e.RowIndex Mod 2 = 0 Then
+            'Every second row
+            e.CellStyle.ForeColor = Color.Black
+            e.CellStyle.BackColor = Color.LightGray
+        Else
+            e.CellStyle.ForeColor = Color.DarkRed
+            e.CellStyle.BackColor = Color.White
+        End If
+
+        Select Case e.ColumnIndex
+            Case 10 'temporary Storage used
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        End Select
+    End Sub
+
+    Private Sub DtaGrdActJob_MouseClick(sender As Object, e As MouseEventArgs) Handles DtaGrdActJob.MouseClick
+        'Shows the drop down menue on the datagridview via mouseclick
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            CntMnu.Show(Me, e.Location)
+        End If
+    End Sub
+
+    Private Sub CntMnuEndJob_Click(sender As Object, e As EventArgs) Handles CntMnuEndJob.Click
+        'Process end job requests
+        Dim Result As DialogResult
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            Result = MessageBox.Show("Please confirm the endjob", "End job immed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If Result = System.Windows.Forms.DialogResult.Yes Then
+                DisplayInformation("Please wait, process input...")
+                EndJobImmed(DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value)
+                RemoveInformation()
+            End If
+        Next
+    End Sub
+
+    Private Sub CntMnuMsgw_Click(sender As Object, e As EventArgs) Handles CntMnuMsgw.Click
+        'Process reply messages
+        Dim Result As String
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            Result = InputBox("Please insert your reply message", "Reply-Message")
+            If Result <> "" And DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value <> "" Then
+                DisplayInformation("Please wait, process input...")
+                ReplyMessage(DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value)
+                RemoveInformation()
+            ElseIf Result <> "" And DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value = "" Then
+                MessageBox.Show("No message key available", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        Next
+    End Sub
+
+    Private Sub CntMnuExcCmd_Click(sender As Object, e As EventArgs) Handles CntMnuExcCmd.Click
+        'Execute given command on host system
+        Dim Result As String
+        Result = InputBox("Please insert your command to be executed on host-system")
+        If Result <> "" Then
+            DisplayInformation("Please wait, process input...")
+            ExecuteCommandOnHost(Result)
+            RemoveInformation()
+        End If
+    End Sub
 End Class
