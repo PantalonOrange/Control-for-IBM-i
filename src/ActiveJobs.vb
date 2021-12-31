@@ -11,6 +11,7 @@ Imports Newtonsoft.Json.Linq
 Public Class ActiveJobs
 
     Private ResponseStream As New ResponseFromServer_T
+    Private ActiveJobWebservice As String = Main.Host.Trim() + "/activejobs"
 
     Private Sub ActiveJobs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
@@ -31,7 +32,7 @@ Public Class ActiveJobs
         BtnGet.Enabled = False
         DtaGrdActJob.Enabled = False
         DisplayInformation("Please wait, load data...")
-        StartProcessGETActiveJobs(Main.Host, TxtBoxUsr.Text, TxtBoxJobSts.Text, TxtBoxSubSys.Text, TxtBoxFunction.Text)
+        StartProcessGETActiveJobs(ActiveJobWebservice, TxtBoxUsr.Text, TxtBoxJobSts.Text, TxtBoxSubSys.Text, TxtBoxFunction.Text)
         RemoveInformation()
         BtnGet.Enabled = True
         DtaGrdActJob.Enabled = True
@@ -40,16 +41,16 @@ Public Class ActiveJobs
     Private Async Sub StartProcessGETActiveJobs(ByVal pURL As String, ByVal pSelUsr As String, ByVal pSelJobSts As String, ByVal pSelSubSys As String, ByVal pSelFct As String)
         Dim GetActiveJobs As New DoRestStuffGet
         Dim URL As String = pURL.Trim() + "?"
-        If TxtBoxUsr.Text <> "" Then
+        If pSelUsr <> "" Then
             URL = URL.Trim() + "&usr=" + pSelUsr.Trim()
         End If
-        If TxtBoxJobSts.Text <> "" Then
+        If pSelJobSts <> "" Then
             URL = URL.Trim() + "&jobsts=" + pSelJobSts.Trim()
         End If
-        If TxtBoxSubSys.Text <> "" Then
+        If pSelSubSys <> "" Then
             URL = URL.Trim() + "&sbs=" + pSelSubSys.Trim()
         End If
-        If TxtBoxFunction.Text <> "" Then
+        If pSelFct <> "" Then
             URL = URL.Trim() + "&fct=" + pSelFct.Trim()
         End If
 
@@ -170,7 +171,7 @@ Public Class ActiveJobs
         'Process end job requests
         Dim PostEndJob As New DoRestStuffPost
         Dim endJob As New EndJob_T
-        Dim URL As String = Main.Host.Trim()
+        Dim URL As String = ActiveJobWebservice.Trim()
         Dim Success As String
         endJob.endJobList(0).jobName = pJobName
         Dim JsonStream As String = JObject.FromObject(endJob).ToString
@@ -190,6 +191,8 @@ Public Class ActiveJobs
                                 Success = Entry("success").ToString.ToLower()
                                 If Success = "false" Then
                                     MessageBox.Show(Entry("errorMessage").ToString(), "WS-Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                Else
+                                    MessageBox.Show("job ended successfull", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                                 End If
                             Catch ex As Exception
                             End Try
@@ -207,7 +210,7 @@ Public Class ActiveJobs
         'Process reply messages
         Dim PostReplyMessage As New DoRestStuffPost
         Dim replyMessage As New ReplyMessage_T
-        Dim URL As String = Main.Host.Trim()
+        Dim URL As String = ActiveJobWebservice.Trim()
         Dim Success As String
         replyMessage.replyList(0).replyMessage = "C"
         replyMessage.replyList(0).messageKey = pMessageKey
@@ -228,6 +231,8 @@ Public Class ActiveJobs
                                 Success = Entry("success").ToString.ToLower()
                                 If Success = "false" Then
                                     MessageBox.Show(Entry("errorMessage").ToString(), "WS-Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                Else
+                                    MessageBox.Show("Reply message was successfull", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                                 End If
                             Catch ex As Exception
                             End Try
@@ -244,7 +249,7 @@ Public Class ActiveJobs
         'Process execute command on host system
         Dim PostReplyMessage As New DoRestStuffPost
         Dim executeCommand As New ExecuteCommand_T
-        Dim URL As String = Main.Host.Trim()
+        Dim URL As String = ActiveJobWebservice.Trim()
         Dim Success As String
         executeCommand.executeCommandList(0).command = pCommand
         Dim JsonStream As String = JObject.FromObject(executeCommand).ToString
@@ -264,6 +269,8 @@ Public Class ActiveJobs
                                 Success = Entry("success").ToString.ToLower()
                                 If Success = "false" Then
                                     MessageBox.Show(Entry("errorMessage").ToString(), "WS-Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                Else
+                                    MessageBox.Show("Command successfull", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                                 End If
                             Catch ex As Exception
                             End Try
@@ -295,13 +302,15 @@ Public Class ActiveJobs
             e.CellStyle.ForeColor = Color.Black
             e.CellStyle.BackColor = Color.LightGray
         Else
-            e.CellStyle.ForeColor = Color.DarkRed
+            e.CellStyle.ForeColor = Color.Black
             e.CellStyle.BackColor = Color.White
         End If
 
         Select Case e.ColumnIndex
             Case 10 'temporary Storage used
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Case 11 'ip address
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         End Select
     End Sub
 
@@ -349,5 +358,48 @@ Public Class ActiveJobs
             ExecuteCommandOnHost(Result)
             RemoveInformation()
         End If
+    End Sub
+
+    Private Sub CntMnuDspJobLog_Click(sender As Object, e As EventArgs) Handles CntMnuDspJobLog.Click
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            Dim JoblogForm As New JobLog
+            JoblogForm.MdiParent = Main
+            JoblogForm.Show()
+            JoblogForm.TxtBoxJob.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value
+            JoblogForm.TxtBoxJob.Enabled = False
+            JoblogForm.CmbBoxMax.Text = "50"
+            JoblogForm.BtnGet.PerformClick()
+        Next
+    End Sub
+
+    Private Sub CntMnuDspUsrPrf_Click(sender As Object, e As EventArgs) Handles CntMnuDspUsrPrf.Click
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            Dim UsrPrfForm As New UsrPrf
+            UsrPrfForm.MdiParent = Main
+            UsrPrfForm.Show()
+            UsrPrfForm.TxtBoxUsrPrf.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(6).Value
+            UsrPrfForm.TxtBoxUsrPrf.Enabled = False
+            UsrPrfForm.BtnGet.PerformClick()
+        Next
+    End Sub
+
+    Private Sub CntMnuFltUsrJob_Click(sender As Object, e As EventArgs) Handles CntMnuFltUsrJob.Click
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            TxtBoxJobSts.Text = ""
+            TxtBoxUsr.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(6).Value
+            TxtBoxSubSys.Text = ""
+            TxtBoxFunction.Text = ""
+            Me.BtnGet.PerformClick()
+        Next
+    End Sub
+
+    Private Sub CntMnuFltFct_Click(sender As Object, e As EventArgs) Handles CntMnuFltFct.Click
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            TxtBoxJobSts.Text = ""
+            TxtBoxUsr.Text = ""
+            TxtBoxSubSys.Text = ""
+            TxtBoxFunction.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(9).Value
+            Me.BtnGet.PerformClick()
+        Next
     End Sub
 End Class

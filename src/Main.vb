@@ -27,4 +27,10 @@ Public Class Main
         ActiveJobForm.MdiParent = Me
         ActiveJobForm.Show()
     End Sub
+
+    Private Sub JobLogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles JobLogsToolStripMenuItem.Click
+        Dim JoblogForm As New JobLog
+        JoblogForm.MdiParent = Me
+        JoblogForm.Show()
+    End Sub
 End Class

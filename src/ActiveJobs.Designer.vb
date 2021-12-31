@@ -42,8 +42,15 @@ Partial Class ActiveJobs
         Me.CntMnu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CntMnuMsgw = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntMnuEndJob = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrgBar = New System.Windows.Forms.ProgressBar()
         Me.CntMnuExcCmd = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CntMnuDspJobLog = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrgBar = New System.Windows.Forms.ProgressBar()
+        Me.CntMnuDspUsrPrf = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.GroupFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CntMnuFltUsrJob = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CntMnuFltFct = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CntMnu.SuspendLayout()
         Me.SuspendLayout()
@@ -111,7 +118,7 @@ Partial Class ActiveJobs
         Me.BtnGet.Name = "BtnGet"
         Me.BtnGet.Size = New System.Drawing.Size(120, 34)
         Me.BtnGet.TabIndex = 6
-        Me.BtnGet.Text = "&Start"
+        Me.BtnGet.Text = "&Get"
         Me.BtnGet.UseVisualStyleBackColor = True
         '
         'LblWait
@@ -203,21 +210,33 @@ Partial Class ActiveJobs
         'CntMnu
         '
         Me.CntMnu.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CntMnu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuMsgw, Me.CntMnuEndJob, Me.CntMnuExcCmd})
+        Me.CntMnu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuMsgw, Me.CntMnuEndJob, Me.CntMnuExcCmd, Me.ToolStripSeparator1, Me.CntMnuDspJobLog, Me.CntMnuDspUsrPrf, Me.ToolStripSeparator2, Me.GroupFilter})
         Me.CntMnu.Name = "CntMnu"
-        Me.CntMnu.Size = New System.Drawing.Size(181, 92)
+        Me.CntMnu.Size = New System.Drawing.Size(181, 170)
         '
         'CntMnuMsgw
         '
         Me.CntMnuMsgw.Name = "CntMnuMsgw"
-        Me.CntMnuMsgw.Size = New System.Drawing.Size(173, 22)
+        Me.CntMnuMsgw.Size = New System.Drawing.Size(180, 22)
         Me.CntMnuMsgw.Text = "&Send reply"
         '
         'CntMnuEndJob
         '
         Me.CntMnuEndJob.Name = "CntMnuEndJob"
-        Me.CntMnuEndJob.Size = New System.Drawing.Size(173, 22)
+        Me.CntMnuEndJob.Size = New System.Drawing.Size(180, 22)
         Me.CntMnuEndJob.Text = "&End job"
+        '
+        'CntMnuExcCmd
+        '
+        Me.CntMnuExcCmd.Name = "CntMnuExcCmd"
+        Me.CntMnuExcCmd.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuExcCmd.Text = "E&xecute command"
+        '
+        'CntMnuDspJobLog
+        '
+        Me.CntMnuDspJobLog.Name = "CntMnuDspJobLog"
+        Me.CntMnuDspJobLog.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuDspJobLog.Text = "Display job log"
         '
         'PrgBar
         '
@@ -228,11 +247,40 @@ Partial Class ActiveJobs
         Me.PrgBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
         Me.PrgBar.TabIndex = 16
         '
-        'CntMnuExcCmd
+        'CntMnuDspUsrPrf
         '
-        Me.CntMnuExcCmd.Name = "CntMnuExcCmd"
-        Me.CntMnuExcCmd.Size = New System.Drawing.Size(180, 22)
-        Me.CntMnuExcCmd.Text = "E&xecute command"
+        Me.CntMnuDspUsrPrf.Name = "CntMnuDspUsrPrf"
+        Me.CntMnuDspUsrPrf.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuDspUsrPrf.Text = "Display userprofile"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        '
+        'GroupFilter
+        '
+        Me.GroupFilter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuFltUsrJob, Me.CntMnuFltFct})
+        Me.GroupFilter.Name = "GroupFilter"
+        Me.GroupFilter.Size = New System.Drawing.Size(180, 22)
+        Me.GroupFilter.Text = "Filters"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        '
+        'CntMnuFltUsrJob
+        '
+        Me.CntMnuFltUsrJob.Name = "CntMnuFltUsrJob"
+        Me.CntMnuFltUsrJob.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuFltUsrJob.Text = "Userprofile"
+        '
+        'CntMnuFltFct
+        '
+        Me.CntMnuFltFct.Name = "CntMnuFltFct"
+        Me.CntMnuFltFct.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuFltFct.Text = "Function"
         '
         'ActiveJobs
         '
@@ -291,4 +339,11 @@ Partial Class ActiveJobs
     Friend WithEvents CntMnuEndJob As ToolStripMenuItem
     Friend WithEvents PrgBar As ProgressBar
     Friend WithEvents CntMnuExcCmd As ToolStripMenuItem
+    Friend WithEvents CntMnuDspJobLog As ToolStripMenuItem
+    Friend WithEvents CntMnuDspUsrPrf As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents GroupFilter As ToolStripMenuItem
+    Friend WithEvents CntMnuFltUsrJob As ToolStripMenuItem
+    Friend WithEvents CntMnuFltFct As ToolStripMenuItem
 End Class

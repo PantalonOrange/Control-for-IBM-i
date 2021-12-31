@@ -7,7 +7,7 @@ Public Class Login
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
-        HostTextBox.Text = "https://10.1.1.1:20210/system/activejobs"
+        HostTextBox.Text = "https://10.1.1.1:20210/system"
     End Sub
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click

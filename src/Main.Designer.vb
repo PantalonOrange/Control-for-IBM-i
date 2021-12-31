@@ -31,6 +31,7 @@ Partial Class Main
         Me.StsStrpMain = New System.Windows.Forms.StatusStrip()
         Me.StrpLabelUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StrpLabelHost = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.JobLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuStrpMain.SuspendLayout()
         Me.StsStrpMain.SuspendLayout()
         Me.SuspendLayout()
@@ -56,12 +57,12 @@ Partial Class Main
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(93, 22)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
         'OperationsToolStripMenuItem
         '
-        Me.OperationsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActiveJobsToolStripMenuItem})
+        Me.OperationsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActiveJobsToolStripMenuItem, Me.JobLogsToolStripMenuItem})
         Me.OperationsToolStripMenuItem.Name = "OperationsToolStripMenuItem"
         Me.OperationsToolStripMenuItem.Size = New System.Drawing.Size(77, 22)
         Me.OperationsToolStripMenuItem.Text = "&Operations"
@@ -103,6 +104,12 @@ Partial Class Main
         Me.StrpLabelHost.Size = New System.Drawing.Size(36, 19)
         Me.StrpLabelHost.Text = "Host"
         '
+        'JobLogsToolStripMenuItem
+        '
+        Me.JobLogsToolStripMenuItem.Name = "JobLogsToolStripMenuItem"
+        Me.JobLogsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.JobLogsToolStripMenuItem.Text = "Job logs"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -113,7 +120,7 @@ Partial Class Main
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MnuStrpMain
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "IBM i Control"
@@ -135,4 +142,5 @@ Partial Class Main
     Friend WithEvents StsStrpMain As StatusStrip
     Friend WithEvents StrpLabelUser As ToolStripStatusLabel
     Friend WithEvents StrpLabelHost As ToolStripStatusLabel
+    Friend WithEvents JobLogsToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -14,3 +14,6 @@
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi_Control.ActiveJobs.resources
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi_Control.Login.resources
 \\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi_Control.Main.resources
+\\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi_Control.JobLog.resources
+\\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi_Control.UsrPrf.resources
+\\10.0.0.4\home\VS Codes\IBMi-Control\obj\Debug\IBMi-Control.vbproj.AssemblyReference.cache
