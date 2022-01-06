@@ -13,6 +13,10 @@ Public Class Main
         StrpLabelUser.Text = Me.Credentials.User
     End Sub
 
+    Private Sub ChangeSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeSettingsToolStripMenuItem.Click
+        Login.Show()
+    End Sub
+
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Login.Close()
         Me.Close()
@@ -33,4 +37,11 @@ Public Class Main
         JoblogForm.MdiParent = Me
         JoblogForm.Show()
     End Sub
+
+    Private Sub UsrInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UsrInfoToolStripMenuItem.Click
+        Dim UsrInfoForm As New UsrPrf
+        UsrInfoForm.MdiParent = Me
+        UsrInfoForm.Show()
+    End Sub
+
 End Class

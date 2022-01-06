@@ -28,10 +28,13 @@ Partial Class Main
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OperationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActiveJobsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.JobLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UsrInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StsStrpMain = New System.Windows.Forms.StatusStrip()
         Me.StrpLabelUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StrpLabelHost = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.JobLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangeSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.MnuStrpMain.SuspendLayout()
         Me.StsStrpMain.SuspendLayout()
         Me.SuspendLayout()
@@ -49,7 +52,7 @@ Partial Class Main
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangeSettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 22)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -57,12 +60,12 @@ Partial Class Main
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(93, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
         'OperationsToolStripMenuItem
         '
-        Me.OperationsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActiveJobsToolStripMenuItem, Me.JobLogsToolStripMenuItem})
+        Me.OperationsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActiveJobsToolStripMenuItem, Me.JobLogsToolStripMenuItem, Me.UsrInfoToolStripMenuItem})
         Me.OperationsToolStripMenuItem.Name = "OperationsToolStripMenuItem"
         Me.OperationsToolStripMenuItem.Size = New System.Drawing.Size(77, 22)
         Me.OperationsToolStripMenuItem.Text = "&Operations"
@@ -70,8 +73,20 @@ Partial Class Main
         'ActiveJobsToolStripMenuItem
         '
         Me.ActiveJobsToolStripMenuItem.Name = "ActiveJobsToolStripMenuItem"
-        Me.ActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.ActiveJobsToolStripMenuItem.Text = "&Active jobs"
+        '
+        'JobLogsToolStripMenuItem
+        '
+        Me.JobLogsToolStripMenuItem.Name = "JobLogsToolStripMenuItem"
+        Me.JobLogsToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.JobLogsToolStripMenuItem.Text = "Job logs"
+        '
+        'UsrInfoToolStripMenuItem
+        '
+        Me.UsrInfoToolStripMenuItem.Name = "UsrInfoToolStripMenuItem"
+        Me.UsrInfoToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.UsrInfoToolStripMenuItem.Text = "User info"
         '
         'StsStrpMain
         '
@@ -104,11 +119,16 @@ Partial Class Main
         Me.StrpLabelHost.Size = New System.Drawing.Size(36, 19)
         Me.StrpLabelHost.Text = "Host"
         '
-        'JobLogsToolStripMenuItem
+        'ChangeSettingsToolStripMenuItem
         '
-        Me.JobLogsToolStripMenuItem.Name = "JobLogsToolStripMenuItem"
-        Me.JobLogsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.JobLogsToolStripMenuItem.Text = "Job logs"
+        Me.ChangeSettingsToolStripMenuItem.Name = "ChangeSettingsToolStripMenuItem"
+        Me.ChangeSettingsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChangeSettingsToolStripMenuItem.Text = "Change settings"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'Main
         '
@@ -123,7 +143,7 @@ Partial Class Main
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "IBM i Control"
+        Me.Text = "Control for IBM i®"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MnuStrpMain.ResumeLayout(False)
         Me.MnuStrpMain.PerformLayout()
@@ -143,4 +163,7 @@ Partial Class Main
     Friend WithEvents StrpLabelUser As ToolStripStatusLabel
     Friend WithEvents StrpLabelHost As ToolStripStatusLabel
     Friend WithEvents JobLogsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UsrInfoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangeSettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
 End Class

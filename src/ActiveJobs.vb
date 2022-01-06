@@ -25,17 +25,28 @@ Public Class ActiveJobs
         PrgBar.Style = ProgressBarStyle.Marquee
         PrgBar.MarqueeAnimationSpeed = 80
         PrgBar.Visible = False
+        FillCmbBoxes()
     End Sub
 
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
-        'Start communication, etrieve json stream and fill datagridview
-        BtnGet.Enabled = False
-        DtaGrdActJob.Enabled = False
-        DisplayInformation("Please wait, load data...")
-        StartProcessGETActiveJobs(ActiveJobWebservice, TxtBoxUsr.Text, TxtBoxJobSts.Text, TxtBoxSubSys.Text, TxtBoxFunction.Text)
-        RemoveInformation()
-        BtnGet.Enabled = True
-        DtaGrdActJob.Enabled = True
+        If CmbBoxJobSts.Text = "" And TxtBoxUsr.Text = "" And CmbBoxSbs.Text = "" And TxtBoxFunction.Text = "" Then
+            MessageBox.Show("Please take at least one selection", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Else
+            'Start communication, etrieve json stream and fill datagridview
+            BtnGet.Enabled = False
+            BtnClose.Enabled = False
+            DtaGrdActJob.Enabled = False
+            DisplayInformation("Please wait, collecting data...")
+            StartProcessGETActiveJobs(ActiveJobWebservice, TxtBoxUsr.Text, CmbBoxJobSts.Text, CmbBoxSbs.Text, TxtBoxFunction.Text)
+            RemoveInformation()
+            BtnGet.Enabled = True
+            BtnClose.Enabled = True
+            DtaGrdActJob.Enabled = True
+        End If
+    End Sub
+
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+        Me.Close()
     End Sub
 
     Private Async Sub StartProcessGETActiveJobs(ByVal pURL As String, ByVal pSelUsr As String, ByVal pSelJobSts As String, ByVal pSelSubSys As String, ByVal pSelFct As String)
@@ -96,6 +107,7 @@ Public Class ActiveJobs
             .Columns.Add("Function", "Function")
             .Columns.Add("Storage", "Storage")
             .Columns.Add("ClientIPAddress", "ClientIPAddress")
+            .Columns.Add("SubSystem", "SubSystem")
             .Columns.Add("JobActivityTime", "JobActivityTime")
         End With
 
@@ -158,7 +170,8 @@ Public Class ActiveJobs
                             .Rows(Index).Cells(9).Value = ActiveJobInfo.FunctionName
                             .Rows(Index).Cells(10).Value = ActiveJobInfo.StorageUsed
                             .Rows(Index).Cells(11).Value = ActiveJobInfo.ClientIPAddress
-                            .Rows(Index).Cells(12).Value = ActiveJobInfo.JobActiveTime
+                            .Rows(Index).Cells(12).Value = ActiveJobInfo.SubSystem
+                            .Rows(Index).Cells(13).Value = ActiveJobInfo.JobActiveTime
                         End With
                         Index += 1
                     Next
@@ -206,13 +219,13 @@ Public Class ActiveJobs
 
     End Sub
 
-    Private Async Sub ReplyMessage(ByVal pMessageKey As String)
+    Private Async Sub ReplyMessage(ByVal pMessageKey As String, ByVal pReplyMessage As String)
         'Process reply messages
         Dim PostReplyMessage As New DoRestStuffPost
         Dim replyMessage As New ReplyMessage_T
         Dim URL As String = ActiveJobWebservice.Trim()
         Dim Success As String
-        replyMessage.replyList(0).replyMessage = "C"
+        replyMessage.replyList(0).replyMessage = pReplyMessage
         replyMessage.replyList(0).messageKey = pMessageKey
         Dim JsonStream As String = JObject.FromObject(replyMessage).ToString
         PostReplyMessage.PostJSONData(URL, JsonStream, Main.Credentials.User, Main.Credentials.Password)
@@ -296,6 +309,17 @@ Public Class ActiveJobs
         LblWait.Visible = False
     End Sub
 
+    Private Sub FillCmbBoxes()
+        CmbBoxJobSts.Items.Add("MSGW")
+        CmbBoxJobSts.Items.Add("LCKW")
+        CmbBoxJobSts.Items.Add("DSPW")
+        CmbBoxJobSts.Items.Add("TIMW")
+        CmbBoxSbs.Items.Add("QINTER")
+        CmbBoxSbs.Items.Add("QBATCH")
+        CmbBoxSbs.Items.Add("QSPL")
+        CmbBoxSbs.Items.Add("QUSRWRK")
+    End Sub
+
     Private Sub DtaGrdActJob_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DtaGrdActJob.CellFormatting
         If e.RowIndex Mod 2 = 0 Then
             'Every second row
@@ -341,7 +365,7 @@ Public Class ActiveJobs
             Result = InputBox("Please insert your reply message", "Reply-Message")
             If Result <> "" And DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value <> "" Then
                 DisplayInformation("Please wait, process input...")
-                ReplyMessage(DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value)
+                ReplyMessage(DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value, Result)
                 RemoveInformation()
             ElseIf Result <> "" And DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value = "" Then
                 MessageBox.Show("No message key available", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -385,9 +409,9 @@ Public Class ActiveJobs
 
     Private Sub CntMnuFltUsrJob_Click(sender As Object, e As EventArgs) Handles CntMnuFltUsrJob.Click
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
-            TxtBoxJobSts.Text = ""
+            CmbBoxJobSts.Text = ""
             TxtBoxUsr.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(6).Value
-            TxtBoxSubSys.Text = ""
+            CmbBoxSbs.Text = ""
             TxtBoxFunction.Text = ""
             Me.BtnGet.PerformClick()
         Next
@@ -395,10 +419,20 @@ Public Class ActiveJobs
 
     Private Sub CntMnuFltFct_Click(sender As Object, e As EventArgs) Handles CntMnuFltFct.Click
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
-            TxtBoxJobSts.Text = ""
+            CmbBoxJobSts.Text = ""
             TxtBoxUsr.Text = ""
-            TxtBoxSubSys.Text = ""
+            CmbBoxSbs.Text = ""
             TxtBoxFunction.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(9).Value
+            Me.BtnGet.PerformClick()
+        Next
+    End Sub
+
+    Private Sub CntMnuFltSbs_Click(sender As Object, e As EventArgs) Handles CntMnuFltSbs.Click
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            CmbBoxJobSts.Text = ""
+            TxtBoxUsr.Text = ""
+            CmbBoxSbs.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(12).Value
+            TxtBoxFunction.Text = ""
             Me.BtnGet.PerformClick()
         Next
     End Sub

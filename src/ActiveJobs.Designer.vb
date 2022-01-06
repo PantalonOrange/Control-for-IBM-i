@@ -32,8 +32,6 @@ Partial Class ActiveJobs
         Me.BtnGet = New System.Windows.Forms.Button()
         Me.LblWait = New System.Windows.Forms.Label()
         Me.LblJobSts = New System.Windows.Forms.Label()
-        Me.TxtBoxJobSts = New System.Windows.Forms.TextBox()
-        Me.TxtBoxSubSys = New System.Windows.Forms.TextBox()
         Me.LblSubSys = New System.Windows.Forms.Label()
         Me.TxtBoxUsr = New System.Windows.Forms.TextBox()
         Me.LblUsr = New System.Windows.Forms.Label()
@@ -43,14 +41,18 @@ Partial Class ActiveJobs
         Me.CntMnuMsgw = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntMnuEndJob = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntMnuExcCmd = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CntMnuDspJobLog = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrgBar = New System.Windows.Forms.ProgressBar()
-        Me.CntMnuDspUsrPrf = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.GroupFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CntMnuDspJobLog = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CntMnuDspUsrPrf = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.GroupFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntMnuFltUsrJob = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntMnuFltFct = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrgBar = New System.Windows.Forms.ProgressBar()
+        Me.BtnClose = New System.Windows.Forms.Button()
+        Me.CntMnuFltSbs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CmbBoxJobSts = New System.Windows.Forms.ComboBox()
+        Me.CmbBoxSbs = New System.Windows.Forms.ComboBox()
         CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CntMnu.SuspendLayout()
         Me.SuspendLayout()
@@ -73,13 +75,13 @@ Partial Class ActiveJobs
         Me.DtaGrdActJob.RowHeadersWidth = 62
         Me.DtaGrdActJob.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DtaGrdActJob.ShowEditingIcon = False
-        Me.DtaGrdActJob.Size = New System.Drawing.Size(1584, 709)
-        Me.DtaGrdActJob.TabIndex = 0
+        Me.DtaGrdActJob.Size = New System.Drawing.Size(1411, 614)
+        Me.DtaGrdActJob.TabIndex = 7
         '
         'LblSuccess
         '
         Me.LblSuccess.AutoSize = True
-        Me.LblSuccess.Location = New System.Drawing.Point(211, 31)
+        Me.LblSuccess.Location = New System.Drawing.Point(269, 31)
         Me.LblSuccess.Name = "LblSuccess"
         Me.LblSuccess.Size = New System.Drawing.Size(62, 13)
         Me.LblSuccess.TabIndex = 1
@@ -88,7 +90,7 @@ Partial Class ActiveJobs
         'LblResults
         '
         Me.LblResults.AutoSize = True
-        Me.LblResults.Location = New System.Drawing.Point(334, 31)
+        Me.LblResults.Location = New System.Drawing.Point(392, 31)
         Me.LblResults.Name = "LblResults"
         Me.LblResults.Size = New System.Drawing.Size(56, 13)
         Me.LblResults.TabIndex = 2
@@ -97,7 +99,7 @@ Partial Class ActiveJobs
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(154, 31)
+        Me.Label1.Location = New System.Drawing.Point(212, 31)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 13)
         Me.Label1.TabIndex = 3
@@ -106,7 +108,7 @@ Partial Class ActiveJobs
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(283, 31)
+        Me.Label2.Location = New System.Drawing.Point(341, 31)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(45, 13)
         Me.Label2.TabIndex = 4
@@ -117,7 +119,7 @@ Partial Class ActiveJobs
         Me.BtnGet.Location = New System.Drawing.Point(11, 20)
         Me.BtnGet.Name = "BtnGet"
         Me.BtnGet.Size = New System.Drawing.Size(120, 34)
-        Me.BtnGet.TabIndex = 6
+        Me.BtnGet.TabIndex = 5
         Me.BtnGet.Text = "&Get"
         Me.BtnGet.UseVisualStyleBackColor = True
         '
@@ -130,39 +132,22 @@ Partial Class ActiveJobs
         Me.LblWait.Size = New System.Drawing.Size(183, 42)
         Me.LblWait.TabIndex = 7
         Me.LblWait.Text = "LblStatus"
+        Me.LblWait.UseWaitCursor = True
         '
         'LblJobSts
         '
         Me.LblJobSts.AutoSize = True
-        Me.LblJobSts.Location = New System.Drawing.Point(1269, 14)
+        Me.LblJobSts.Location = New System.Drawing.Point(1094, 14)
         Me.LblJobSts.Name = "LblJobSts"
         Me.LblJobSts.Size = New System.Drawing.Size(57, 13)
         Me.LblJobSts.TabIndex = 8
         Me.LblJobSts.Text = "Job-Status"
         Me.LblJobSts.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'TxtBoxJobSts
-        '
-        Me.TxtBoxJobSts.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
-        Me.TxtBoxJobSts.Location = New System.Drawing.Point(1332, 11)
-        Me.TxtBoxJobSts.MaxLength = 4
-        Me.TxtBoxJobSts.Name = "TxtBoxJobSts"
-        Me.TxtBoxJobSts.Size = New System.Drawing.Size(79, 20)
-        Me.TxtBoxJobSts.TabIndex = 1
-        '
-        'TxtBoxSubSys
-        '
-        Me.TxtBoxSubSys.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
-        Me.TxtBoxSubSys.Location = New System.Drawing.Point(1332, 38)
-        Me.TxtBoxSubSys.MaxLength = 10
-        Me.TxtBoxSubSys.Name = "TxtBoxSubSys"
-        Me.TxtBoxSubSys.Size = New System.Drawing.Size(95, 20)
-        Me.TxtBoxSubSys.TabIndex = 3
-        '
         'LblSubSys
         '
         Me.LblSubSys.AutoSize = True
-        Me.LblSubSys.Location = New System.Drawing.Point(1268, 41)
+        Me.LblSubSys.Location = New System.Drawing.Point(1093, 41)
         Me.LblSubSys.Name = "LblSubSys"
         Me.LblSubSys.Size = New System.Drawing.Size(58, 13)
         Me.LblSubSys.TabIndex = 10
@@ -172,7 +157,7 @@ Partial Class ActiveJobs
         'TxtBoxUsr
         '
         Me.TxtBoxUsr.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
-        Me.TxtBoxUsr.Location = New System.Drawing.Point(1499, 11)
+        Me.TxtBoxUsr.Location = New System.Drawing.Point(1324, 11)
         Me.TxtBoxUsr.MaxLength = 10
         Me.TxtBoxUsr.Name = "TxtBoxUsr"
         Me.TxtBoxUsr.Size = New System.Drawing.Size(96, 20)
@@ -181,7 +166,7 @@ Partial Class ActiveJobs
         'LblUsr
         '
         Me.LblUsr.AutoSize = True
-        Me.LblUsr.Location = New System.Drawing.Point(1464, 14)
+        Me.LblUsr.Location = New System.Drawing.Point(1289, 14)
         Me.LblUsr.Name = "LblUsr"
         Me.LblUsr.Size = New System.Drawing.Size(29, 13)
         Me.LblUsr.TabIndex = 12
@@ -191,7 +176,7 @@ Partial Class ActiveJobs
         'TxtBoxFunction
         '
         Me.TxtBoxFunction.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
-        Me.TxtBoxFunction.Location = New System.Drawing.Point(1499, 38)
+        Me.TxtBoxFunction.Location = New System.Drawing.Point(1324, 38)
         Me.TxtBoxFunction.MaxLength = 10
         Me.TxtBoxFunction.Name = "TxtBoxFunction"
         Me.TxtBoxFunction.Size = New System.Drawing.Size(96, 20)
@@ -200,7 +185,7 @@ Partial Class ActiveJobs
         'LblFunction
         '
         Me.LblFunction.AutoSize = True
-        Me.LblFunction.Location = New System.Drawing.Point(1445, 41)
+        Me.LblFunction.Location = New System.Drawing.Point(1270, 41)
         Me.LblFunction.Name = "LblFunction"
         Me.LblFunction.Size = New System.Drawing.Size(48, 13)
         Me.LblFunction.TabIndex = 14
@@ -212,63 +197,54 @@ Partial Class ActiveJobs
         Me.CntMnu.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.CntMnu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuMsgw, Me.CntMnuEndJob, Me.CntMnuExcCmd, Me.ToolStripSeparator1, Me.CntMnuDspJobLog, Me.CntMnuDspUsrPrf, Me.ToolStripSeparator2, Me.GroupFilter})
         Me.CntMnu.Name = "CntMnu"
-        Me.CntMnu.Size = New System.Drawing.Size(181, 170)
+        Me.CntMnu.Size = New System.Drawing.Size(174, 148)
         '
         'CntMnuMsgw
         '
         Me.CntMnuMsgw.Name = "CntMnuMsgw"
-        Me.CntMnuMsgw.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuMsgw.Size = New System.Drawing.Size(173, 22)
         Me.CntMnuMsgw.Text = "&Send reply"
         '
         'CntMnuEndJob
         '
         Me.CntMnuEndJob.Name = "CntMnuEndJob"
-        Me.CntMnuEndJob.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuEndJob.Size = New System.Drawing.Size(173, 22)
         Me.CntMnuEndJob.Text = "&End job"
         '
         'CntMnuExcCmd
         '
         Me.CntMnuExcCmd.Name = "CntMnuExcCmd"
-        Me.CntMnuExcCmd.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuExcCmd.Size = New System.Drawing.Size(173, 22)
         Me.CntMnuExcCmd.Text = "E&xecute command"
-        '
-        'CntMnuDspJobLog
-        '
-        Me.CntMnuDspJobLog.Name = "CntMnuDspJobLog"
-        Me.CntMnuDspJobLog.Size = New System.Drawing.Size(180, 22)
-        Me.CntMnuDspJobLog.Text = "Display job log"
-        '
-        'PrgBar
-        '
-        Me.PrgBar.Location = New System.Drawing.Point(8, 55)
-        Me.PrgBar.MarqueeAnimationSpeed = 70
-        Me.PrgBar.Name = "PrgBar"
-        Me.PrgBar.Size = New System.Drawing.Size(127, 10)
-        Me.PrgBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
-        Me.PrgBar.TabIndex = 16
-        '
-        'CntMnuDspUsrPrf
-        '
-        Me.CntMnuDspUsrPrf.Name = "CntMnuDspUsrPrf"
-        Me.CntMnuDspUsrPrf.Size = New System.Drawing.Size(180, 22)
-        Me.CntMnuDspUsrPrf.Text = "Display userprofile"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(170, 6)
         '
-        'GroupFilter
+        'CntMnuDspJobLog
         '
-        Me.GroupFilter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuFltUsrJob, Me.CntMnuFltFct})
-        Me.GroupFilter.Name = "GroupFilter"
-        Me.GroupFilter.Size = New System.Drawing.Size(180, 22)
-        Me.GroupFilter.Text = "Filters"
+        Me.CntMnuDspJobLog.Name = "CntMnuDspJobLog"
+        Me.CntMnuDspJobLog.Size = New System.Drawing.Size(173, 22)
+        Me.CntMnuDspJobLog.Text = "Display job log"
+        '
+        'CntMnuDspUsrPrf
+        '
+        Me.CntMnuDspUsrPrf.Name = "CntMnuDspUsrPrf"
+        Me.CntMnuDspUsrPrf.Size = New System.Drawing.Size(173, 22)
+        Me.CntMnuDspUsrPrf.Text = "Display userprofile"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(170, 6)
+        '
+        'GroupFilter
+        '
+        Me.GroupFilter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuFltUsrJob, Me.CntMnuFltFct, Me.CntMnuFltSbs})
+        Me.GroupFilter.Name = "GroupFilter"
+        Me.GroupFilter.Size = New System.Drawing.Size(173, 22)
+        Me.GroupFilter.Text = "Filters"
         '
         'CntMnuFltUsrJob
         '
@@ -282,21 +258,70 @@ Partial Class ActiveJobs
         Me.CntMnuFltFct.Size = New System.Drawing.Size(180, 22)
         Me.CntMnuFltFct.Text = "Function"
         '
+        'PrgBar
+        '
+        Me.PrgBar.Location = New System.Drawing.Point(8, 55)
+        Me.PrgBar.MarqueeAnimationSpeed = 70
+        Me.PrgBar.Name = "PrgBar"
+        Me.PrgBar.Size = New System.Drawing.Size(204, 10)
+        Me.PrgBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.PrgBar.TabIndex = 16
+        '
+        'BtnClose
+        '
+        Me.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.BtnClose.Location = New System.Drawing.Point(136, 20)
+        Me.BtnClose.Name = "BtnClose"
+        Me.BtnClose.Size = New System.Drawing.Size(69, 34)
+        Me.BtnClose.TabIndex = 6
+        Me.BtnClose.Text = "&Close"
+        Me.BtnClose.UseVisualStyleBackColor = True
+        '
+        'CntMnuFltSbs
+        '
+        Me.CntMnuFltSbs.Name = "CntMnuFltSbs"
+        Me.CntMnuFltSbs.Size = New System.Drawing.Size(180, 22)
+        Me.CntMnuFltSbs.Text = "Subsystem"
+        '
+        'CmbBoxJobSts
+        '
+        Me.CmbBoxJobSts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbBoxJobSts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CmbBoxJobSts.FormattingEnabled = True
+        Me.CmbBoxJobSts.Location = New System.Drawing.Point(1157, 11)
+        Me.CmbBoxJobSts.MaxLength = 4
+        Me.CmbBoxJobSts.Name = "CmbBoxJobSts"
+        Me.CmbBoxJobSts.Size = New System.Drawing.Size(95, 21)
+        Me.CmbBoxJobSts.TabIndex = 1
+        '
+        'CmbBoxSbs
+        '
+        Me.CmbBoxSbs.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbBoxSbs.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CmbBoxSbs.FormattingEnabled = True
+        Me.CmbBoxSbs.Location = New System.Drawing.Point(1157, 37)
+        Me.CmbBoxSbs.MaxLength = 10
+        Me.CmbBoxSbs.Name = "CmbBoxSbs"
+        Me.CmbBoxSbs.Size = New System.Drawing.Size(95, 21)
+        Me.CmbBoxSbs.TabIndex = 3
+        '
         'ActiveJobs
         '
         Me.AcceptButton = Me.BtnGet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1607, 788)
-        Me.Controls.Add(Me.PrgBar)
+        Me.CancelButton = Me.BtnClose
+        Me.ClientSize = New System.Drawing.Size(1435, 696)
         Me.Controls.Add(Me.LblWait)
+        Me.Controls.Add(Me.CmbBoxSbs)
+        Me.Controls.Add(Me.CmbBoxJobSts)
+        Me.Controls.Add(Me.BtnClose)
+        Me.Controls.Add(Me.PrgBar)
         Me.Controls.Add(Me.TxtBoxFunction)
         Me.Controls.Add(Me.LblFunction)
         Me.Controls.Add(Me.TxtBoxUsr)
         Me.Controls.Add(Me.LblUsr)
-        Me.Controls.Add(Me.TxtBoxSubSys)
         Me.Controls.Add(Me.LblSubSys)
-        Me.Controls.Add(Me.TxtBoxJobSts)
         Me.Controls.Add(Me.LblJobSts)
         Me.Controls.Add(Me.BtnGet)
         Me.Controls.Add(Me.Label2)
@@ -311,7 +336,7 @@ Partial Class ActiveJobs
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "IBM i Active jobs"
+        Me.Text = "Active jobs"
         CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CntMnu.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -327,8 +352,6 @@ Partial Class ActiveJobs
     Friend WithEvents BtnGet As Button
     Friend WithEvents LblWait As Label
     Friend WithEvents LblJobSts As Label
-    Friend WithEvents TxtBoxJobSts As TextBox
-    Friend WithEvents TxtBoxSubSys As TextBox
     Friend WithEvents LblSubSys As Label
     Friend WithEvents TxtBoxUsr As TextBox
     Friend WithEvents LblUsr As Label
@@ -346,4 +369,8 @@ Partial Class ActiveJobs
     Friend WithEvents GroupFilter As ToolStripMenuItem
     Friend WithEvents CntMnuFltUsrJob As ToolStripMenuItem
     Friend WithEvents CntMnuFltFct As ToolStripMenuItem
+    Friend WithEvents BtnClose As Button
+    Friend WithEvents CntMnuFltSbs As ToolStripMenuItem
+    Friend WithEvents CmbBoxJobSts As ComboBox
+    Friend WithEvents CmbBoxSbs As ComboBox
 End Class

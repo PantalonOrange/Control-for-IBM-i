@@ -5,6 +5,8 @@
 
 Public Class Login
 
+    Public First As Boolean = True
+
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
         HostTextBox.Text = "https://10.1.1.1:20210/system"
@@ -32,13 +34,22 @@ Public Class Login
             Main.Credentials.User = UsernameTextBox.Text
             Main.Credentials.Password = PasswordTextBox.Text
             Main.Host = HostTextBox.Text
+            If First = False Then
+                Main.StrpLabelHost.Text = HostTextBox.Text
+                Main.StrpLabelUser.Text = UsernameTextBox.Text
+            End If
+            First = False
             Main.Show()
             Me.Hide()
         End If
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
-        Me.Close()
+        If First Then
+            Me.Close()
+        Else
+            Me.Hide()
+        End If
     End Sub
 
 End Class

@@ -19,7 +19,6 @@ Public Class UsrPrf
 
     Private Sub UsrPrf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LblWait.Visible = False
-        RunGetProcess()
     End Sub
 
 
@@ -82,6 +81,11 @@ Public Class UsrPrf
                             TxtBoxPrvSignon.Text = ""
                         End Try
                         Try
+                            TxtBoxPrvUsed.Text = Entry("lastUsedTimestamp").ToString()
+                        Catch ex As Exception
+                            TxtBoxPrvUsed.Text = ""
+                        End Try
+                        Try
                             TxtBoxPwdChgDate.Text = Entry("passwordChangeDate").ToString()
                         Catch ex As Exception
                             TxtBoxPwdChgDate.Text = ""
@@ -112,7 +116,11 @@ Public Class UsrPrf
     End Sub
 
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
-        RunGetProcess()
+        If TxtBoxUsrPrf.Text = "" Then
+            MessageBox.Show("Please insert a userprofile name", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Else
+            RunGetProcess()
+        End If
     End Sub
 
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
@@ -133,7 +141,7 @@ Public Class UsrPrf
         BtnGet.Enabled = False
         BtnClose.Enabled = False
         BtnActJob.Enabled = False
-        DisplayInformation("Please wait, load data...")
+        DisplayInformation("Please wait, collecting data...")
         StartProcessGETJoblog(UsrInfoWebservice, TxtBoxUsrPrf.Text)
         RemoveInformation()
         BtnGet.Enabled = True

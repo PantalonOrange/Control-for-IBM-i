@@ -34,6 +34,7 @@ Partial Class JobLog
         Me.TxtBoxJob = New System.Windows.Forms.TextBox()
         Me.LblMax = New System.Windows.Forms.Label()
         Me.CmbBoxMax = New System.Windows.Forms.ComboBox()
+        Me.BtnClose = New System.Windows.Forms.Button()
         CType(Me.DtaGrdJobLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -42,7 +43,7 @@ Partial Class JobLog
         Me.PrgBar.Location = New System.Drawing.Point(11, 51)
         Me.PrgBar.MarqueeAnimationSpeed = 70
         Me.PrgBar.Name = "PrgBar"
-        Me.PrgBar.Size = New System.Drawing.Size(127, 10)
+        Me.PrgBar.Size = New System.Drawing.Size(203, 10)
         Me.PrgBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
         Me.PrgBar.TabIndex = 24
         '
@@ -68,7 +69,7 @@ Partial Class JobLog
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(286, 27)
+        Me.Label2.Location = New System.Drawing.Point(343, 26)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(45, 13)
         Me.Label2.TabIndex = 21
@@ -77,7 +78,7 @@ Partial Class JobLog
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(157, 27)
+        Me.Label1.Location = New System.Drawing.Point(214, 26)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 13)
         Me.Label1.TabIndex = 20
@@ -86,7 +87,7 @@ Partial Class JobLog
         'LblResults
         '
         Me.LblResults.AutoSize = True
-        Me.LblResults.Location = New System.Drawing.Point(337, 27)
+        Me.LblResults.Location = New System.Drawing.Point(394, 26)
         Me.LblResults.Name = "LblResults"
         Me.LblResults.Size = New System.Drawing.Size(56, 13)
         Me.LblResults.TabIndex = 19
@@ -95,7 +96,7 @@ Partial Class JobLog
         'LblSuccess
         '
         Me.LblSuccess.AutoSize = True
-        Me.LblSuccess.Location = New System.Drawing.Point(214, 27)
+        Me.LblSuccess.Location = New System.Drawing.Point(271, 26)
         Me.LblSuccess.Name = "LblSuccess"
         Me.LblSuccess.Size = New System.Drawing.Size(62, 13)
         Me.LblSuccess.TabIndex = 18
@@ -119,13 +120,13 @@ Partial Class JobLog
         Me.DtaGrdJobLog.RowHeadersWidth = 62
         Me.DtaGrdJobLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DtaGrdJobLog.ShowEditingIcon = False
-        Me.DtaGrdJobLog.Size = New System.Drawing.Size(1584, 709)
+        Me.DtaGrdJobLog.Size = New System.Drawing.Size(1347, 564)
         Me.DtaGrdJobLog.TabIndex = 4
         '
         'LblJob
         '
         Me.LblJob.AutoSize = True
-        Me.LblJob.Location = New System.Drawing.Point(1223, 27)
+        Me.LblJob.Location = New System.Drawing.Point(986, 26)
         Me.LblJob.Name = "LblJob"
         Me.LblJob.Size = New System.Drawing.Size(27, 13)
         Me.LblJob.TabIndex = 25
@@ -133,7 +134,7 @@ Partial Class JobLog
         '
         'TxtBoxJob
         '
-        Me.TxtBoxJob.Location = New System.Drawing.Point(1256, 24)
+        Me.TxtBoxJob.Location = New System.Drawing.Point(1019, 23)
         Me.TxtBoxJob.MaxLength = 26
         Me.TxtBoxJob.Name = "TxtBoxJob"
         Me.TxtBoxJob.Size = New System.Drawing.Size(201, 20)
@@ -142,7 +143,7 @@ Partial Class JobLog
         'LblMax
         '
         Me.LblMax.AutoSize = True
-        Me.LblMax.Location = New System.Drawing.Point(1476, 27)
+        Me.LblMax.Location = New System.Drawing.Point(1239, 26)
         Me.LblMax.Name = "LblMax"
         Me.LblMax.Size = New System.Drawing.Size(50, 13)
         Me.LblMax.TabIndex = 27
@@ -153,20 +154,32 @@ Partial Class JobLog
         Me.CmbBoxMax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbBoxMax.FormattingEnabled = True
         Me.CmbBoxMax.Items.AddRange(New Object() {"10", "20", "50", "100", "200", "500", "1000"})
-        Me.CmbBoxMax.Location = New System.Drawing.Point(1532, 23)
+        Me.CmbBoxMax.Location = New System.Drawing.Point(1295, 22)
         Me.CmbBoxMax.Name = "CmbBoxMax"
         Me.CmbBoxMax.Size = New System.Drawing.Size(64, 21)
         Me.CmbBoxMax.TabIndex = 2
+        '
+        'BtnClose
+        '
+        Me.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.BtnClose.Location = New System.Drawing.Point(139, 16)
+        Me.BtnClose.Name = "BtnClose"
+        Me.BtnClose.Size = New System.Drawing.Size(69, 34)
+        Me.BtnClose.TabIndex = 4
+        Me.BtnClose.Text = "&Close"
+        Me.BtnClose.UseVisualStyleBackColor = True
         '
         'JobLog
         '
         Me.AcceptButton = Me.BtnGet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1610, 786)
+        Me.CancelButton = Me.BtnClose
+        Me.ClientSize = New System.Drawing.Size(1371, 639)
+        Me.Controls.Add(Me.LblWait)
+        Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.CmbBoxMax)
         Me.Controls.Add(Me.LblMax)
-        Me.Controls.Add(Me.LblWait)
         Me.Controls.Add(Me.TxtBoxJob)
         Me.Controls.Add(Me.LblJob)
         Me.Controls.Add(Me.PrgBar)
@@ -181,7 +194,8 @@ Partial Class JobLog
         Me.Name = "JobLog"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.Text = "IBM i Joblog"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Joblog informations"
         CType(Me.DtaGrdJobLog, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -200,4 +214,5 @@ Partial Class JobLog
     Friend WithEvents TxtBoxJob As TextBox
     Friend WithEvents LblMax As Label
     Friend WithEvents CmbBoxMax As ComboBox
+    Friend WithEvents BtnClose As Button
 End Class

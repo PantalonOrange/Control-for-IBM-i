@@ -29,10 +29,14 @@ Public Class JobLog
 
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
         If TxtBoxJob.Text = "" Then
-            MessageBox.Show("Missing job name", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Missing job name", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Else
             RunGetProcess()
         End If
+    End Sub
+
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+        Me.Close()
     End Sub
 
     Private Async Sub StartProcessGETJoblog(ByVal pURL As String, ByVal pJobNam As String)
@@ -161,11 +165,14 @@ Public Class JobLog
     Public Sub RunGetProcess()
         'Start communication, etrieve json stream and fill datagridview
         BtnGet.Enabled = False
+        BtnClose.Enabled = False
         DtaGrdJobLog.Enabled = False
-        DisplayInformation("Please wait, load data...")
+        DisplayInformation("Please wait, collecting data...")
         StartProcessGETJoblog(JoblogWebservice, TxtBoxJob.Text)
         RemoveInformation()
         BtnGet.Enabled = True
+        BtnClose.Enabled = True
         DtaGrdJobLog.Enabled = True
     End Sub
+
 End Class
