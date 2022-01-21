@@ -22,6 +22,7 @@ Partial Class UsrPrf
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UsrPrf))
         Me.LblUsrPrf = New System.Windows.Forms.Label()
         Me.TxtBoxUsrPrf = New System.Windows.Forms.TextBox()
         Me.TxtBoxUsrTxt = New System.Windows.Forms.TextBox()
@@ -243,9 +244,9 @@ Partial Class UsrPrf
         Me.Controls.Add(Me.LblUsrPrf)
         Me.Controls.Add(Me.GrpBoxUsr)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "UsrPrf"
-        Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Userprofile informations"

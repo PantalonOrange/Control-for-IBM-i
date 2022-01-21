@@ -1,6 +1,6 @@
 ﻿'Main.vb
 'Mainform as mdi-parent
-'Copyright (C)2021 by Christian Brunner
+'Copyright (C)2021,2022 by Christian Brunner
 
 
 Public Class Main
@@ -44,4 +44,8 @@ Public Class Main
         UsrInfoForm.Show()
     End Sub
 
+    Private Sub InfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InfoToolStripMenuItem.Click
+        MessageBox.Show("Control for IBM i® - Version: " + Login.Version + vbCrLf + "Erstellt von Christian Brunner" + vbCrLf + "Copyright (c)2021,2022 Pantalon Orange OSS" + vbCrLf +
+                        "https://github.com/PantalonOrange/Control-for-IBM-i", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
 End Class

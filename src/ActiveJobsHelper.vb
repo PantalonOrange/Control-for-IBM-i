@@ -1,12 +1,13 @@
 ﻿'ActiveJobsHelper.vb
 'Some helping hands and templates
-'Copyright (C)2021 by Christian Brunner
+'Copyright (C)2021, 2022 by Christian Brunner
 
 
 Public Class ActiveJobInfo_T
     Public OrdinalPosition As String
     Public SubSystem As String
     Public JobName As String
+    Public JobNameShort As String
     Public JobType As String
     Public JobStatus As String
     Public JobMessage As String

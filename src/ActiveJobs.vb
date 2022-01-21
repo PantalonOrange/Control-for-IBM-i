@@ -1,6 +1,6 @@
 ﻿'ActiveJobs.vb
 'This form shows active job informations with different options to select
-'Copyright (C)2021 by Christian Brunner
+'Copyright (C)2021,2022 by Christian Brunner
 
 
 Imports System.Net
@@ -15,6 +15,7 @@ Public Class ActiveJobs
 
     Private Sub ActiveJobs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
+        Me.KeyPreview = True
         LblSuccess.Text = "-"
         LblResults.Text = "-"
         LblWait.Visible = False
@@ -28,16 +29,29 @@ Public Class ActiveJobs
         FillCmbBoxes()
     End Sub
 
+    Private Sub ActiveJobs_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        'Handle key prints f5 or f12
+        Select Case e.KeyCode
+            Case Keys.F5
+                Me.BtnGet.PerformClick()
+            Case Keys.F12
+                Me.BtnClose.PerformClick()
+        End Select
+    End Sub
+
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
-        If CmbBoxJobSts.Text = "" And TxtBoxUsr.Text = "" And CmbBoxSbs.Text = "" And TxtBoxFunction.Text = "" Then
-            MessageBox.Show("Please take at least one selection", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        If CmbBoxJobSts.Text = "" And TxtBoxUsr.Text = "" And CmbBoxSbs.Text = "" And TxtBoxFunction.Text = "" And
+            TxtBoxJobNameShort.Text = "" And CmbBoxJobTyp.Text = "" Then
+            MessageBox.Show("Please take at least one selection", "No selection found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            CmbBoxSbs.Select()
         Else
             'Start communication, etrieve json stream and fill datagridview
             BtnGet.Enabled = False
             BtnClose.Enabled = False
             DtaGrdActJob.Enabled = False
+            ActiveJobWebservice = Main.Host.Trim() + "/activejobs"
             DisplayInformation("Please wait, collecting data...")
-            StartProcessGETActiveJobs(ActiveJobWebservice, TxtBoxUsr.Text, CmbBoxJobSts.Text, CmbBoxSbs.Text, TxtBoxFunction.Text)
+            StartProcessGETActiveJobs(ActiveJobWebservice, CmbBoxJobTyp.Text, TxtBoxJobNameShort.Text, TxtBoxUsr.Text, CmbBoxJobSts.Text, CmbBoxSbs.Text, TxtBoxFunction.Text)
             RemoveInformation()
             BtnGet.Enabled = True
             BtnClose.Enabled = True
@@ -49,26 +63,32 @@ Public Class ActiveJobs
         Me.Close()
     End Sub
 
-    Private Async Sub StartProcessGETActiveJobs(ByVal pURL As String, ByVal pSelUsr As String, ByVal pSelJobSts As String, ByVal pSelSubSys As String, ByVal pSelFct As String)
+    Private Sub StartProcessGETActiveJobs(ByVal pURL As String, ByVal pJobTyp As String, ByVal pJobNameShort As String,
+                                          ByVal pSelUsr As String, ByVal pSelJobSts As String, ByVal pSelSubSys As String, ByVal pSelFct As String)
         Dim GetActiveJobs As New DoRestStuffGet
         Dim URL As String = pURL.Trim() + "?"
+        If pJobTyp <> "" Then
+            URL = URL.Trim() + "jobtype=" + pJobTyp.Trim() + "&"
+        End If
+        If pJobNameShort <> "" Then
+            URL = URL.Trim() + "jobshort=" + pJobNameShort.Trim() + "&"
+        End If
         If pSelUsr <> "" Then
-            URL = URL.Trim() + "&usr=" + pSelUsr.Trim()
+            URL = URL.Trim() + "&usr=" + pSelUsr.Trim() + "&"
         End If
         If pSelJobSts <> "" Then
-            URL = URL.Trim() + "&jobsts=" + pSelJobSts.Trim()
+            URL = URL.Trim() + "&jobsts=" + pSelJobSts.Trim() + "&"
         End If
         If pSelSubSys <> "" Then
-            URL = URL.Trim() + "&sbs=" + pSelSubSys.Trim()
+            URL = URL.Trim() + "&sbs=" + pSelSubSys.Trim() + "&"
         End If
         If pSelFct <> "" Then
-            URL = URL.Trim() + "&fct=" + pSelFct.Trim()
+            URL = URL.Trim() + "&fct=" + pSelFct.Trim() + "&"
         End If
 
         Try
             GetActiveJobs.GetJSONData(URL, Main.Credentials.User, Main.Credentials.Password)
             ResponseStream = GetActiveJobs._returnJSONStream
-            Await Task.Run(Function() GetActiveJobs._returnJSONStream())
             If Not String.IsNullOrEmpty(ResponseStream.Response) Then
                 If ResponseStream.Code = HttpStatusCode.OK Then
                     ParseJsonStream(ResponseStream.Response)
@@ -93,22 +113,26 @@ Public Class ActiveJobs
         Dim Data As List(Of JToken) = Ser.Children().ToList()
         Dim Index As Integer = 0
 
+        DisplayInformation("Please wait, parse incoming data...")
+
         With DtaGrdActJob
             .Columns.Clear()
-            .Columns.Add("Position", "Position")
-            .Columns.Add("JobName", "JobName")
-            .Columns.Add("JobType", "JobType")
-            .Columns.Add("JobStatus", "JobStatus")
-            .Columns.Add("JobMessage", "JobMessage")
-            .Columns.Add("MessageKey", "MessageKey")
-            .Columns.Add("AuthorizationName", "AuthorizationName")
-            .Columns.Add("AuthorizationDescription", "AuthorizationDescription")
-            .Columns.Add("FunctionType", "FunctionType")
+            .Columns.Add("Pos", "Pos")
+            .Columns.Add("JobName", "Job Name")
+            .Columns.Add("JobType", "Job Type")
+            .Columns.Add("JobStatus", "Job Status")
+            .Columns.Add("JobMessage", "Job Message")
+            .Columns.Add("MessageKey", "Message Key")
+            .Columns.Add("AuthorizationName", "Authorization Name")
+            .Columns.Add("AuthorizationDescription", "Authorization Description")
+            .Columns.Add("FunctionType", "Function Type")
             .Columns.Add("Function", "Function")
             .Columns.Add("Storage", "Storage")
-            .Columns.Add("ClientIPAddress", "ClientIPAddress")
-            .Columns.Add("SubSystem", "SubSystem")
-            .Columns.Add("JobActivityTime", "JobActivityTime")
+            .Columns.Add("ClientIPAddress", "Client IP Address")
+            .Columns.Add("SubSystem", "Sub System")
+            .Columns.Add("JobActivityTime", "Job Activity Time")
+            .Columns.Add("JobNameShort", "Job Name Short")
+            .Columns(14).Visible = False
         End With
 
         For Each Item As JProperty In Data
@@ -125,17 +149,22 @@ Public Class ActiveJobs
                         ActiveJobInfo.OrdinalPosition = Entry("ordinalPosition").ToString()
                         ActiveJobInfo.SubSystem = Entry("subSystem").ToString()
                         ActiveJobInfo.JobName = Entry("jobName").ToString()
+                        Try
+                            ActiveJobInfo.JobNameShort = Entry("jobNameShort").ToString()
+                        Catch
+                            ActiveJobInfo.JobNameShort = ""
+                        End Try
                         ActiveJobInfo.JobType = Entry("jobType").ToString()
                         ActiveJobInfo.JobStatus = Entry("jobStatus").ToString
                         Try
                             ActiveJobInfo.JobMessage = Entry("jobMessage").ToString()
                         Catch x As Exception
-                            ActiveJobInfo.JobMessage = Nothing
+                            ActiveJobInfo.JobMessage = "-"
                         End Try
                         Try
                             ActiveJobInfo.MessageKey = Entry("messageKey").ToString
                         Catch x As Exception
-                            ActiveJobInfo.MessageKey = Nothing
+                            ActiveJobInfo.MessageKey = "-"
                         End Try
                         ActiveJobInfo.AuthorizationName = Entry("authorizationName").ToString()
                         ActiveJobInfo.AuthorizationDescription = Entry("authorizationDescription").ToString()
@@ -143,20 +172,22 @@ Public Class ActiveJobs
                             ActiveJobInfo.FunctionType = Entry("functionType").ToString()
                             ActiveJobInfo.FunctionName = Entry("function").ToString()
                         Catch x As Exception
-                            ActiveJobInfo.FunctionType = Nothing
-                            ActiveJobInfo.FunctionName = Nothing
+                            ActiveJobInfo.FunctionType = "-"
+                            ActiveJobInfo.FunctionName = "-"
                         End Try
                         Try
                             ActiveJobInfo.StorageUsed = Convert.ToInt32(Entry("temporaryStorage").ToString())
                         Catch x As Exception
-                            ActiveJobInfo.StorageUsed = Nothing
+                            ActiveJobInfo.StorageUsed = "-"
                         End Try
                         Try
                             ActiveJobInfo.ClientIPAddress = Entry("clientIPAddress").ToString
                         Catch x As Exception
-                            ActiveJobInfo.ClientIPAddress = Nothing
+                            ActiveJobInfo.ClientIPAddress = "-"
                         End Try
                         ActiveJobInfo.JobActiveTime = Entry("jobActiveTime").ToString
+
+                        DisplayInformation("Please wait, write parsed data to display...")
                         With DtaGrdActJob
                             .Rows.Add(ActiveJobInfo.OrdinalPosition)
                             .Rows(Index).Cells(1).Value = ActiveJobInfo.JobName
@@ -172,6 +203,7 @@ Public Class ActiveJobs
                             .Rows(Index).Cells(11).Value = ActiveJobInfo.ClientIPAddress
                             .Rows(Index).Cells(12).Value = ActiveJobInfo.SubSystem
                             .Rows(Index).Cells(13).Value = ActiveJobInfo.JobActiveTime
+                            .Rows(Index).Cells(14).Value = ActiveJobInfo.JobNameShort
                         End With
                         Index += 1
                     Next
@@ -182,13 +214,13 @@ Public Class ActiveJobs
 
     Private Async Sub EndJobImmed(ByVal pJobName As String)
         'Process end job requests
+        ActiveJobWebservice = Main.Host.Trim() + "/endjobs"
         Dim PostEndJob As New DoRestStuffPost
         Dim endJob As New EndJob_T
-        Dim URL As String = ActiveJobWebservice.Trim()
         Dim Success As String
         endJob.endJobList(0).jobName = pJobName
         Dim JsonStream As String = JObject.FromObject(endJob).ToString
-        PostEndJob.PostJSONData(URL, JsonStream, Main.Credentials.User, Main.Credentials.Password)
+        PostEndJob.PostJSONData(ActiveJobWebservice, JsonStream, Main.Credentials.User, Main.Credentials.Password)
         ResponseStream = PostEndJob._returnJSONStream()
         Await Task.Run(Function() PostEndJob._returnJSONStream)
 
@@ -221,14 +253,14 @@ Public Class ActiveJobs
 
     Private Async Sub ReplyMessage(ByVal pMessageKey As String, ByVal pReplyMessage As String)
         'Process reply messages
+        ActiveJobWebservice = Main.Host.Trim() + "/replys"
         Dim PostReplyMessage As New DoRestStuffPost
         Dim replyMessage As New ReplyMessage_T
-        Dim URL As String = ActiveJobWebservice.Trim()
         Dim Success As String
         replyMessage.replyList(0).replyMessage = pReplyMessage
         replyMessage.replyList(0).messageKey = pMessageKey
         Dim JsonStream As String = JObject.FromObject(replyMessage).ToString
-        PostReplyMessage.PostJSONData(URL, JsonStream, Main.Credentials.User, Main.Credentials.Password)
+        PostReplyMessage.PostJSONData(ActiveJobWebservice, JsonStream, Main.Credentials.User, Main.Credentials.Password)
         ResponseStream = PostReplyMessage._returnJSONStream()
         Await Task.Run(Function() PostReplyMessage._returnJSONStream)
 
@@ -260,13 +292,13 @@ Public Class ActiveJobs
 
     Private Async Sub ExecuteCommandOnHost(ByVal pCommand As String)
         'Process execute command on host system
+        ActiveJobWebservice = Main.Host.Trim() + "/executecommands"
         Dim PostReplyMessage As New DoRestStuffPost
         Dim executeCommand As New ExecuteCommand_T
-        Dim URL As String = ActiveJobWebservice.Trim()
         Dim Success As String
         executeCommand.executeCommandList(0).command = pCommand
         Dim JsonStream As String = JObject.FromObject(executeCommand).ToString
-        PostReplyMessage.PostJSONData(URL, JsonStream, Main.Credentials.User, Main.Credentials.Password)
+        PostReplyMessage.PostJSONData(ActiveJobWebservice, JsonStream, Main.Credentials.User, Main.Credentials.Password)
         ResponseStream = PostReplyMessage._returnJSONStream()
         Await Task.Run(Function() PostReplyMessage._returnJSONStream)
 
@@ -310,14 +342,9 @@ Public Class ActiveJobs
     End Sub
 
     Private Sub FillCmbBoxes()
-        CmbBoxJobSts.Items.Add("MSGW")
-        CmbBoxJobSts.Items.Add("LCKW")
-        CmbBoxJobSts.Items.Add("DSPW")
-        CmbBoxJobSts.Items.Add("TIMW")
-        CmbBoxSbs.Items.Add("QINTER")
-        CmbBoxSbs.Items.Add("QBATCH")
-        CmbBoxSbs.Items.Add("QSPL")
-        CmbBoxSbs.Items.Add("QUSRWRK")
+        CmbBoxJobSts.Items.AddRange(File.ReadAllLines(Application.StartupPath + "\settings\jobsts.txt"))
+        CmbBoxSbs.Items.AddRange(File.ReadAllLines(Application.StartupPath + "\settings\sbs.txt"))
+        CmbBoxJobTyp.Items.AddRange(File.ReadAllLines(Application.StartupPath + "\settings\jobtyp.txt"))
     End Sub
 
     Private Sub DtaGrdActJob_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DtaGrdActJob.CellFormatting
@@ -331,9 +358,23 @@ Public Class ActiveJobs
         End If
 
         Select Case e.ColumnIndex
+            Case 0 'Position
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            Case 2 'job type
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 3 'job status
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 6 'authorization name
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 8 'function type
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 9 'function
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             Case 10 'temporary Storage used
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             Case 11 'ip address
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 12 'subsystem
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         End Select
     End Sub
@@ -349,9 +390,10 @@ Public Class ActiveJobs
         'Process end job requests
         Dim Result As DialogResult
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
-            Result = MessageBox.Show("Please confirm the endjob", "End job immed?", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            Result = MessageBox.Show("Please confirm the endjob-request for: " + DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value.ToString().Trim(), "End job immed?",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
             If Result = System.Windows.Forms.DialogResult.Yes Then
-                DisplayInformation("Please wait, process input...")
+                DisplayInformation("Please wait, process endjob on host...")
                 EndJobImmed(DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value)
                 RemoveInformation()
             End If
@@ -363,12 +405,12 @@ Public Class ActiveJobs
         Dim Result As String
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
             Result = InputBox("Please insert your reply message", "Reply-Message")
-            If Result <> "" And DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value <> "" Then
-                DisplayInformation("Please wait, process input...")
+            If Result <> "" And DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value <> "-" Then
+                DisplayInformation("Please wait, process reply-request...")
                 ReplyMessage(DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value, Result)
                 RemoveInformation()
-            ElseIf Result <> "" And DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value = "" Then
-                MessageBox.Show("No message key available", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            ElseIf Result <> "" And DtaGrdActJob.Rows(SelectedRow.Index).Cells(5).Value = "-" Then
+                MessageBox.Show("No message key available. Cancel reply request", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         Next
     End Sub
@@ -376,15 +418,16 @@ Public Class ActiveJobs
     Private Sub CntMnuExcCmd_Click(sender As Object, e As EventArgs) Handles CntMnuExcCmd.Click
         'Execute given command on host system
         Dim Result As String
-        Result = InputBox("Please insert your command to be executed on host-system")
+        Result = InputBox("Please insert your command to be executed on host-system", "Execute command")
         If Result <> "" Then
-            DisplayInformation("Please wait, process input...")
+            DisplayInformation("Please wait, try to process command-request on host...")
             ExecuteCommandOnHost(Result)
             RemoveInformation()
         End If
     End Sub
 
-    Private Sub CntMnuDspJobLog_Click(sender As Object, e As EventArgs) Handles CntMnuDspJobLog.Click
+    Private Sub CntMnuDspJobLog_Click(sender As Object, e As EventArgs) Handles CntMnuDspJobLog.Click, DtaGrdActJob.MouseDoubleClick
+        'Display joblog for selected job
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
             Dim JoblogForm As New JobLog
             JoblogForm.MdiParent = Main
@@ -397,6 +440,7 @@ Public Class ActiveJobs
     End Sub
 
     Private Sub CntMnuDspUsrPrf_Click(sender As Object, e As EventArgs) Handles CntMnuDspUsrPrf.Click
+        'Display userinformations for selected user
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
             Dim UsrPrfForm As New UsrPrf
             UsrPrfForm.MdiParent = Main
@@ -404,36 +448,183 @@ Public Class ActiveJobs
             UsrPrfForm.TxtBoxUsrPrf.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(6).Value
             UsrPrfForm.TxtBoxUsrPrf.Enabled = False
             UsrPrfForm.BtnGet.PerformClick()
+            Exit For
         Next
     End Sub
 
     Private Sub CntMnuFltUsrJob_Click(sender As Object, e As EventArgs) Handles CntMnuFltUsrJob.Click
+        'Set filter to selected user
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
             CmbBoxJobSts.Text = ""
             TxtBoxUsr.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(6).Value
             CmbBoxSbs.Text = ""
             TxtBoxFunction.Text = ""
+            CmbBoxJobTyp.Text = ""
+            TxtBoxJobNameShort.Text = ""
             Me.BtnGet.PerformClick()
+            Exit For
         Next
     End Sub
 
     Private Sub CntMnuFltFct_Click(sender As Object, e As EventArgs) Handles CntMnuFltFct.Click
+        'Set filter to selected function
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
             CmbBoxJobSts.Text = ""
             TxtBoxUsr.Text = ""
             CmbBoxSbs.Text = ""
             TxtBoxFunction.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(9).Value
+            CmbBoxJobTyp.Text = ""
+            TxtBoxJobNameShort.Text = ""
             Me.BtnGet.PerformClick()
+            Exit For
         Next
     End Sub
 
     Private Sub CntMnuFltSbs_Click(sender As Object, e As EventArgs) Handles CntMnuFltSbs.Click
+        'Set filter to selected subsystem
         For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
             CmbBoxJobSts.Text = ""
             TxtBoxUsr.Text = ""
             CmbBoxSbs.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(12).Value
             TxtBoxFunction.Text = ""
+            CmbBoxJobTyp.Text = ""
+            TxtBoxJobNameShort.Text = ""
             Me.BtnGet.PerformClick()
+            Exit For
         Next
     End Sub
+
+    Private Sub CntMnuFltJobTyp_Click(sender As Object, e As EventArgs) Handles CntMnuFltJobTyp.Click
+        'Set filter to selected job type
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            CmbBoxJobSts.Text = ""
+            TxtBoxUsr.Text = ""
+            CmbBoxSbs.Text = ""
+            TxtBoxFunction.Text = ""
+            CmbBoxJobTyp.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(2).Value
+            TxtBoxJobNameShort.Text = ""
+            Me.BtnGet.PerformClick()
+            Exit For
+        Next
+    End Sub
+
+    Private Sub CntMnuStrPrt_Click(sender As Object, e As EventArgs) Handles CntMnuStrPrt.Click
+        'Start printer
+        Dim Result As String = InputBox("Please insert the printer to start", "Start printer")
+        If Result <> "" Then
+            Result = "STRPRTWTR DEV(" + Result.ToUpper().Trim() + ")"
+            DisplayInformation("Please wait, process input...")
+            ExecuteCommandOnHost(Result)
+            RemoveInformation()
+        End If
+    End Sub
+
+    Private Sub CntMnuEndPrt_Click(sender As Object, e As EventArgs) Handles CntMnuEndPrt.Click
+        'End printer
+        Dim Result As String = InputBox("Please insert the printer to end", "End printer")
+        If Result <> "" Then
+            Result = "ENDWTR WTR(" + Result.ToUpper().Trim() + ") OPTION(*IMMED)"
+            DisplayInformation("Please wait, process input...")
+            ExecuteCommandOnHost(Result)
+            RemoveInformation()
+        End If
+    End Sub
+
+    Private Sub CntMnuSndBrkMsg_Click(sender As Object, e As EventArgs) Handles CntMnuSndBrkMsg.Click
+        'send break message to selected job(s)
+        Dim Result As String = InputBox("Please inser the message to send as break message", "Send break message")
+        Dim MessageRequest As String
+        If Result <> "" Then
+            For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+                DisplayInformation("Please wait, try to send message to job...")
+                MessageRequest = "SNDBRKMSG MSG('" + Result.Trim() + "') TOMSGQ(" + DtaGrdActJob.Rows(SelectedRow.Index).Cells(14).Value.ToString.Trim() + ")"
+                ExecuteCommandOnHost(MessageRequest)
+                RemoveInformation()
+            Next
+        End If
+    End Sub
+
+    Private Sub CntMnuHldJob_Click(sender As Object, e As EventArgs) Handles CntMnuHldJob.Click
+        'Hold selected job(s)
+        Dim Command As String
+        Dim Result As DialogResult
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            If DtaGrdActJob.Rows(SelectedRow.Index).Cells(2).Value = "WTR" Then
+                MessageBox.Show("Not possible, job is a printer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                Result = MessageBox.Show("Please confirm the hold job request for: " + DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value.ToString().Trim(), "Hold job",
+                                             MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If Result = System.Windows.Forms.DialogResult.Yes Then
+
+                    DisplayInformation("Please wait, try to hold job...")
+                    Command = "HLDJOB JOB(" + DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value.ToString.Trim() + ")"
+                    ExecuteCommandOnHost(Command)
+                    RemoveInformation()
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub CntMnuRlsJob_Click(sender As Object, e As EventArgs) Handles CntMnuRlsJob.Click
+        'Release selected job(s)
+        Dim Command As String
+        Dim Result As DialogResult
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            If DtaGrdActJob.Rows(SelectedRow.Index).Cells(2).Value = "WTR" Then
+                MessageBox.Show("Not possible, job is a printer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                Result = MessageBox.Show("Please confirm the release job request for: " + DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value.ToString().Trim(), "Release job",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If Result = System.Windows.Forms.DialogResult.Yes Then
+                    DisplayInformation("Please wait, try to release job...")
+                    Command = "RLSJOB JOB(" + DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value.ToString.Trim() + ")"
+                    ExecuteCommandOnHost(Command)
+                    RemoveInformation()
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub CntMnuHldOutQ_Click(sender As Object, e As EventArgs) Handles CntMnuHldOutQ.Click
+        'Hold selected outqueue(s)
+        Dim Command As String
+        Dim Result As DialogResult
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            If DtaGrdActJob.Rows(SelectedRow.Index).Cells(2).Value = "WTR" Then
+                Result = MessageBox.Show("Please confirm the hold outqueue request for: " + DtaGrdActJob.Rows(SelectedRow.Index).Cells(14).Value.ToString().Trim(), "Hold outqueue",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If Result = System.Windows.Forms.DialogResult.Yes Then
+
+                    DisplayInformation("Please wait, try to hold outqueue...")
+                    Command = "HLDOUTQ OUTQ(QUSRSYS/" + DtaGrdActJob.Rows(SelectedRow.Index).Cells(14).Value.ToString.Trim() + ")"
+                    ExecuteCommandOnHost(Command)
+                    RemoveInformation()
+                End If
+            Else
+                MessageBox.Show("Not possible, job is not a printer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Next
+    End Sub
+
+    Private Sub CntMnuRlsOutQ_Click(sender As Object, e As EventArgs) Handles CntMnuRlsOutQ.Click
+        'Release selected outqueue(s)
+        Dim Command As String
+        Dim Result As DialogResult
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            If DtaGrdActJob.Rows(SelectedRow.Index).Cells(2).Value = "WTR" Then
+                Result = MessageBox.Show("Please confirm the release outqueue request for: " + DtaGrdActJob.Rows(SelectedRow.Index).Cells(14).Value.ToString().Trim(), "Hold outqueue",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If Result = System.Windows.Forms.DialogResult.Yes Then
+
+                    DisplayInformation("Please wait, try to hold outqueue...")
+                    Command = "RLSOUTQ OUTQ(QUSRSYS/" + DtaGrdActJob.Rows(SelectedRow.Index).Cells(14).Value.ToString.Trim() + ")"
+                    ExecuteCommandOnHost(Command)
+                    RemoveInformation()
+                End If
+            Else
+                MessageBox.Show("Not possible, job is not a printer", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Next
+    End Sub
+
 End Class

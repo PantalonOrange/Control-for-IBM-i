@@ -22,7 +22,7 @@ Public Class DoRestStuffGet
         Try
             Dim Request As HttpWebRequest = CType(WebRequest.Create(pRequestURL), HttpWebRequest)
             Request.Method = "GET"
-            Request.UserAgent = "IBMi-Control Activejobs"
+            Request.UserAgent = "Control for IBM i - (" + Login.Version.Trim() + ")"
             Request.Headers("Authorization") = "Basic " + Auth
             Dim Response As HttpWebResponse = CType(Request.GetResponse(), HttpWebResponse)
             Dim DataStream As Stream = Response.GetResponseStream()
@@ -60,7 +60,7 @@ Public Class DoRestStuffPost
             Dim ByteArray() As Byte = Encoding.UTF8.GetBytes(pJSONString)
             Dim Request As HttpWebRequest = CType(WebRequest.Create(pRequestURL), HttpWebRequest)
             Request.Method = "POST"
-            Request.UserAgent = "IBMi-Control Activejobs"
+            Request.UserAgent = "Control for IBM i - (" + Login.Version.Trim() + ")"
             Request.Headers("Authorization") = "Basic " + Auth
             Request.ContentType = "application/json"
             Request.ContentLength = ByteArray.Length

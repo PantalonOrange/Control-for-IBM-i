@@ -40,6 +40,7 @@ Partial Class Login
         Me.Cancel = New System.Windows.Forms.Button()
         Me.HostTextBox = New System.Windows.Forms.TextBox()
         Me.HostLabel = New System.Windows.Forms.Label()
+        Me.LblVersion = New System.Windows.Forms.Label()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -83,7 +84,7 @@ Partial Class Login
         '
         Me.PasswordTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
         Me.PasswordTextBox.Location = New System.Drawing.Point(175, 72)
-        Me.PasswordTextBox.MaxLength = 10
+        Me.PasswordTextBox.MaxLength = 128
         Me.PasswordTextBox.Name = "PasswordTextBox"
         Me.PasswordTextBox.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.PasswordTextBox.Size = New System.Drawing.Size(216, 20)
@@ -124,6 +125,17 @@ Partial Class Login
         Me.HostLabel.Text = "&Webservice"
         Me.HostLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'LblVersion
+        '
+        Me.LblVersion.AutoSize = True
+        Me.LblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblVersion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.LblVersion.Location = New System.Drawing.Point(135, 0)
+        Me.LblVersion.Name = "LblVersion"
+        Me.LblVersion.Size = New System.Drawing.Size(30, 9)
+        Me.LblVersion.TabIndex = 7
+        Me.LblVersion.Text = "version"
+        '
         'Login
         '
         Me.AcceptButton = Me.OK
@@ -131,6 +143,7 @@ Partial Class Login
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
         Me.ClientSize = New System.Drawing.Size(401, 180)
+        Me.Controls.Add(Me.LblVersion)
         Me.Controls.Add(Me.HostTextBox)
         Me.Controls.Add(Me.HostLabel)
         Me.Controls.Add(Me.Cancel)
@@ -156,4 +169,5 @@ Partial Class Login
 
     Friend WithEvents HostTextBox As TextBox
     Friend WithEvents HostLabel As Label
+    Friend WithEvents LblVersion As Label
 End Class

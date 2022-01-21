@@ -6,9 +6,11 @@
 Public Class Login
 
     Public First As Boolean = True
+    Public Version As String = "0.0.6"
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
+        LblVersion.Text = Me.Version
         HostTextBox.Text = "https://10.1.1.1:20210/system"
     End Sub
 

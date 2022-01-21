@@ -25,16 +25,18 @@ Partial Class Main
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.MnuStrpMain = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangeSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OperationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActiveJobsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.JobLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsrInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StsStrpMain = New System.Windows.Forms.StatusStrip()
         Me.StrpLabelUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StrpLabelHost = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ChangeSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.MnuStrpMain.SuspendLayout()
         Me.StsStrpMain.SuspendLayout()
         Me.SuspendLayout()
@@ -42,7 +44,7 @@ Partial Class Main
         'MnuStrpMain
         '
         Me.MnuStrpMain.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MnuStrpMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OperationsToolStripMenuItem})
+        Me.MnuStrpMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OperationsToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.MnuStrpMain.Location = New System.Drawing.Point(0, 0)
         Me.MnuStrpMain.Name = "MnuStrpMain"
         Me.MnuStrpMain.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
@@ -57,10 +59,23 @@ Partial Class Main
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 22)
         Me.FileToolStripMenuItem.Text = "&File"
         '
+        'ChangeSettingsToolStripMenuItem
+        '
+        Me.ChangeSettingsToolStripMenuItem.Image = CType(resources.GetObject("ChangeSettingsToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ChangeSettingsToolStripMenuItem.Name = "ChangeSettingsToolStripMenuItem"
+        Me.ChangeSettingsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.ChangeSettingsToolStripMenuItem.Text = "Change settings"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(185, 6)
+        '
         'ExitToolStripMenuItem
         '
+        Me.ExitToolStripMenuItem.Image = CType(resources.GetObject("ExitToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
         'OperationsToolStripMenuItem
@@ -72,21 +87,43 @@ Partial Class Main
         '
         'ActiveJobsToolStripMenuItem
         '
+        Me.ActiveJobsToolStripMenuItem.Image = CType(resources.GetObject("ActiveJobsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ActiveJobsToolStripMenuItem.Name = "ActiveJobsToolStripMenuItem"
-        Me.ActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.ActiveJobsToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+            Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+        Me.ActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(207, 30)
         Me.ActiveJobsToolStripMenuItem.Text = "&Active jobs"
         '
         'JobLogsToolStripMenuItem
         '
+        Me.JobLogsToolStripMenuItem.Image = CType(resources.GetObject("JobLogsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.JobLogsToolStripMenuItem.Name = "JobLogsToolStripMenuItem"
-        Me.JobLogsToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.JobLogsToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+            Or System.Windows.Forms.Keys.J), System.Windows.Forms.Keys)
+        Me.JobLogsToolStripMenuItem.Size = New System.Drawing.Size(207, 30)
         Me.JobLogsToolStripMenuItem.Text = "Job logs"
         '
         'UsrInfoToolStripMenuItem
         '
+        Me.UsrInfoToolStripMenuItem.Image = CType(resources.GetObject("UsrInfoToolStripMenuItem.Image"), System.Drawing.Image)
         Me.UsrInfoToolStripMenuItem.Name = "UsrInfoToolStripMenuItem"
-        Me.UsrInfoToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.UsrInfoToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+            Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
+        Me.UsrInfoToolStripMenuItem.Size = New System.Drawing.Size(207, 30)
         Me.UsrInfoToolStripMenuItem.Text = "User info"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InfoToolStripMenuItem})
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(24, 22)
+        Me.ToolStripMenuItem1.Text = "&?"
+        '
+        'InfoToolStripMenuItem
+        '
+        Me.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem"
+        Me.InfoToolStripMenuItem.Size = New System.Drawing.Size(95, 22)
+        Me.InfoToolStripMenuItem.Text = "&Info"
         '
         'StsStrpMain
         '
@@ -118,17 +155,6 @@ Partial Class Main
         Me.StrpLabelHost.Name = "StrpLabelHost"
         Me.StrpLabelHost.Size = New System.Drawing.Size(36, 19)
         Me.StrpLabelHost.Text = "Host"
-        '
-        'ChangeSettingsToolStripMenuItem
-        '
-        Me.ChangeSettingsToolStripMenuItem.Name = "ChangeSettingsToolStripMenuItem"
-        Me.ChangeSettingsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ChangeSettingsToolStripMenuItem.Text = "Change settings"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'Main
         '
@@ -166,4 +192,6 @@ Partial Class Main
     Friend WithEvents UsrInfoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ChangeSettingsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents InfoToolStripMenuItem As ToolStripMenuItem
 End Class
