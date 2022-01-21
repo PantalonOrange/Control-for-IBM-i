@@ -6,4 +6,4 @@ Version 0.0.6<br><br>
 Based on "https://github.com/PantalonOrange/CGI-Serviceprogram"
 
 # Active jobs (for API GETACTJOB.sqlrpgle)
-![activejobs](https://github.com/PantalonOrange/IBM-i-Activejobs/blob/master/actjob.png)
+![activejobs](https://github.com/PantalonOrange/Control-for-IBM-i/blob/main/actjob.PNG)
