@@ -9,3 +9,5 @@ Based on the examples from my cgi-serviceprogram "https://github.com/PantalonOra
 ![activejobs](https://github.com/PantalonOrange/Control-for-IBM-i/blob/main/actjob.PNG)
 
 
+# User profile informations (for API GETUSRINF.sqlrpgle)
+![userinfos](https://github.com/PantalonOrange/Control-for-IBM-i/blob/main/usrinf.PNG)
