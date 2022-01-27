@@ -1,6 +1,6 @@
 ﻿'UsrPrf.vb
 'This form shows some information about selected userprofile
-'Copyright (C)2021 by Christian Brunner
+'Copyright (c)2021,2022 by Christian Brunner
 
 
 Imports System.Net
@@ -24,10 +24,7 @@ Public Class UsrPrf
 
     Private Async Sub StartProcessGETJoblog(ByVal pURL As String, ByVal pUsrPrf As String)
         Dim GetUsrPrf As New DoRestStuffGet
-        Dim URL As String = pURL.Trim() + "?"
-        If pUsrPrf <> "" Then
-            URL = URL.Trim() + "usr=" + pUsrPrf.Trim()
-        End If
+        Dim URL As String = pURL.Trim() + "?usr=" + pUsrPrf.Trim()
 
         Try
             GetUsrPrf.GetJSONData(URL, Main.Credentials.User, Main.Credentials.Password)
@@ -68,32 +65,67 @@ Public Class UsrPrf
                         Try
                             TxtBoxUsrTxt.Text = Entry("authorizationDescription").ToString()
                         Catch ex As Exception
-                            TxtBoxUsrTxt.Text = ""
+                            TxtBoxUsrTxt.Text = "-"
                         End Try
                         Try
                             TxtBoxEnabled.Text = Entry("isEnabled").ToString()
                         Catch ex As Exception
-                            TxtBoxEnabled.Text = ""
+                            TxtBoxEnabled.Text = "-"
                         End Try
                         Try
                             TxtBoxPrvSignon.Text = Entry("previousSignon").ToString()
                         Catch ex As Exception
-                            TxtBoxPrvSignon.Text = ""
+                            TxtBoxPrvSignon.Text = "-"
                         End Try
                         Try
                             TxtBoxPrvUsed.Text = Entry("lastUsedTimestamp").ToString()
                         Catch ex As Exception
-                            TxtBoxPrvUsed.Text = ""
+                            TxtBoxPrvUsed.Text = "-"
                         End Try
                         Try
                             TxtBoxPwdChgDate.Text = Entry("passwordChangeDate").ToString()
                         Catch ex As Exception
-                            TxtBoxPwdChgDate.Text = ""
+                            TxtBoxPwdChgDate.Text = "-"
                         End Try
                         Try
                             TxtBoxUsrCls.Text = Entry("userClassName").ToString()
                         Catch ex As Exception
-                            TxtBoxUsrCls.Text = ""
+                            TxtBoxUsrCls.Text = "-"
+                        End Try
+                        Try
+                            TxtBoxGrpPrf.Text = Entry("groupProfileName").ToString()
+                        Catch ex As Exception
+                            TxtBoxGrpPrf.Text = "-"
+                        End Try
+                        Try
+                            TxtBoxOwner.Text = Entry("owner").ToString()
+                        Catch ex As Exception
+                            TxtBoxOwner.Text = "-"
+                        End Try
+                        Try
+                            TxtBoxCurLib.Text = Entry("currentLibraryName").ToString()
+                        Catch ex As Exception
+                            TxtBoxCurLib.Text = "-"
+                        End Try
+                        Try
+                            TxtBoxLmtCap.Text = Entry("limitCapabilities").ToString()
+                        Catch ex As Exception
+                            TxtBoxLmtCap.Text = "-"
+                        End Try
+                        Try
+                            TxtBoxLimitDevSess.Text = Entry("limitDeviceSessions").ToString()
+                        Catch ex As Exception
+                            TxtBoxLimitDevSess.Text = "-"
+                        End Try
+                        Try
+                            TxtBoxStgUsed.Text = Entry("storageUsed").ToString()
+                        Catch ex As Exception
+                            TxtBoxStgUsed.Text = "-"
+                        End Try
+                        Try
+                            TxtBoxJobsRun.Text = Entry("currentJobsRunning").ToString()
+                        Catch ex As Exception
+                            TxtBoxJobsRun.Text = "0"
                         End Try
 
                     Next
@@ -120,6 +152,11 @@ Public Class UsrPrf
             MessageBox.Show("Please insert a userprofile name", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Else
             RunGetProcess()
+            If TxtBoxJobsRun.Text = "" Or TxtBoxJobsRun.Text = "0" Then
+                BtnActJob.Enabled = False
+            Else
+                BtnActJob.Enabled = True
+            End If
         End If
     End Sub
 

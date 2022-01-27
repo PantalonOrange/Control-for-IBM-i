@@ -41,7 +41,7 @@ Public Class ActiveJobs
 
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
         If CmbBoxJobSts.Text = "" And TxtBoxUsr.Text = "" And CmbBoxSbs.Text = "" And TxtBoxFunction.Text = "" And
-            TxtBoxJobNameShort.Text = "" And CmbBoxJobTyp.Text = "" Then
+            TxtBoxJobNameShort.Text = "" And CmbBoxJobTyp.Text = "" And TxtBoxIPAdr.Text = "" Then
             MessageBox.Show("Please take at least one selection", "No selection found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             CmbBoxSbs.Select()
         Else
@@ -51,7 +51,8 @@ Public Class ActiveJobs
             DtaGrdActJob.Enabled = False
             ActiveJobWebservice = Main.Host.Trim() + "/activejobs"
             DisplayInformation("Please wait, collecting data...")
-            StartProcessGETActiveJobs(ActiveJobWebservice, CmbBoxJobTyp.Text, TxtBoxJobNameShort.Text, TxtBoxUsr.Text, CmbBoxJobSts.Text, CmbBoxSbs.Text, TxtBoxFunction.Text)
+            StartProcessGETActiveJobs(ActiveJobWebservice, CmbBoxJobTyp.Text, TxtBoxJobNameShort.Text, TxtBoxUsr.Text, CmbBoxJobSts.Text,
+                                      CmbBoxSbs.Text, TxtBoxFunction.Text, TxtBoxIPAdr.Text)
             RemoveInformation()
             BtnGet.Enabled = True
             BtnClose.Enabled = True
@@ -64,7 +65,8 @@ Public Class ActiveJobs
     End Sub
 
     Private Sub StartProcessGETActiveJobs(ByVal pURL As String, ByVal pJobTyp As String, ByVal pJobNameShort As String,
-                                          ByVal pSelUsr As String, ByVal pSelJobSts As String, ByVal pSelSubSys As String, ByVal pSelFct As String)
+                                          ByVal pSelUsr As String, ByVal pSelJobSts As String, ByVal pSelSubSys As String,
+                                          ByVal pSelFct As String, ByVal pClientIP As String)
         Dim GetActiveJobs As New DoRestStuffGet
         Dim URL As String = pURL.Trim() + "?"
         If pJobTyp <> "" Then
@@ -74,16 +76,19 @@ Public Class ActiveJobs
             URL = URL.Trim() + "jobshort=" + pJobNameShort.Trim() + "&"
         End If
         If pSelUsr <> "" Then
-            URL = URL.Trim() + "&usr=" + pSelUsr.Trim() + "&"
+            URL = URL.Trim() + "usr=" + pSelUsr.Trim() + "&"
         End If
         If pSelJobSts <> "" Then
-            URL = URL.Trim() + "&jobsts=" + pSelJobSts.Trim() + "&"
+            URL = URL.Trim() + "jobsts=" + pSelJobSts.Trim() + "&"
         End If
         If pSelSubSys <> "" Then
-            URL = URL.Trim() + "&sbs=" + pSelSubSys.Trim() + "&"
+            URL = URL.Trim() + "sbs=" + pSelSubSys.Trim() + "&"
         End If
         If pSelFct <> "" Then
-            URL = URL.Trim() + "&fct=" + pSelFct.Trim() + "&"
+            URL = URL.Trim() + "fct=" + pSelFct.Trim() + "&"
+        End If
+        If pClientIP <> "" Then
+            URL = URL.Trim() + "clientip=" + pClientIP.Trim()
         End If
 
         Try
@@ -433,7 +438,7 @@ Public Class ActiveJobs
             JoblogForm.MdiParent = Main
             JoblogForm.Show()
             JoblogForm.TxtBoxJob.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value
-            JoblogForm.TxtBoxJob.Enabled = False
+            JoblogForm.TxtBoxJob.ReadOnly = True
             JoblogForm.CmbBoxMax.Text = "50"
             JoblogForm.BtnGet.PerformClick()
         Next
@@ -446,7 +451,7 @@ Public Class ActiveJobs
             UsrPrfForm.MdiParent = Main
             UsrPrfForm.Show()
             UsrPrfForm.TxtBoxUsrPrf.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(6).Value
-            UsrPrfForm.TxtBoxUsrPrf.Enabled = False
+            UsrPrfForm.TxtBoxUsrPrf.ReadOnly = False
             UsrPrfForm.BtnGet.PerformClick()
             Exit For
         Next
@@ -461,6 +466,7 @@ Public Class ActiveJobs
             TxtBoxFunction.Text = ""
             CmbBoxJobTyp.Text = ""
             TxtBoxJobNameShort.Text = ""
+            TxtBoxIPAdr.Text = ""
             Me.BtnGet.PerformClick()
             Exit For
         Next
@@ -475,6 +481,7 @@ Public Class ActiveJobs
             TxtBoxFunction.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(9).Value
             CmbBoxJobTyp.Text = ""
             TxtBoxJobNameShort.Text = ""
+            TxtBoxIPAdr.Text = ""
             Me.BtnGet.PerformClick()
             Exit For
         Next
@@ -489,6 +496,7 @@ Public Class ActiveJobs
             TxtBoxFunction.Text = ""
             CmbBoxJobTyp.Text = ""
             TxtBoxJobNameShort.Text = ""
+            TxtBoxIPAdr.Text = ""
             Me.BtnGet.PerformClick()
             Exit For
         Next
@@ -503,6 +511,22 @@ Public Class ActiveJobs
             TxtBoxFunction.Text = ""
             CmbBoxJobTyp.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(2).Value
             TxtBoxJobNameShort.Text = ""
+            TxtBoxIPAdr.Text = ""
+            Me.BtnGet.PerformClick()
+            Exit For
+        Next
+    End Sub
+
+    Private Sub CntMnuFltIPAdr_Click(sender As Object, e As EventArgs) Handles CntMnuFltIPAdr.Click
+        'Set filter to selected entry ip-address
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            CmbBoxJobSts.Text = ""
+            TxtBoxUsr.Text = ""
+            CmbBoxSbs.Text = ""
+            TxtBoxFunction.Text = ""
+            CmbBoxJobTyp.Text = ""
+            TxtBoxJobNameShort.Text = ""
+            TxtBoxIPAdr.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(11).Value
             Me.BtnGet.PerformClick()
             Exit For
         Next
@@ -531,7 +555,7 @@ Public Class ActiveJobs
     End Sub
 
     Private Sub CntMnuSndBrkMsg_Click(sender As Object, e As EventArgs) Handles CntMnuSndBrkMsg.Click
-        'send break message to selected job(s)
+        'Send break message to selected job(s)
         Dim Result As String = InputBox("Please inser the message to send as break message", "Send break message")
         Dim MessageRequest As String
         If Result <> "" Then

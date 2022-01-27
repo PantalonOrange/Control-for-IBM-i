@@ -54,10 +54,10 @@ Public Class JobLog
         Dim GetJobLogs As New DoRestStuffGet
         Dim URL As String = pURL.Trim() + "?"
         If pJobNam <> "" Then
-            URL = URL.Trim() + "&job=" + pJobNam.Trim()
+            URL = URL.Trim() + "job=" + pJobNam.Trim() + "&"
         End If
         If CmbBoxMax.Text <> "" Then
-            URL = URL.Trim() + "&limit=" + CmbBoxMax.Text.Trim()
+            URL = URL.Trim() + "limit=" + CmbBoxMax.Text.Trim() + "&"
         End If
 
         Try

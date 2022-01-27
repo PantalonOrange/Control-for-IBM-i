@@ -42,13 +42,27 @@ Partial Class UsrPrf
         Me.TxtBoxPrvUsed = New System.Windows.Forms.TextBox()
         Me.LblPrvUsed = New System.Windows.Forms.Label()
         Me.GrpBoxUsr = New System.Windows.Forms.GroupBox()
+        Me.TxtBoxJobsRun = New System.Windows.Forms.TextBox()
+        Me.LblJobsRun = New System.Windows.Forms.Label()
+        Me.TxtBoxStgUsed = New System.Windows.Forms.TextBox()
+        Me.LblStgUsed = New System.Windows.Forms.Label()
+        Me.TxtBoxLimitDevSess = New System.Windows.Forms.TextBox()
+        Me.LblLimDevSess = New System.Windows.Forms.Label()
+        Me.TxtBoxLmtCap = New System.Windows.Forms.TextBox()
+        Me.LblLimCap = New System.Windows.Forms.Label()
+        Me.TxtBoxCurLib = New System.Windows.Forms.TextBox()
+        Me.LblCurLib = New System.Windows.Forms.Label()
+        Me.TxtBoxOwner = New System.Windows.Forms.TextBox()
+        Me.LblOwner = New System.Windows.Forms.Label()
+        Me.TxtBoxGrpPrf = New System.Windows.Forms.TextBox()
+        Me.LblGrpPrf = New System.Windows.Forms.Label()
         Me.GrpBoxUsr.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblUsrPrf
         '
         Me.LblUsrPrf.AutoSize = True
-        Me.LblUsrPrf.Location = New System.Drawing.Point(12, 9)
+        Me.LblUsrPrf.Location = New System.Drawing.Point(8, 9)
         Me.LblUsrPrf.Name = "LblUsrPrf"
         Me.LblUsrPrf.Size = New System.Drawing.Size(60, 13)
         Me.LblUsrPrf.TabIndex = 0
@@ -57,7 +71,7 @@ Partial Class UsrPrf
         'TxtBoxUsrPrf
         '
         Me.TxtBoxUsrPrf.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtBoxUsrPrf.Location = New System.Drawing.Point(123, 6)
+        Me.TxtBoxUsrPrf.Location = New System.Drawing.Point(119, 6)
         Me.TxtBoxUsrPrf.MaxLength = 10
         Me.TxtBoxUsrPrf.Name = "TxtBoxUsrPrf"
         Me.TxtBoxUsrPrf.Size = New System.Drawing.Size(100, 20)
@@ -134,7 +148,7 @@ Partial Class UsrPrf
         Me.TxtBoxPwdChgDate.Name = "TxtBoxPwdChgDate"
         Me.TxtBoxPwdChgDate.ReadOnly = True
         Me.TxtBoxPwdChgDate.Size = New System.Drawing.Size(231, 20)
-        Me.TxtBoxPwdChgDate.TabIndex = 5
+        Me.TxtBoxPwdChgDate.TabIndex = 6
         '
         'LblPwdChgDate
         '
@@ -152,7 +166,7 @@ Partial Class UsrPrf
         Me.TxtBoxUsrCls.Name = "TxtBoxUsrCls"
         Me.TxtBoxUsrCls.ReadOnly = True
         Me.TxtBoxUsrCls.Size = New System.Drawing.Size(100, 20)
-        Me.TxtBoxUsrCls.TabIndex = 6
+        Me.TxtBoxUsrCls.TabIndex = 7
         '
         'LblUsrCls
         '
@@ -166,28 +180,28 @@ Partial Class UsrPrf
         'BtnClose
         '
         Me.BtnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnClose.Location = New System.Drawing.Point(630, 153)
+        Me.BtnClose.Location = New System.Drawing.Point(632, 252)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 23)
-        Me.BtnClose.TabIndex = 9
+        Me.BtnClose.TabIndex = 16
         Me.BtnClose.Text = "&Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
         'BtnActJob
         '
-        Me.BtnActJob.Location = New System.Drawing.Point(549, 153)
+        Me.BtnActJob.Location = New System.Drawing.Point(551, 252)
         Me.BtnActJob.Name = "BtnActJob"
         Me.BtnActJob.Size = New System.Drawing.Size(75, 23)
-        Me.BtnActJob.TabIndex = 8
+        Me.BtnActJob.TabIndex = 17
         Me.BtnActJob.Text = "&Active jobs"
         Me.BtnActJob.UseVisualStyleBackColor = True
         '
         'BtnGet
         '
-        Me.BtnGet.Location = New System.Drawing.Point(468, 153)
+        Me.BtnGet.Location = New System.Drawing.Point(470, 252)
         Me.BtnGet.Name = "BtnGet"
         Me.BtnGet.Size = New System.Drawing.Size(75, 23)
-        Me.BtnGet.TabIndex = 7
+        Me.BtnGet.TabIndex = 15
         Me.BtnGet.Text = "&Get"
         Me.BtnGet.UseVisualStyleBackColor = True
         '
@@ -198,7 +212,7 @@ Partial Class UsrPrf
         Me.TxtBoxPrvUsed.Name = "TxtBoxPrvUsed"
         Me.TxtBoxPrvUsed.ReadOnly = True
         Me.TxtBoxPrvUsed.Size = New System.Drawing.Size(231, 20)
-        Me.TxtBoxPrvUsed.TabIndex = 16
+        Me.TxtBoxPrvUsed.TabIndex = 5
         '
         'LblPrvUsed
         '
@@ -211,6 +225,20 @@ Partial Class UsrPrf
         '
         'GrpBoxUsr
         '
+        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxJobsRun)
+        Me.GrpBoxUsr.Controls.Add(Me.LblJobsRun)
+        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxStgUsed)
+        Me.GrpBoxUsr.Controls.Add(Me.LblStgUsed)
+        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxLimitDevSess)
+        Me.GrpBoxUsr.Controls.Add(Me.LblLimDevSess)
+        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxLmtCap)
+        Me.GrpBoxUsr.Controls.Add(Me.LblLimCap)
+        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxCurLib)
+        Me.GrpBoxUsr.Controls.Add(Me.LblCurLib)
+        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxOwner)
+        Me.GrpBoxUsr.Controls.Add(Me.LblOwner)
+        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxGrpPrf)
+        Me.GrpBoxUsr.Controls.Add(Me.LblGrpPrf)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxPrvUsed)
         Me.GrpBoxUsr.Controls.Add(Me.LblPrvUsed)
         Me.GrpBoxUsr.Controls.Add(Me.BtnGet)
@@ -226,11 +254,139 @@ Partial Class UsrPrf
         Me.GrpBoxUsr.Controls.Add(Me.LblEnabled)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxUsrTxt)
         Me.GrpBoxUsr.Controls.Add(Me.LblUsrTxt)
-        Me.GrpBoxUsr.Location = New System.Drawing.Point(8, 32)
+        Me.GrpBoxUsr.Location = New System.Drawing.Point(4, 32)
         Me.GrpBoxUsr.Name = "GrpBoxUsr"
-        Me.GrpBoxUsr.Size = New System.Drawing.Size(708, 178)
+        Me.GrpBoxUsr.Size = New System.Drawing.Size(713, 281)
         Me.GrpBoxUsr.TabIndex = 18
         Me.GrpBoxUsr.TabStop = False
+        '
+        'TxtBoxJobsRun
+        '
+        Me.TxtBoxJobsRun.Location = New System.Drawing.Point(600, 120)
+        Me.TxtBoxJobsRun.MaxLength = 10
+        Me.TxtBoxJobsRun.Name = "TxtBoxJobsRun"
+        Me.TxtBoxJobsRun.ReadOnly = True
+        Me.TxtBoxJobsRun.Size = New System.Drawing.Size(100, 20)
+        Me.TxtBoxJobsRun.TabIndex = 14
+        Me.TxtBoxJobsRun.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblJobsRun
+        '
+        Me.LblJobsRun.AutoSize = True
+        Me.LblJobsRun.Location = New System.Drawing.Point(489, 123)
+        Me.LblJobsRun.Name = "LblJobsRun"
+        Me.LblJobsRun.Size = New System.Drawing.Size(67, 13)
+        Me.LblJobsRun.TabIndex = 31
+        Me.LblJobsRun.Text = "Jobs running"
+        '
+        'TxtBoxStgUsed
+        '
+        Me.TxtBoxStgUsed.Location = New System.Drawing.Point(600, 92)
+        Me.TxtBoxStgUsed.MaxLength = 10
+        Me.TxtBoxStgUsed.Name = "TxtBoxStgUsed"
+        Me.TxtBoxStgUsed.ReadOnly = True
+        Me.TxtBoxStgUsed.Size = New System.Drawing.Size(100, 20)
+        Me.TxtBoxStgUsed.TabIndex = 13
+        Me.TxtBoxStgUsed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'LblStgUsed
+        '
+        Me.LblStgUsed.AutoSize = True
+        Me.LblStgUsed.Location = New System.Drawing.Point(489, 95)
+        Me.LblStgUsed.Name = "LblStgUsed"
+        Me.LblStgUsed.Size = New System.Drawing.Size(70, 13)
+        Me.LblStgUsed.TabIndex = 29
+        Me.LblStgUsed.Text = "Storage used"
+        '
+        'TxtBoxLimitDevSess
+        '
+        Me.TxtBoxLimitDevSess.Location = New System.Drawing.Point(600, 66)
+        Me.TxtBoxLimitDevSess.MaxLength = 10
+        Me.TxtBoxLimitDevSess.Name = "TxtBoxLimitDevSess"
+        Me.TxtBoxLimitDevSess.ReadOnly = True
+        Me.TxtBoxLimitDevSess.Size = New System.Drawing.Size(100, 20)
+        Me.TxtBoxLimitDevSess.TabIndex = 12
+        '
+        'LblLimDevSess
+        '
+        Me.LblLimDevSess.AutoSize = True
+        Me.LblLimDevSess.Location = New System.Drawing.Point(489, 68)
+        Me.LblLimDevSess.Name = "LblLimDevSess"
+        Me.LblLimDevSess.Size = New System.Drawing.Size(106, 13)
+        Me.LblLimDevSess.TabIndex = 27
+        Me.LblLimDevSess.Text = "Limit device sessions"
+        '
+        'TxtBoxLmtCap
+        '
+        Me.TxtBoxLmtCap.Location = New System.Drawing.Point(115, 252)
+        Me.TxtBoxLmtCap.MaxLength = 10
+        Me.TxtBoxLmtCap.Name = "TxtBoxLmtCap"
+        Me.TxtBoxLmtCap.ReadOnly = True
+        Me.TxtBoxLmtCap.Size = New System.Drawing.Size(100, 20)
+        Me.TxtBoxLmtCap.TabIndex = 11
+        '
+        'LblLimCap
+        '
+        Me.LblLimCap.AutoSize = True
+        Me.LblLimCap.Location = New System.Drawing.Point(4, 255)
+        Me.LblLimCap.Name = "LblLimCap"
+        Me.LblLimCap.Size = New System.Drawing.Size(83, 13)
+        Me.LblLimCap.TabIndex = 25
+        Me.LblLimCap.Text = "Limit capabilities"
+        '
+        'TxtBoxCurLib
+        '
+        Me.TxtBoxCurLib.Location = New System.Drawing.Point(115, 226)
+        Me.TxtBoxCurLib.MaxLength = 10
+        Me.TxtBoxCurLib.Name = "TxtBoxCurLib"
+        Me.TxtBoxCurLib.ReadOnly = True
+        Me.TxtBoxCurLib.Size = New System.Drawing.Size(100, 20)
+        Me.TxtBoxCurLib.TabIndex = 10
+        '
+        'LblCurLib
+        '
+        Me.LblCurLib.AutoSize = True
+        Me.LblCurLib.Location = New System.Drawing.Point(4, 229)
+        Me.LblCurLib.Name = "LblCurLib"
+        Me.LblCurLib.Size = New System.Drawing.Size(71, 13)
+        Me.LblCurLib.TabIndex = 23
+        Me.LblCurLib.Text = "Current library"
+        '
+        'TxtBoxOwner
+        '
+        Me.TxtBoxOwner.Location = New System.Drawing.Point(115, 200)
+        Me.TxtBoxOwner.MaxLength = 10
+        Me.TxtBoxOwner.Name = "TxtBoxOwner"
+        Me.TxtBoxOwner.ReadOnly = True
+        Me.TxtBoxOwner.Size = New System.Drawing.Size(100, 20)
+        Me.TxtBoxOwner.TabIndex = 9
+        '
+        'LblOwner
+        '
+        Me.LblOwner.AutoSize = True
+        Me.LblOwner.Location = New System.Drawing.Point(4, 203)
+        Me.LblOwner.Name = "LblOwner"
+        Me.LblOwner.Size = New System.Drawing.Size(38, 13)
+        Me.LblOwner.TabIndex = 21
+        Me.LblOwner.Text = "Owner"
+        '
+        'TxtBoxGrpPrf
+        '
+        Me.TxtBoxGrpPrf.Location = New System.Drawing.Point(115, 174)
+        Me.TxtBoxGrpPrf.MaxLength = 10
+        Me.TxtBoxGrpPrf.Name = "TxtBoxGrpPrf"
+        Me.TxtBoxGrpPrf.ReadOnly = True
+        Me.TxtBoxGrpPrf.Size = New System.Drawing.Size(100, 20)
+        Me.TxtBoxGrpPrf.TabIndex = 8
+        '
+        'LblGrpPrf
+        '
+        Me.LblGrpPrf.AutoSize = True
+        Me.LblGrpPrf.Location = New System.Drawing.Point(4, 177)
+        Me.LblGrpPrf.Name = "LblGrpPrf"
+        Me.LblGrpPrf.Size = New System.Drawing.Size(96, 13)
+        Me.LblGrpPrf.TabIndex = 19
+        Me.LblGrpPrf.Text = "Group profile name"
         '
         'UsrPrf
         '
@@ -238,7 +394,7 @@ Partial Class UsrPrf
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnClose
-        Me.ClientSize = New System.Drawing.Size(722, 216)
+        Me.ClientSize = New System.Drawing.Size(720, 315)
         Me.Controls.Add(Me.LblWait)
         Me.Controls.Add(Me.TxtBoxUsrPrf)
         Me.Controls.Add(Me.LblUsrPrf)
@@ -249,7 +405,7 @@ Partial Class UsrPrf
         Me.Name = "UsrPrf"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Userprofile informations"
+        Me.Text = "Userprofile detail informations"
         Me.GrpBoxUsr.ResumeLayout(False)
         Me.GrpBoxUsr.PerformLayout()
         Me.ResumeLayout(False)
@@ -276,4 +432,18 @@ Partial Class UsrPrf
     Friend WithEvents TxtBoxPrvUsed As TextBox
     Friend WithEvents LblPrvUsed As Label
     Friend WithEvents GrpBoxUsr As GroupBox
+    Friend WithEvents TxtBoxStgUsed As TextBox
+    Friend WithEvents LblStgUsed As Label
+    Friend WithEvents TxtBoxLimitDevSess As TextBox
+    Friend WithEvents LblLimDevSess As Label
+    Friend WithEvents TxtBoxLmtCap As TextBox
+    Friend WithEvents LblLimCap As Label
+    Friend WithEvents TxtBoxCurLib As TextBox
+    Friend WithEvents LblCurLib As Label
+    Friend WithEvents TxtBoxOwner As TextBox
+    Friend WithEvents LblOwner As Label
+    Friend WithEvents TxtBoxGrpPrf As TextBox
+    Friend WithEvents LblGrpPrf As Label
+    Friend WithEvents TxtBoxJobsRun As TextBox
+    Friend WithEvents LblJobsRun As Label
 End Class

@@ -1,12 +1,12 @@
 'Login.vb
 'This form handles the credentials and exit point to the webservice
-'Copyright (C)2021 by Christian Brunner
+'Copyright (C)2021, 2022 by Christian Brunner
 
 
 Public Class Login
 
     Public First As Boolean = True
-    Public Version As String = "0.0.6"
+    Public Version As String = Application.ProductVersion.ToString()
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
