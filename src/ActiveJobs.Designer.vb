@@ -23,7 +23,7 @@ Partial Class ActiveJobs
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ActiveJobs))
         Me.DtaGrdActJob = New System.Windows.Forms.DataGridView()
         Me.LblSuccess = New System.Windows.Forms.Label()
@@ -74,8 +74,12 @@ Partial Class ActiveJobs
         Me.LblJobNameShort = New System.Windows.Forms.Label()
         Me.TxtBoxIPAdr = New System.Windows.Forms.TextBox()
         Me.LblIPAdr = New System.Windows.Forms.Label()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripRecordsSelected = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripMessage = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CntMnu.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DtaGrdActJob
@@ -87,14 +91,14 @@ Partial Class ActiveJobs
         Me.DtaGrdActJob.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DtaGrdActJob.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DtaGrdActJob.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DtaGrdActJob.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdActJob.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DtaGrdActJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DtaGrdActJob.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.DtaGrdActJob.Location = New System.Drawing.Point(5, 93)
@@ -103,7 +107,7 @@ Partial Class ActiveJobs
         Me.DtaGrdActJob.RowHeadersWidth = 62
         Me.DtaGrdActJob.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DtaGrdActJob.ShowEditingIcon = False
-        Me.DtaGrdActJob.Size = New System.Drawing.Size(1411, 633)
+        Me.DtaGrdActJob.Size = New System.Drawing.Size(1411, 613)
         Me.DtaGrdActJob.TabIndex = 10
         '
         'LblSuccess
@@ -396,6 +400,7 @@ Partial Class ActiveJobs
         Me.PrgBar.MarqueeAnimationSpeed = 70
         Me.PrgBar.Name = "PrgBar"
         Me.PrgBar.Size = New System.Drawing.Size(204, 25)
+        Me.PrgBar.Step = 20
         Me.PrgBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
         Me.PrgBar.TabIndex = 16
         '
@@ -483,12 +488,33 @@ Partial Class ActiveJobs
         'LblIPAdr
         '
         Me.LblIPAdr.AutoSize = True
-        Me.LblIPAdr.Location = New System.Drawing.Point(919, 69)
+        Me.LblIPAdr.Location = New System.Drawing.Point(913, 69)
         Me.LblIPAdr.Name = "LblIPAdr"
-        Me.LblIPAdr.Size = New System.Drawing.Size(81, 13)
+        Me.LblIPAdr.Size = New System.Drawing.Size(87, 13)
         Me.LblIPAdr.TabIndex = 22
-        Me.LblIPAdr.Text = "Client IP-Adress"
+        Me.LblIPAdr.Text = "Client IP-Address"
         Me.LblIPAdr.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripRecordsSelected, Me.ToolStripMessage})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 709)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(1423, 22)
+        Me.StatusStrip1.TabIndex = 23
+        Me.StatusStrip1.Text = "StsStrpActJob"
+        '
+        'ToolStripRecordsSelected
+        '
+        Me.ToolStripRecordsSelected.Name = "ToolStripRecordsSelected"
+        Me.ToolStripRecordsSelected.Size = New System.Drawing.Size(139, 17)
+        Me.ToolStripRecordsSelected.Text = "ToolStripRecordsSelected"
+        '
+        'ToolStripMessage
+        '
+        Me.ToolStripMessage.Name = "ToolStripMessage"
+        Me.ToolStripMessage.Size = New System.Drawing.Size(99, 17)
+        Me.ToolStripMessage.Text = "ToolStripMessage"
         '
         'ActiveJobs
         '
@@ -497,6 +523,7 @@ Partial Class ActiveJobs
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnClose
         Me.ClientSize = New System.Drawing.Size(1423, 731)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.LblWait)
         Me.Controls.Add(Me.TxtBoxIPAdr)
         Me.Controls.Add(Me.LblIPAdr)
@@ -529,6 +556,8 @@ Partial Class ActiveJobs
         Me.Text = "Active jobs"
         CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CntMnu.ResumeLayout(False)
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -583,4 +612,7 @@ Partial Class ActiveJobs
     Friend WithEvents TxtBoxIPAdr As TextBox
     Friend WithEvents LblIPAdr As Label
     Friend WithEvents CntMnuFltIPAdr As ToolStripMenuItem
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents ToolStripMessage As ToolStripStatusLabel
+    Friend WithEvents ToolStripRecordsSelected As ToolStripStatusLabel
 End Class

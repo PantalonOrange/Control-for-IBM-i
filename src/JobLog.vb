@@ -50,6 +50,63 @@ Public Class JobLog
         Me.Close()
     End Sub
 
+    Private Sub DtaGrdJobLog_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DtaGrdJobLog.CellContentDoubleClick
+        For Each SelectedRow As DataGridViewRow In DtaGrdJobLog.SelectedRows
+            Dim JobLogInfoDetails As New JobLogDetails
+            JobLogInfoDetails.MdiParent = Main
+            JobLogInfoDetails.TxtBoxJob.Text = TxtBoxJob.Text
+            JobLogInfoDetails.TxtBoxMsgID.Text = DtaGrdJobLog.Rows(SelectedRow.Index).Cells(1).Value
+            JobLogInfoDetails.TxtBoxSev.Text = DtaGrdJobLog.Rows(SelectedRow.Index).Cells(2).Value
+            JobLogInfoDetails.TxtBoxLvl1.Text = DtaGrdJobLog.Rows(SelectedRow.Index).Cells(4).Value
+            JobLogInfoDetails.TxtBoxLvl2.Text = DtaGrdJobLog.Rows(SelectedRow.Index).Cells(5).Value
+            JobLogInfoDetails.TxtBoxAdditions.Text =
+                "From program:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(6).Value.ToString.Trim() + vbCrLf +
+                "From module:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(7).Value.ToString.Trim() + vbCrLf +
+                "From procedure:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(8).Value.ToString.Trim() + vbCrLf + vbCrLf +
+                "To program:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(9).Value.ToString.Trim() + vbCrLf +
+                "To module:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(10).Value.ToString.Trim() + vbCrLf +
+                "To procedure:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(11).Value.ToString.Trim() + vbCrLf + vbCrLf +
+                "From user:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(12).Value.ToString.Trim()
+            JobLogInfoDetails.Show()
+        Next
+    End Sub
+
+    Private Sub DtaGrdJobLog_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DtaGrdJobLog.CellFormatting
+        If e.RowIndex Mod 2 = 0 Then
+            'Every second row
+            e.CellStyle.ForeColor = Color.Black
+            e.CellStyle.BackColor = Color.LightGray
+        Else
+            e.CellStyle.ForeColor = Color.Black
+            e.CellStyle.BackColor = Color.White
+        End If
+
+        Select Case e.ColumnIndex
+            Case 0 'position
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                e.CellStyle.Format = "N0"
+            Case 1 'message id
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 2 'severity
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                e.CellStyle.Format = "N0"
+            Case 6 'from program
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 7 'from module
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 8 'from procedure
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 9 'to program
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 10 'to module
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 11 'to procedure
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            Case 12 'from user
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        End Select
+    End Sub
+
     Private Sub StartProcessGETJoblog(ByVal pURL As String, ByVal pJobNam As String)
         Dim GetJobLogs As New DoRestStuffGet
         Dim URL As String = pURL.Trim() + "?"
@@ -57,7 +114,7 @@ Public Class JobLog
             URL = URL.Trim() + "job=" + pJobNam.Trim() + "&"
         End If
         If CmbBoxMax.Text <> "" Then
-            URL = URL.Trim() + "limit=" + CmbBoxMax.Text.Trim() + "&"
+            URL = URL.Trim() + "limit=" + CmbBoxMax.Text.Trim()
         End If
 
         Try
@@ -90,6 +147,7 @@ Public Class JobLog
         With DtaGrdJobLog
             .Columns.Clear()
             .Columns.Add("Pos", "Pos")
+            .Columns(0).Visible = False
             .Columns.Add("MessageID", "Message ID")
             .Columns.Add("Sev", "Sev")
             .Columns.Add("MessageTime", "Message Time")
@@ -216,40 +274,6 @@ Public Class JobLog
         LblWait.Visible = False
     End Sub
 
-    Private Sub DtaGrdJobLog_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DtaGrdJobLog.CellFormatting
-        If e.RowIndex Mod 2 = 0 Then
-            'Every second row
-            e.CellStyle.ForeColor = Color.Black
-            e.CellStyle.BackColor = Color.LightGray
-        Else
-            e.CellStyle.ForeColor = Color.Black
-            e.CellStyle.BackColor = Color.White
-        End If
-
-        Select Case e.ColumnIndex
-            Case 0 'position
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            Case 1 'message id
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            Case 2 'severity
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            Case 6 'from program
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            Case 7 'from module
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            Case 8 'from procedure
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            Case 9 'to program
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            Case 10 'to module
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            Case 11 'to procedure
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            Case 12 'from user
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        End Select
-    End Sub
-
     Public Sub RunGetProcess()
         'Start communication, etrieve json stream and fill datagridview
         BtnGet.Enabled = False
@@ -263,25 +287,5 @@ Public Class JobLog
         DtaGrdJobLog.Enabled = True
     End Sub
 
-    Private Sub DtaGrdJobLog_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DtaGrdJobLog.CellContentDoubleClick
-        For Each SelectedRow As DataGridViewRow In DtaGrdJobLog.SelectedRows
-            Dim JobLogInfoDetails As New JobLogDetails
-            JobLogInfoDetails.MdiParent = Main
-            JobLogInfoDetails.TxtBoxJob.Text = TxtBoxJob.Text
-            JobLogInfoDetails.TxtBoxMsgID.Text = DtaGrdJobLog.Rows(SelectedRow.Index).Cells(1).Value
-            JobLogInfoDetails.TxtBoxSev.Text = DtaGrdJobLog.Rows(SelectedRow.Index).Cells(2).Value
-            JobLogInfoDetails.TxtBoxLvl1.Text = DtaGrdJobLog.Rows(SelectedRow.Index).Cells(4).Value
-            JobLogInfoDetails.TxtBoxLvl2.Text = DtaGrdJobLog.Rows(SelectedRow.Index).Cells(5).Value
-            JobLogInfoDetails.TxtBoxAdditions.Text =
-                "From program:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(6).Value.ToString.Trim() + vbCrLf +
-                "From module:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(7).Value.ToString.Trim() + vbCrLf +
-                "From procedure:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(8).Value.ToString.Trim() + vbCrLf + vbCrLf +
-                "To program:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(9).Value.ToString.Trim() + vbCrLf +
-                "To module:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(10).Value.ToString.Trim() + vbCrLf +
-                "To procedure:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(11).Value.ToString.Trim() + vbCrLf + vbCrLf +
-                "From user:" + vbTab + DtaGrdJobLog.Rows(SelectedRow.Index).Cells(12).Value.ToString.Trim()
-            JobLogInfoDetails.Show()
-        Next
-    End Sub
 
 End Class

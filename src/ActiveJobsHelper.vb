@@ -45,3 +45,10 @@ End Class
 Public Structure executeCommandList_T
     Public command As String
 End Structure
+
+Public Structure MessageWait4Timer_T
+    Public JobName As String
+    Public JobNameShort As String
+    Public JobMessage As String
+    Public MessageKey As String
+End Structure

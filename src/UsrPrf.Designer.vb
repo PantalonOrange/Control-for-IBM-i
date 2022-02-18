@@ -28,13 +28,11 @@ Partial Class UsrPrf
         Me.TxtBoxUsrTxt = New System.Windows.Forms.TextBox()
         Me.LblUsrTxt = New System.Windows.Forms.Label()
         Me.LblWait = New System.Windows.Forms.Label()
-        Me.TxtBoxEnabled = New System.Windows.Forms.TextBox()
         Me.LblEnabled = New System.Windows.Forms.Label()
         Me.TxtBoxPrvSignon = New System.Windows.Forms.TextBox()
         Me.LblPrvSignon = New System.Windows.Forms.Label()
         Me.TxtBoxPwdChgDate = New System.Windows.Forms.TextBox()
         Me.LblPwdChgDate = New System.Windows.Forms.Label()
-        Me.TxtBoxUsrCls = New System.Windows.Forms.TextBox()
         Me.LblUsrCls = New System.Windows.Forms.Label()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.BtnActJob = New System.Windows.Forms.Button()
@@ -42,20 +40,22 @@ Partial Class UsrPrf
         Me.TxtBoxPrvUsed = New System.Windows.Forms.TextBox()
         Me.LblPrvUsed = New System.Windows.Forms.Label()
         Me.GrpBoxUsr = New System.Windows.Forms.GroupBox()
+        Me.CmbBoxLmtCap = New System.Windows.Forms.ComboBox()
+        Me.CmbBoxOwner = New System.Windows.Forms.ComboBox()
+        Me.CmbBoxUsrCls = New System.Windows.Forms.ComboBox()
+        Me.CmbBoxEnabled = New System.Windows.Forms.ComboBox()
         Me.TxtBoxJobsRun = New System.Windows.Forms.TextBox()
         Me.LblJobsRun = New System.Windows.Forms.Label()
         Me.TxtBoxStgUsed = New System.Windows.Forms.TextBox()
         Me.LblStgUsed = New System.Windows.Forms.Label()
-        Me.TxtBoxLimitDevSess = New System.Windows.Forms.TextBox()
         Me.LblLimDevSess = New System.Windows.Forms.Label()
-        Me.TxtBoxLmtCap = New System.Windows.Forms.TextBox()
         Me.LblLimCap = New System.Windows.Forms.Label()
         Me.TxtBoxCurLib = New System.Windows.Forms.TextBox()
         Me.LblCurLib = New System.Windows.Forms.Label()
-        Me.TxtBoxOwner = New System.Windows.Forms.TextBox()
         Me.LblOwner = New System.Windows.Forms.Label()
         Me.TxtBoxGrpPrf = New System.Windows.Forms.TextBox()
         Me.LblGrpPrf = New System.Windows.Forms.Label()
+        Me.CmbBoxLimitDevSess = New System.Windows.Forms.ComboBox()
         Me.GrpBoxUsr.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -105,15 +105,6 @@ Partial Class UsrPrf
         Me.LblWait.TabIndex = 8
         Me.LblWait.Text = "LblStatus"
         '
-        'TxtBoxEnabled
-        '
-        Me.TxtBoxEnabled.Location = New System.Drawing.Point(115, 40)
-        Me.TxtBoxEnabled.MaxLength = 10
-        Me.TxtBoxEnabled.Name = "TxtBoxEnabled"
-        Me.TxtBoxEnabled.ReadOnly = True
-        Me.TxtBoxEnabled.Size = New System.Drawing.Size(100, 20)
-        Me.TxtBoxEnabled.TabIndex = 3
-        '
         'LblEnabled
         '
         Me.LblEnabled.AutoSize = True
@@ -158,15 +149,6 @@ Partial Class UsrPrf
         Me.LblPwdChgDate.Size = New System.Drawing.Size(101, 13)
         Me.LblPwdChgDate.TabIndex = 13
         Me.LblPwdChgDate.Text = "Password changed:"
-        '
-        'TxtBoxUsrCls
-        '
-        Me.TxtBoxUsrCls.Location = New System.Drawing.Point(115, 148)
-        Me.TxtBoxUsrCls.MaxLength = 10
-        Me.TxtBoxUsrCls.Name = "TxtBoxUsrCls"
-        Me.TxtBoxUsrCls.ReadOnly = True
-        Me.TxtBoxUsrCls.Size = New System.Drawing.Size(100, 20)
-        Me.TxtBoxUsrCls.TabIndex = 7
         '
         'LblUsrCls
         '
@@ -225,17 +207,19 @@ Partial Class UsrPrf
         '
         'GrpBoxUsr
         '
+        Me.GrpBoxUsr.Controls.Add(Me.CmbBoxLimitDevSess)
+        Me.GrpBoxUsr.Controls.Add(Me.CmbBoxLmtCap)
+        Me.GrpBoxUsr.Controls.Add(Me.CmbBoxOwner)
+        Me.GrpBoxUsr.Controls.Add(Me.CmbBoxUsrCls)
+        Me.GrpBoxUsr.Controls.Add(Me.CmbBoxEnabled)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxJobsRun)
         Me.GrpBoxUsr.Controls.Add(Me.LblJobsRun)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxStgUsed)
         Me.GrpBoxUsr.Controls.Add(Me.LblStgUsed)
-        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxLimitDevSess)
         Me.GrpBoxUsr.Controls.Add(Me.LblLimDevSess)
-        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxLmtCap)
         Me.GrpBoxUsr.Controls.Add(Me.LblLimCap)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxCurLib)
         Me.GrpBoxUsr.Controls.Add(Me.LblCurLib)
-        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxOwner)
         Me.GrpBoxUsr.Controls.Add(Me.LblOwner)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxGrpPrf)
         Me.GrpBoxUsr.Controls.Add(Me.LblGrpPrf)
@@ -244,13 +228,11 @@ Partial Class UsrPrf
         Me.GrpBoxUsr.Controls.Add(Me.BtnGet)
         Me.GrpBoxUsr.Controls.Add(Me.BtnActJob)
         Me.GrpBoxUsr.Controls.Add(Me.BtnClose)
-        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxUsrCls)
         Me.GrpBoxUsr.Controls.Add(Me.LblUsrCls)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxPwdChgDate)
         Me.GrpBoxUsr.Controls.Add(Me.LblPwdChgDate)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxPrvSignon)
         Me.GrpBoxUsr.Controls.Add(Me.LblPrvSignon)
-        Me.GrpBoxUsr.Controls.Add(Me.TxtBoxEnabled)
         Me.GrpBoxUsr.Controls.Add(Me.LblEnabled)
         Me.GrpBoxUsr.Controls.Add(Me.TxtBoxUsrTxt)
         Me.GrpBoxUsr.Controls.Add(Me.LblUsrTxt)
@@ -259,6 +241,46 @@ Partial Class UsrPrf
         Me.GrpBoxUsr.Size = New System.Drawing.Size(713, 281)
         Me.GrpBoxUsr.TabIndex = 18
         Me.GrpBoxUsr.TabStop = False
+        '
+        'CmbBoxLmtCap
+        '
+        Me.CmbBoxLmtCap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBoxLmtCap.FormattingEnabled = True
+        Me.CmbBoxLmtCap.Items.AddRange(New Object() {"*SAME", "*NO", "*PARTIAL", "*YES"})
+        Me.CmbBoxLmtCap.Location = New System.Drawing.Point(115, 252)
+        Me.CmbBoxLmtCap.Name = "CmbBoxLmtCap"
+        Me.CmbBoxLmtCap.Size = New System.Drawing.Size(100, 21)
+        Me.CmbBoxLmtCap.TabIndex = 11
+        '
+        'CmbBoxOwner
+        '
+        Me.CmbBoxOwner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBoxOwner.FormattingEnabled = True
+        Me.CmbBoxOwner.Items.AddRange(New Object() {"*SAME", "*USRPRF", "*GRPPRF"})
+        Me.CmbBoxOwner.Location = New System.Drawing.Point(115, 199)
+        Me.CmbBoxOwner.Name = "CmbBoxOwner"
+        Me.CmbBoxOwner.Size = New System.Drawing.Size(100, 21)
+        Me.CmbBoxOwner.TabIndex = 9
+        '
+        'CmbBoxUsrCls
+        '
+        Me.CmbBoxUsrCls.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBoxUsrCls.FormattingEnabled = True
+        Me.CmbBoxUsrCls.Items.AddRange(New Object() {"*SAME", "*USER", "*SYSOPR", "*PGMR", "*SECADM", "*SECOFR"})
+        Me.CmbBoxUsrCls.Location = New System.Drawing.Point(115, 147)
+        Me.CmbBoxUsrCls.Name = "CmbBoxUsrCls"
+        Me.CmbBoxUsrCls.Size = New System.Drawing.Size(100, 21)
+        Me.CmbBoxUsrCls.TabIndex = 7
+        '
+        'CmbBoxEnabled
+        '
+        Me.CmbBoxEnabled.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBoxEnabled.FormattingEnabled = True
+        Me.CmbBoxEnabled.Items.AddRange(New Object() {"TRUE", "FALSE"})
+        Me.CmbBoxEnabled.Location = New System.Drawing.Point(115, 39)
+        Me.CmbBoxEnabled.Name = "CmbBoxEnabled"
+        Me.CmbBoxEnabled.Size = New System.Drawing.Size(100, 21)
+        Me.CmbBoxEnabled.TabIndex = 3
         '
         'TxtBoxJobsRun
         '
@@ -282,7 +304,7 @@ Partial Class UsrPrf
         'TxtBoxStgUsed
         '
         Me.TxtBoxStgUsed.Location = New System.Drawing.Point(600, 92)
-        Me.TxtBoxStgUsed.MaxLength = 10
+        Me.TxtBoxStgUsed.MaxLength = 32000
         Me.TxtBoxStgUsed.Name = "TxtBoxStgUsed"
         Me.TxtBoxStgUsed.ReadOnly = True
         Me.TxtBoxStgUsed.Size = New System.Drawing.Size(100, 20)
@@ -298,15 +320,6 @@ Partial Class UsrPrf
         Me.LblStgUsed.TabIndex = 29
         Me.LblStgUsed.Text = "Storage used"
         '
-        'TxtBoxLimitDevSess
-        '
-        Me.TxtBoxLimitDevSess.Location = New System.Drawing.Point(600, 66)
-        Me.TxtBoxLimitDevSess.MaxLength = 10
-        Me.TxtBoxLimitDevSess.Name = "TxtBoxLimitDevSess"
-        Me.TxtBoxLimitDevSess.ReadOnly = True
-        Me.TxtBoxLimitDevSess.Size = New System.Drawing.Size(100, 20)
-        Me.TxtBoxLimitDevSess.TabIndex = 12
-        '
         'LblLimDevSess
         '
         Me.LblLimDevSess.AutoSize = True
@@ -315,15 +328,6 @@ Partial Class UsrPrf
         Me.LblLimDevSess.Size = New System.Drawing.Size(106, 13)
         Me.LblLimDevSess.TabIndex = 27
         Me.LblLimDevSess.Text = "Limit device sessions"
-        '
-        'TxtBoxLmtCap
-        '
-        Me.TxtBoxLmtCap.Location = New System.Drawing.Point(115, 252)
-        Me.TxtBoxLmtCap.MaxLength = 10
-        Me.TxtBoxLmtCap.Name = "TxtBoxLmtCap"
-        Me.TxtBoxLmtCap.ReadOnly = True
-        Me.TxtBoxLmtCap.Size = New System.Drawing.Size(100, 20)
-        Me.TxtBoxLmtCap.TabIndex = 11
         '
         'LblLimCap
         '
@@ -352,15 +356,6 @@ Partial Class UsrPrf
         Me.LblCurLib.TabIndex = 23
         Me.LblCurLib.Text = "Current library"
         '
-        'TxtBoxOwner
-        '
-        Me.TxtBoxOwner.Location = New System.Drawing.Point(115, 200)
-        Me.TxtBoxOwner.MaxLength = 10
-        Me.TxtBoxOwner.Name = "TxtBoxOwner"
-        Me.TxtBoxOwner.ReadOnly = True
-        Me.TxtBoxOwner.Size = New System.Drawing.Size(100, 20)
-        Me.TxtBoxOwner.TabIndex = 9
-        '
         'LblOwner
         '
         Me.LblOwner.AutoSize = True
@@ -387,6 +382,16 @@ Partial Class UsrPrf
         Me.LblGrpPrf.Size = New System.Drawing.Size(96, 13)
         Me.LblGrpPrf.TabIndex = 19
         Me.LblGrpPrf.Text = "Group profile name"
+        '
+        'CmbBoxLimitDevSess
+        '
+        Me.CmbBoxLimitDevSess.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBoxLimitDevSess.FormattingEnabled = True
+        Me.CmbBoxLimitDevSess.Items.AddRange(New Object() {"*SAME", "*SYSVAL", "*YES", "*NO", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"})
+        Me.CmbBoxLimitDevSess.Location = New System.Drawing.Point(601, 65)
+        Me.CmbBoxLimitDevSess.Name = "CmbBoxLimitDevSess"
+        Me.CmbBoxLimitDevSess.Size = New System.Drawing.Size(99, 21)
+        Me.CmbBoxLimitDevSess.TabIndex = 12
         '
         'UsrPrf
         '
@@ -418,13 +423,11 @@ Partial Class UsrPrf
     Friend WithEvents TxtBoxUsrTxt As TextBox
     Friend WithEvents LblUsrTxt As Label
     Friend WithEvents LblWait As Label
-    Friend WithEvents TxtBoxEnabled As TextBox
     Friend WithEvents LblEnabled As Label
     Friend WithEvents TxtBoxPrvSignon As TextBox
     Friend WithEvents LblPrvSignon As Label
     Friend WithEvents TxtBoxPwdChgDate As TextBox
     Friend WithEvents LblPwdChgDate As Label
-    Friend WithEvents TxtBoxUsrCls As TextBox
     Friend WithEvents LblUsrCls As Label
     Friend WithEvents BtnClose As Button
     Friend WithEvents BtnActJob As Button
@@ -434,16 +437,18 @@ Partial Class UsrPrf
     Friend WithEvents GrpBoxUsr As GroupBox
     Friend WithEvents TxtBoxStgUsed As TextBox
     Friend WithEvents LblStgUsed As Label
-    Friend WithEvents TxtBoxLimitDevSess As TextBox
     Friend WithEvents LblLimDevSess As Label
-    Friend WithEvents TxtBoxLmtCap As TextBox
     Friend WithEvents LblLimCap As Label
     Friend WithEvents TxtBoxCurLib As TextBox
     Friend WithEvents LblCurLib As Label
-    Friend WithEvents TxtBoxOwner As TextBox
     Friend WithEvents LblOwner As Label
     Friend WithEvents TxtBoxGrpPrf As TextBox
     Friend WithEvents LblGrpPrf As Label
     Friend WithEvents TxtBoxJobsRun As TextBox
     Friend WithEvents LblJobsRun As Label
+    Friend WithEvents CmbBoxEnabled As ComboBox
+    Friend WithEvents CmbBoxUsrCls As ComboBox
+    Friend WithEvents CmbBoxOwner As ComboBox
+    Friend WithEvents CmbBoxLmtCap As ComboBox
+    Friend WithEvents CmbBoxLimitDevSess As ComboBox
 End Class

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Control for IBM i®", "Control for IBM i®.vbproj", "{D665D966-0878-41AE-A0E5-D93C3600B8DF}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Coltrol for IBM i® Setup", "..\IBM i - Control Setup\IBM i - Control Setup.vdproj", "{3D4E125E-6D81-47AE-A7A3-D0F15EFD5764}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Control for IBM i® Setup", "..\IBM i - Control Setup\IBM i - Control Setup.vdproj", "{3D4E125E-6D81-47AE-A7A3-D0F15EFD5764}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{359C496D-38A0-4FA9-B5C9-7A48CB09BFF7}"
 EndProject

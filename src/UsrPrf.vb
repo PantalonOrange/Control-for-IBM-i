@@ -11,6 +11,8 @@ Imports Newtonsoft.Json.Linq
 
 Public Class UsrPrf
 
+    Public Mode As Integer '0=View, 1=Change
+
     Private ResponseStream As New ResponseFromServer_T
     Private UsrInfoWebservice As String = Main.Host.Trim() + "/userinfos"
     Private APISuccess As String
@@ -19,8 +21,106 @@ Public Class UsrPrf
 
     Private Sub UsrPrf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LblWait.Visible = False
+        TxtBoxUsrPrf.ReadOnly = True
+        TxtBoxPrvSignon.ReadOnly = True
+        TxtBoxPrvUsed.ReadOnly = True
+        TxtBoxPwdChgDate.ReadOnly = True
+        TxtBoxStgUsed.ReadOnly = True
+
+        If Mode = 1 Then
+            RunGetProcess()
+            TxtBoxUsrTxt.ReadOnly = False
+            CmbBoxEnabled.Enabled = True
+            CmbBoxUsrCls.Enabled = True
+            TxtBoxGrpPrf.ReadOnly = False
+            CmbBoxOwner.Enabled = True
+            TxtBoxCurLib.ReadOnly = False
+            CmbBoxLmtCap.Enabled = True
+            CmbBoxLimitDevSess.Enabled = True
+            BtnGet.Text = "Post"
+        Else
+            TxtBoxUsrTxt.ReadOnly = True
+            CmbBoxEnabled.Enabled = False
+            CmbBoxUsrCls.Enabled = False
+            TxtBoxGrpPrf.ReadOnly = True
+            CmbBoxOwner.Enabled = False
+            TxtBoxCurLib.ReadOnly = True
+            CmbBoxLmtCap.Enabled = False
+            CmbBoxLimitDevSess.Enabled = False
+            BtnGet.Text = "Get"
+        End If
     End Sub
 
+
+    Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
+        If Mode = 0 Then
+            'Get data from userprofile
+            If TxtBoxUsrPrf.Text = "" Then
+                MessageBox.Show("Please insert a userprofile name", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Else
+                RunGetProcess()
+            End If
+        ElseIf Mode = 1 Then
+            'Change userprofile with the new settings
+            ChangeUserprofile(TxtBoxUsrPrf.Text)
+        End If
+    End Sub
+
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub BtnActJob_Click(sender As Object, e As EventArgs) Handles BtnActJob.Click
+        Dim ActiveJobInfoForm As New ActiveJobs
+        ActiveJobInfoForm.MdiParent = Main
+        ActiveJobInfoForm.TxtBoxUsr.Text = TxtBoxUsrPrf.Text
+        ActiveJobInfoForm.Show()
+        ActiveJobInfoForm.BtnGet.PerformClick()
+    End Sub
+
+    Private Sub DisplayInformation(ByVal pMessage As String)
+        LblWait.Text = pMessage
+        LblWait.Visible = True
+    End Sub
+
+    Private Sub RemoveInformation()
+        LblWait.Visible = False
+    End Sub
+
+    Public Sub RunGetProcess()
+        'Start communication, etrieve json stream and fill datagridview
+        BtnGet.Enabled = False
+        BtnClose.Enabled = False
+        BtnActJob.Enabled = False
+        DisplayInformation("Please wait, collecting data...")
+        StartProcessGETJoblog(UsrInfoWebservice, TxtBoxUsrPrf.Text)
+        RemoveInformation()
+        BtnGet.Enabled = True
+        BtnClose.Enabled = True
+        BtnActJob.Enabled = True
+    End Sub
+
+    Private Sub ChangeUserprofile(ByVal pAuthorizationName As String)
+        Dim Command As String
+        Dim Success As Boolean = True
+
+        If TxtBoxUsrTxt.Text = "" Then
+            TxtBoxUsrTxt.Text = "*SAME"
+        End If
+
+        If Success Then
+            Command = "CHGUSRPRF USRPRF(" + pAuthorizationName.Trim() + ")"
+            If CmbBoxEnabled.Text = "TRUE" Then
+                Command = Command.Trim() + " STATUS(*ENABLED)"
+            Else
+                Command = Command.Trim() + " STATUS(*DISABLED)"
+            End If
+            Command = Command.Trim() + " USRCLS(" + CmbBoxUsrCls.Text.Trim() + ") LMTCPB(" + CmbBoxLmtCap.Text.Trim() +
+                ") CURLIB(" + TxtBoxCurLib.Text.Trim() + ") TEXT('" + TxtBoxUsrTxt.Text.Trim() +
+                "') OWNER(" + CmbBoxOwner.Text.Trim() + ") LMTDEVSSN(" + CmbBoxLimitDevSess.Text.Trim() + ")"
+            ExecuteCommandOnHost(Command)
+        End If
+    End Sub
 
     Private Async Sub StartProcessGETJoblog(ByVal pURL As String, ByVal pUsrPrf As String)
         Dim GetUsrPrf As New DoRestStuffGet
@@ -68,9 +168,9 @@ Public Class UsrPrf
                             TxtBoxUsrTxt.Text = "-"
                         End Try
                         Try
-                            TxtBoxEnabled.Text = Entry("isEnabled").ToString()
+                            CmbBoxEnabled.Text = Entry("isEnabled").ToString().ToUpper()
                         Catch ex As Exception
-                            TxtBoxEnabled.Text = "-"
+                            CmbBoxEnabled.Text = "*SAME"
                         End Try
                         Try
                             TxtBoxPrvSignon.Text = Entry("previousSignon").ToString()
@@ -88,9 +188,9 @@ Public Class UsrPrf
                             TxtBoxPwdChgDate.Text = "-"
                         End Try
                         Try
-                            TxtBoxUsrCls.Text = Entry("userClassName").ToString()
+                            CmbBoxUsrCls.Text = Entry("userClassName").ToString().ToUpper()
                         Catch ex As Exception
-                            TxtBoxUsrCls.Text = "-"
+                            CmbBoxUsrCls.Text = "*SAME"
                         End Try
                         Try
                             TxtBoxGrpPrf.Text = Entry("groupProfileName").ToString()
@@ -98,9 +198,9 @@ Public Class UsrPrf
                             TxtBoxGrpPrf.Text = "-"
                         End Try
                         Try
-                            TxtBoxOwner.Text = Entry("owner").ToString()
+                            CmbBoxOwner.Text = Entry("owner").ToString().ToUpper()
                         Catch ex As Exception
-                            TxtBoxOwner.Text = "-"
+                            CmbBoxOwner.Text = "*SAME"
                         End Try
                         Try
                             TxtBoxCurLib.Text = Entry("currentLibraryName").ToString()
@@ -108,14 +208,14 @@ Public Class UsrPrf
                             TxtBoxCurLib.Text = "-"
                         End Try
                         Try
-                            TxtBoxLmtCap.Text = Entry("limitCapabilities").ToString()
+                            CmbBoxLmtCap.Text = Entry("limitCapabilities").ToString().ToUpper()
                         Catch ex As Exception
-                            TxtBoxLmtCap.Text = "-"
+                            CmbBoxLmtCap.Text = "*SAME"
                         End Try
                         Try
-                            TxtBoxLimitDevSess.Text = Entry("limitDeviceSessions").ToString()
+                            CmbBoxLimitDevSess.Text = Entry("limitDeviceSessions").ToString().ToUpper()
                         Catch ex As Exception
-                            TxtBoxLimitDevSess.Text = "-"
+                            CmbBoxLimitDevSess.Text = "*SAME"
                         End Try
                         Try
                             TxtBoxStgUsed.Text = Entry("storageUsed").ToString()
@@ -138,52 +238,43 @@ Public Class UsrPrf
 
     End Sub
 
-    Private Sub DisplayInformation(ByVal pMessage As String)
-        LblWait.Text = pMessage
-        LblWait.Visible = True
-    End Sub
+    Private Async Sub ExecuteCommandOnHost(ByVal pCommand As String)
+        'Process execute command on host system
+        Dim ExecuteCommandValue = Main.Host.Trim() + "/executecommands"
+        Dim PostReplyMessage As New DoRestStuffPost
+        Dim executeCommand As New ExecuteCommand_T
+        Dim Success As String
+        executeCommand.executeCommandList(0).command = pCommand
+        Dim JsonStream As String = JObject.FromObject(executeCommand).ToString
+        PostReplyMessage.PostJSONData(ExecuteCommandValue, JsonStream, Main.Credentials.User, Main.Credentials.Password)
+        ResponseStream = PostReplyMessage._returnJSONStream()
+        Await Task.Run(Function() PostReplyMessage._returnJSONStream)
 
-    Private Sub RemoveInformation()
-        LblWait.Visible = False
-    End Sub
+        If ResponseStream.Code = HttpStatusCode.OK Then
+            Dim Ser As JObject = JObject.Parse(ResponseStream.Response)
+            Dim Data As List(Of JToken) = Ser.Children().ToList()
+            For Each Item As JProperty In Data
+                Item.CreateReader()
+                Select Case Item.Name
+                    Case "executeCommandResults"
+                        For Each Entry As JObject In Item.Values()
+                            Try
+                                Success = Entry("success").ToString.ToLower()
+                                If Success = "false" Then
+                                    MessageBox.Show(Entry("errorMessage").ToString(), "WS-Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                Else
+                                    MessageBox.Show("Command successfull", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                    Me.Close()
+                                End If
+                            Catch ex As Exception
+                            End Try
+                        Next
+                End Select
+            Next
 
-    Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
-        If TxtBoxUsrPrf.Text = "" Then
-            MessageBox.Show("Please insert a userprofile name", "No selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        Else
-            RunGetProcess()
-            If TxtBoxJobsRun.Text = "" Or TxtBoxJobsRun.Text = "0" Then
-                BtnActJob.Enabled = False
-            Else
-                BtnActJob.Enabled = True
-            End If
+        ElseIf ResponseStream.Code <> HttpStatusCode.OK Then
+            MessageBox.Show(ResponseStream.Response.Trim() + " (" + ResponseStream.Code.Trim(), "WS-Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
-    End Sub
-
-    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
-    End Sub
-
-    Private Sub BtnActJob_Click(sender As Object, e As EventArgs) Handles BtnActJob.Click
-        Dim ActiveJobInfoForm As New ActiveJobs
-        ActiveJobInfoForm.MdiParent = Main
-        ActiveJobInfoForm.TxtBoxUsr.Text = TxtBoxUsrPrf.Text
-        ActiveJobInfoForm.Show()
-        ActiveJobInfoForm.BtnGet.PerformClick()
-    End Sub
-
-
-    Public Sub RunGetProcess()
-        'Start communication, etrieve json stream and fill datagridview
-        BtnGet.Enabled = False
-        BtnClose.Enabled = False
-        BtnActJob.Enabled = False
-        DisplayInformation("Please wait, collecting data...")
-        StartProcessGETJoblog(UsrInfoWebservice, TxtBoxUsrPrf.Text)
-        RemoveInformation()
-        BtnGet.Enabled = True
-        BtnClose.Enabled = True
-        BtnActJob.Enabled = True
     End Sub
 
 End Class

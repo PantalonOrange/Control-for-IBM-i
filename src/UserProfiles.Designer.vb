@@ -23,7 +23,7 @@ Partial Class UserProfiles
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UserProfiles))
         Me.LblWait = New System.Windows.Forms.Label()
         Me.BtnClose = New System.Windows.Forms.Button()
@@ -44,11 +44,24 @@ Partial Class UserProfiles
         Me.LblActive = New System.Windows.Forms.Label()
         Me.CntMnuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DetailsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangeUserprofileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangeSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangePasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisableUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ActiveJobsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LblDescription = New System.Windows.Forms.Label()
         Me.TxtBoxDescription = New System.Windows.Forms.TextBox()
+        Me.CmbBoxPwdExp = New System.Windows.Forms.ComboBox()
+        Me.LblPwdExp = New System.Windows.Forms.Label()
+        Me.TxtBoxGrpPrf = New System.Windows.Forms.TextBox()
+        Me.LblGrpPrf = New System.Windows.Forms.Label()
+        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripRecordsSelected = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripMessage = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.DtaGrdUsrPrf, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CntMnuStrip.SuspendLayout()
+        Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblWait
@@ -67,7 +80,7 @@ Partial Class UserProfiles
         Me.BtnClose.Location = New System.Drawing.Point(137, 17)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(69, 34)
-        Me.BtnClose.TabIndex = 7
+        Me.BtnClose.TabIndex = 9
         Me.BtnClose.Text = "&Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
@@ -85,7 +98,7 @@ Partial Class UserProfiles
         Me.BtnGet.Location = New System.Drawing.Point(12, 17)
         Me.BtnGet.Name = "BtnGet"
         Me.BtnGet.Size = New System.Drawing.Size(120, 34)
-        Me.BtnGet.TabIndex = 6
+        Me.BtnGet.TabIndex = 8
         Me.BtnGet.Text = "&Get"
         Me.BtnGet.UseVisualStyleBackColor = True
         '
@@ -134,14 +147,14 @@ Partial Class UserProfiles
         Me.DtaGrdUsrPrf.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DtaGrdUsrPrf.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DtaGrdUsrPrf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DtaGrdUsrPrf.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdUsrPrf.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DtaGrdUsrPrf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DtaGrdUsrPrf.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.DtaGrdUsrPrf.Location = New System.Drawing.Point(6, 81)
@@ -152,12 +165,12 @@ Partial Class UserProfiles
         Me.DtaGrdUsrPrf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DtaGrdUsrPrf.ShowEditingIcon = False
         Me.DtaGrdUsrPrf.Size = New System.Drawing.Size(1347, 526)
-        Me.DtaGrdUsrPrf.TabIndex = 8
+        Me.DtaGrdUsrPrf.TabIndex = 10
         '
         'LblUsrPrf
         '
         Me.LblUsrPrf.AutoSize = True
-        Me.LblUsrPrf.Location = New System.Drawing.Point(1063, 9)
+        Me.LblUsrPrf.Location = New System.Drawing.Point(862, 9)
         Me.LblUsrPrf.Name = "LblUsrPrf"
         Me.LblUsrPrf.Size = New System.Drawing.Size(29, 13)
         Me.LblUsrPrf.TabIndex = 39
@@ -166,7 +179,7 @@ Partial Class UserProfiles
         'LblUsrCls
         '
         Me.LblUsrCls.AutoSize = True
-        Me.LblUsrCls.Location = New System.Drawing.Point(1039, 33)
+        Me.LblUsrCls.Location = New System.Drawing.Point(838, 33)
         Me.LblUsrCls.Name = "LblUsrCls"
         Me.LblUsrCls.Size = New System.Drawing.Size(53, 13)
         Me.LblUsrCls.TabIndex = 40
@@ -174,8 +187,8 @@ Partial Class UserProfiles
         '
         'TxtBoxUsrPrf
         '
-        Me.TxtBoxUsrPrf.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TxtBoxUsrPrf.Location = New System.Drawing.Point(1098, 6)
+        Me.TxtBoxUsrPrf.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
+        Me.TxtBoxUsrPrf.Location = New System.Drawing.Point(897, 6)
         Me.TxtBoxUsrPrf.MaxLength = 10
         Me.TxtBoxUsrPrf.Name = "TxtBoxUsrPrf"
         Me.TxtBoxUsrPrf.Size = New System.Drawing.Size(95, 20)
@@ -185,8 +198,9 @@ Partial Class UserProfiles
         '
         Me.CmbBoxUsrCls.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.CmbBoxUsrCls.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CmbBoxUsrCls.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbBoxUsrCls.FormattingEnabled = True
-        Me.CmbBoxUsrCls.Location = New System.Drawing.Point(1098, 30)
+        Me.CmbBoxUsrCls.Location = New System.Drawing.Point(897, 30)
         Me.CmbBoxUsrCls.MaxLength = 10
         Me.CmbBoxUsrCls.Name = "CmbBoxUsrCls"
         Me.CmbBoxUsrCls.Size = New System.Drawing.Size(95, 21)
@@ -198,7 +212,7 @@ Partial Class UserProfiles
         Me.CmbBoxEnabled.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CmbBoxEnabled.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbBoxEnabled.FormattingEnabled = True
-        Me.CmbBoxEnabled.Location = New System.Drawing.Point(1258, 6)
+        Me.CmbBoxEnabled.Location = New System.Drawing.Point(1057, 6)
         Me.CmbBoxEnabled.MaxLength = 10
         Me.CmbBoxEnabled.Name = "CmbBoxEnabled"
         Me.CmbBoxEnabled.Size = New System.Drawing.Size(95, 21)
@@ -207,7 +221,7 @@ Partial Class UserProfiles
         'LblEnabled
         '
         Me.LblEnabled.AutoSize = True
-        Me.LblEnabled.Location = New System.Drawing.Point(1206, 9)
+        Me.LblEnabled.Location = New System.Drawing.Point(1005, 9)
         Me.LblEnabled.Name = "LblEnabled"
         Me.LblEnabled.Size = New System.Drawing.Size(46, 13)
         Me.LblEnabled.TabIndex = 42
@@ -219,7 +233,7 @@ Partial Class UserProfiles
         Me.CmbBoxActive.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CmbBoxActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbBoxActive.FormattingEnabled = True
-        Me.CmbBoxActive.Location = New System.Drawing.Point(1258, 30)
+        Me.CmbBoxActive.Location = New System.Drawing.Point(1057, 30)
         Me.CmbBoxActive.MaxLength = 10
         Me.CmbBoxActive.Name = "CmbBoxActive"
         Me.CmbBoxActive.Size = New System.Drawing.Size(95, 21)
@@ -228,7 +242,7 @@ Partial Class UserProfiles
         'LblActive
         '
         Me.LblActive.AutoSize = True
-        Me.LblActive.Location = New System.Drawing.Point(1215, 33)
+        Me.LblActive.Location = New System.Drawing.Point(1014, 33)
         Me.LblActive.Name = "LblActive"
         Me.LblActive.Size = New System.Drawing.Size(37, 13)
         Me.LblActive.TabIndex = 44
@@ -237,29 +251,63 @@ Partial Class UserProfiles
         'CntMnuStrip
         '
         Me.CntMnuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CntMnuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DetailsToolStripMenuItem, Me.ActiveJobsToolStripMenuItem})
+        Me.CntMnuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DetailsToolStripMenuItem, Me.ChangeUserprofileToolStripMenuItem, Me.ToolStripSeparator1, Me.ActiveJobsToolStripMenuItem})
         Me.CntMnuStrip.Name = "CntMnuStrip"
-        Me.CntMnuStrip.Size = New System.Drawing.Size(141, 64)
+        Me.CntMnuStrip.Size = New System.Drawing.Size(183, 100)
         '
         'DetailsToolStripMenuItem
         '
         Me.DetailsToolStripMenuItem.Image = CType(resources.GetObject("DetailsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.DetailsToolStripMenuItem.Name = "DetailsToolStripMenuItem"
-        Me.DetailsToolStripMenuItem.Size = New System.Drawing.Size(140, 30)
-        Me.DetailsToolStripMenuItem.Text = "Details"
+        Me.DetailsToolStripMenuItem.Size = New System.Drawing.Size(182, 30)
+        Me.DetailsToolStripMenuItem.Text = "Display details"
+        '
+        'ChangeUserprofileToolStripMenuItem
+        '
+        Me.ChangeUserprofileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangeSettingsToolStripMenuItem, Me.ChangePasswordToolStripMenuItem, Me.DisableUserToolStripMenuItem})
+        Me.ChangeUserprofileToolStripMenuItem.Image = CType(resources.GetObject("ChangeUserprofileToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ChangeUserprofileToolStripMenuItem.Name = "ChangeUserprofileToolStripMenuItem"
+        Me.ChangeUserprofileToolStripMenuItem.Size = New System.Drawing.Size(182, 30)
+        Me.ChangeUserprofileToolStripMenuItem.Text = "Change userprofile"
+        '
+        'ChangeSettingsToolStripMenuItem
+        '
+        Me.ChangeSettingsToolStripMenuItem.Image = CType(resources.GetObject("ChangeSettingsToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ChangeSettingsToolStripMenuItem.Name = "ChangeSettingsToolStripMenuItem"
+        Me.ChangeSettingsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.ChangeSettingsToolStripMenuItem.Text = "Change Settings"
+        '
+        'ChangePasswordToolStripMenuItem
+        '
+        Me.ChangePasswordToolStripMenuItem.Image = CType(resources.GetObject("ChangePasswordToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ChangePasswordToolStripMenuItem.Name = "ChangePasswordToolStripMenuItem"
+        Me.ChangePasswordToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.ChangePasswordToolStripMenuItem.Text = "Change password"
+        '
+        'DisableUserToolStripMenuItem
+        '
+        Me.DisableUserToolStripMenuItem.Image = CType(resources.GetObject("DisableUserToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.DisableUserToolStripMenuItem.Name = "DisableUserToolStripMenuItem"
+        Me.DisableUserToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.DisableUserToolStripMenuItem.Text = "Disable user"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(179, 6)
         '
         'ActiveJobsToolStripMenuItem
         '
         Me.ActiveJobsToolStripMenuItem.Image = CType(resources.GetObject("ActiveJobsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ActiveJobsToolStripMenuItem.Name = "ActiveJobsToolStripMenuItem"
-        Me.ActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(140, 30)
-        Me.ActiveJobsToolStripMenuItem.Text = "Active jobs"
+        Me.ActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(182, 30)
+        Me.ActiveJobsToolStripMenuItem.Text = "Display active jobs"
         '
         'LblDescription
         '
         Me.LblDescription.AutoSize = True
         Me.LblDescription.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.LblDescription.Location = New System.Drawing.Point(1032, 58)
+        Me.LblDescription.Location = New System.Drawing.Point(831, 58)
         Me.LblDescription.Name = "LblDescription"
         Me.LblDescription.Size = New System.Drawing.Size(60, 13)
         Me.LblDescription.TabIndex = 45
@@ -267,11 +315,71 @@ Partial Class UserProfiles
         '
         'TxtBoxDescription
         '
-        Me.TxtBoxDescription.Location = New System.Drawing.Point(1098, 55)
+        Me.TxtBoxDescription.Location = New System.Drawing.Point(897, 55)
         Me.TxtBoxDescription.MaxLength = 50
         Me.TxtBoxDescription.Name = "TxtBoxDescription"
-        Me.TxtBoxDescription.Size = New System.Drawing.Size(255, 20)
-        Me.TxtBoxDescription.TabIndex = 5
+        Me.TxtBoxDescription.Size = New System.Drawing.Size(456, 20)
+        Me.TxtBoxDescription.TabIndex = 7
+        '
+        'CmbBoxPwdExp
+        '
+        Me.CmbBoxPwdExp.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbBoxPwdExp.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CmbBoxPwdExp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBoxPwdExp.FormattingEnabled = True
+        Me.CmbBoxPwdExp.Location = New System.Drawing.Point(1258, 5)
+        Me.CmbBoxPwdExp.MaxLength = 10
+        Me.CmbBoxPwdExp.Name = "CmbBoxPwdExp"
+        Me.CmbBoxPwdExp.Size = New System.Drawing.Size(95, 21)
+        Me.CmbBoxPwdExp.TabIndex = 5
+        '
+        'LblPwdExp
+        '
+        Me.LblPwdExp.AutoSize = True
+        Me.LblPwdExp.Location = New System.Drawing.Point(1162, 9)
+        Me.LblPwdExp.Name = "LblPwdExp"
+        Me.LblPwdExp.Size = New System.Drawing.Size(90, 13)
+        Me.LblPwdExp.TabIndex = 47
+        Me.LblPwdExp.Text = "Password expired"
+        '
+        'TxtBoxGrpPrf
+        '
+        Me.TxtBoxGrpPrf.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
+        Me.TxtBoxGrpPrf.Location = New System.Drawing.Point(1258, 30)
+        Me.TxtBoxGrpPrf.MaxLength = 10
+        Me.TxtBoxGrpPrf.Name = "TxtBoxGrpPrf"
+        Me.TxtBoxGrpPrf.Size = New System.Drawing.Size(95, 20)
+        Me.TxtBoxGrpPrf.TabIndex = 6
+        '
+        'LblGrpPrf
+        '
+        Me.LblGrpPrf.AutoSize = True
+        Me.LblGrpPrf.Location = New System.Drawing.Point(1185, 33)
+        Me.LblGrpPrf.Name = "LblGrpPrf"
+        Me.LblGrpPrf.Size = New System.Drawing.Size(67, 13)
+        Me.LblGrpPrf.TabIndex = 49
+        Me.LblGrpPrf.Text = "Group profile"
+        '
+        'StatusStrip
+        '
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripRecordsSelected, Me.ToolStripMessage})
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 612)
+        Me.StatusStrip.Name = "StatusStrip"
+        Me.StatusStrip.Size = New System.Drawing.Size(1360, 22)
+        Me.StatusStrip.TabIndex = 50
+        Me.StatusStrip.Text = "StatusStrip"
+        '
+        'ToolStripRecordsSelected
+        '
+        Me.ToolStripRecordsSelected.Name = "ToolStripRecordsSelected"
+        Me.ToolStripRecordsSelected.Size = New System.Drawing.Size(139, 17)
+        Me.ToolStripRecordsSelected.Text = "ToolStripRecordsSelected"
+        '
+        'ToolStripMessage
+        '
+        Me.ToolStripMessage.Name = "ToolStripMessage"
+        Me.ToolStripMessage.Size = New System.Drawing.Size(99, 17)
+        Me.ToolStripMessage.Text = "ToolStripMessage"
         '
         'UserProfiles
         '
@@ -279,7 +387,12 @@ Partial Class UserProfiles
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnClose
-        Me.ClientSize = New System.Drawing.Size(1360, 614)
+        Me.ClientSize = New System.Drawing.Size(1360, 634)
+        Me.Controls.Add(Me.StatusStrip)
+        Me.Controls.Add(Me.TxtBoxGrpPrf)
+        Me.Controls.Add(Me.LblGrpPrf)
+        Me.Controls.Add(Me.CmbBoxPwdExp)
+        Me.Controls.Add(Me.LblPwdExp)
         Me.Controls.Add(Me.TxtBoxDescription)
         Me.Controls.Add(Me.LblDescription)
         Me.Controls.Add(Me.LblWait)
@@ -308,6 +421,8 @@ Partial Class UserProfiles
         Me.Text = "Userprofile - Informations"
         CType(Me.DtaGrdUsrPrf, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CntMnuStrip.ResumeLayout(False)
+        Me.StatusStrip.ResumeLayout(False)
+        Me.StatusStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -335,4 +450,16 @@ Partial Class UserProfiles
     Friend WithEvents ActiveJobsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LblDescription As Label
     Friend WithEvents TxtBoxDescription As TextBox
+    Friend WithEvents ChangeUserprofileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangeSettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangePasswordToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents CmbBoxPwdExp As ComboBox
+    Friend WithEvents LblPwdExp As Label
+    Friend WithEvents TxtBoxGrpPrf As TextBox
+    Friend WithEvents LblGrpPrf As Label
+    Friend WithEvents StatusStrip As StatusStrip
+    Friend WithEvents ToolStripRecordsSelected As ToolStripStatusLabel
+    Friend WithEvents ToolStripMessage As ToolStripStatusLabel
+    Friend WithEvents DisableUserToolStripMenuItem As ToolStripMenuItem
 End Class

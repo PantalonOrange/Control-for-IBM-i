@@ -22,6 +22,7 @@ Partial Class Main
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.MnuStrpMain = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -37,6 +38,7 @@ Partial Class Main
         Me.StsStrpMain = New System.Windows.Forms.StatusStrip()
         Me.StrpLabelUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StrpLabelHost = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStsLblMsgwSearch = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MnuToolStrip = New System.Windows.Forms.ToolStrip()
         Me.TlStrpActJob = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -44,6 +46,8 @@ Partial Class Main
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.TlStrpJobLog = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MsgwSearchTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.BackgroundMsgwSearch = New System.ComponentModel.BackgroundWorker()
         Me.MnuStrpMain.SuspendLayout()
         Me.StsStrpMain.SuspendLayout()
         Me.MnuToolStrip.SuspendLayout()
@@ -136,7 +140,7 @@ Partial Class Main
         'StsStrpMain
         '
         Me.StsStrpMain.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.StsStrpMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StrpLabelUser, Me.StrpLabelHost})
+        Me.StsStrpMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StrpLabelUser, Me.StrpLabelHost, Me.ToolStripStsLblMsgwSearch})
         Me.StsStrpMain.Location = New System.Drawing.Point(0, 806)
         Me.StsStrpMain.Name = "StsStrpMain"
         Me.StsStrpMain.Padding = New System.Windows.Forms.Padding(1, 0, 9, 0)
@@ -163,6 +167,12 @@ Partial Class Main
         Me.StrpLabelHost.Name = "StrpLabelHost"
         Me.StrpLabelHost.Size = New System.Drawing.Size(36, 19)
         Me.StrpLabelHost.Text = "Host"
+        '
+        'ToolStripStsLblMsgwSearch
+        '
+        Me.ToolStripStsLblMsgwSearch.Name = "ToolStripStsLblMsgwSearch"
+        Me.ToolStripStsLblMsgwSearch.Size = New System.Drawing.Size(171, 19)
+        Me.ToolStripStsLblMsgwSearch.Text = "Searching for MSGW on host ..."
         '
         'MnuToolStrip
         '
@@ -216,6 +226,16 @@ Partial Class Main
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 31)
         '
+        'MsgwSearchTimer
+        '
+        Me.MsgwSearchTimer.Enabled = True
+        Me.MsgwSearchTimer.Interval = 900000
+        '
+        'BackgroundMsgwSearch
+        '
+        Me.BackgroundMsgwSearch.WorkerReportsProgress = True
+        Me.BackgroundMsgwSearch.WorkerSupportsCancellation = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -264,4 +284,7 @@ Partial Class Main
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents MsgwSearchTimer As Timer
+    Friend WithEvents BackgroundMsgwSearch As System.ComponentModel.BackgroundWorker
+    Friend WithEvents ToolStripStsLblMsgwSearch As ToolStripStatusLabel
 End Class

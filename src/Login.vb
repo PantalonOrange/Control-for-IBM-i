@@ -3,15 +3,24 @@
 'Copyright (C)2021, 2022 by Christian Brunner
 
 
+Imports System.Net
+Imports System.IO
+Imports System.Text
+
+
 Public Class Login
 
-    Public First As Boolean = True
     Public Version As String = Application.ProductVersion.ToString()
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
         LblVersion.Text = Me.Version
-        HostTextBox.Text = "https://10.1.1.1:20210/system"
+        Try
+            HostTextBox.Text = File.ReadAllText(Application.StartupPath + "\settings\ibmiC.txt")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error while reading settings", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            HostTextBox.Text = Nothing
+        End Try
     End Sub
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
@@ -36,22 +45,14 @@ Public Class Login
             Main.Credentials.User = UsernameTextBox.Text
             Main.Credentials.Password = PasswordTextBox.Text
             Main.Host = HostTextBox.Text
-            If First = False Then
-                Main.StrpLabelHost.Text = HostTextBox.Text
-                Main.StrpLabelUser.Text = UsernameTextBox.Text
-            End If
-            First = False
+            Main.MSGWCheck = True
             Main.Show()
             Me.Hide()
         End If
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
-        If First Then
-            Me.Close()
-        Else
-            Me.Hide()
-        End If
+        Me.Close()
     End Sub
 
 End Class

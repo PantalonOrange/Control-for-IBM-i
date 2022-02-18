@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Werte der Assemblyattribute überprüfen
 
 <Assembly: AssemblyTitle("IBMi-Control")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyDescription("Small controling program for some IBMi operating stuff")>
 <Assembly: AssemblyCompany("Pantalon Orange OSS")>
 <Assembly: AssemblyProduct("IBMi-Control")>
-<Assembly: AssemblyCopyright("Copyright ©  2021 Christian Brunner")>
+<Assembly: AssemblyCopyright("Copyright ©  2021, 2022 Christian Brunner")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' indem Sie "*" wie unten gezeigt eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("0.0.0.1")>
-<Assembly: AssemblyFileVersion("0.0.0.1")>
+<Assembly: AssemblyVersion("0.1.5.0")>
+<Assembly: AssemblyFileVersion("0.1.5.0")>
