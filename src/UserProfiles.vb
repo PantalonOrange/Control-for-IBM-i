@@ -136,7 +136,7 @@ Public Class UserProfiles
         End If
     End Sub
 
-    Private Sub DtaGrdUsrPrf_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DtaGrdUsrPrf.CellContentDoubleClick
+    Private Sub DtaGrdUsrPrf_MouseDoubleClick(sender As Object, e As EventArgs) Handles DtaGrdUsrPrf.DoubleClick
         'Display detailed information about selected userprofile
         For Each SelectedRow As DataGridViewRow In DtaGrdUsrPrf.SelectedRows
             Dim UsrPrfInfoDetails As New UsrPrf

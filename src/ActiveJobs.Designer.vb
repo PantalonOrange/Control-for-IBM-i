@@ -23,9 +23,10 @@ Partial Class ActiveJobs
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ActiveJobs))
-        Me.DtaGrdActJob = New System.Windows.Forms.DataGridView()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblSuccess = New System.Windows.Forms.Label()
         Me.LblResults = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -77,38 +78,11 @@ Partial Class ActiveJobs
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripRecordsSelected = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripMessage = New System.Windows.Forms.ToolStripStatusLabel()
-        CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DtaGrdActJob = New MetroFramework.Controls.MetroGrid()
         Me.CntMnu.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'DtaGrdActJob
-        '
-        Me.DtaGrdActJob.AllowUserToAddRows = False
-        Me.DtaGrdActJob.AllowUserToDeleteRows = False
-        Me.DtaGrdActJob.AllowUserToResizeColumns = False
-        Me.DtaGrdActJob.AllowUserToResizeRows = False
-        Me.DtaGrdActJob.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DtaGrdActJob.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DtaGrdActJob.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DtaGrdActJob.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DtaGrdActJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DtaGrdActJob.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.DtaGrdActJob.Location = New System.Drawing.Point(5, 93)
-        Me.DtaGrdActJob.Name = "DtaGrdActJob"
-        Me.DtaGrdActJob.ReadOnly = True
-        Me.DtaGrdActJob.RowHeadersWidth = 62
-        Me.DtaGrdActJob.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DtaGrdActJob.ShowEditingIcon = False
-        Me.DtaGrdActJob.Size = New System.Drawing.Size(1411, 613)
-        Me.DtaGrdActJob.TabIndex = 10
         '
         'LblSuccess
         '
@@ -516,6 +490,61 @@ Partial Class ActiveJobs
         Me.ToolStripMessage.Size = New System.Drawing.Size(99, 17)
         Me.ToolStripMessage.Text = "ToolStripMessage"
         '
+        'DtaGrdActJob
+        '
+        Me.DtaGrdActJob.AllowUserToAddRows = False
+        Me.DtaGrdActJob.AllowUserToDeleteRows = False
+        Me.DtaGrdActJob.AllowUserToOrderColumns = True
+        Me.DtaGrdActJob.AllowUserToResizeColumns = False
+        Me.DtaGrdActJob.AllowUserToResizeRows = False
+        Me.DtaGrdActJob.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DtaGrdActJob.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DtaGrdActJob.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DtaGrdActJob.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DtaGrdActJob.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.DtaGrdActJob.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(89, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(104, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdActJob.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DtaGrdActJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(104, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DtaGrdActJob.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DtaGrdActJob.EnableHeadersVisualStyles = False
+        Me.DtaGrdActJob.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.DtaGrdActJob.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DtaGrdActJob.Location = New System.Drawing.Point(5, 92)
+        Me.DtaGrdActJob.Name = "DtaGrdActJob"
+        Me.DtaGrdActJob.ReadOnly = True
+        Me.DtaGrdActJob.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(89, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(104, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdActJob.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.DtaGrdActJob.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DtaGrdActJob.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DtaGrdActJob.ShowCellErrors = False
+        Me.DtaGrdActJob.ShowCellToolTips = False
+        Me.DtaGrdActJob.ShowEditingIcon = False
+        Me.DtaGrdActJob.ShowRowErrors = False
+        Me.DtaGrdActJob.Size = New System.Drawing.Size(1412, 612)
+        Me.DtaGrdActJob.Style = MetroFramework.MetroColorStyle.Green
+        Me.DtaGrdActJob.TabIndex = 10
+        '
         'ActiveJobs
         '
         Me.AcceptButton = Me.BtnGet
@@ -523,8 +552,8 @@ Partial Class ActiveJobs
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnClose
         Me.ClientSize = New System.Drawing.Size(1423, 731)
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.LblWait)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TxtBoxIPAdr)
         Me.Controls.Add(Me.LblIPAdr)
         Me.Controls.Add(Me.TxtBoxJobNameShort)
@@ -554,16 +583,14 @@ Partial Class ActiveJobs
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Active jobs"
-        CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CntMnu.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents DtaGrdActJob As DataGridView
     Friend WithEvents LblSuccess As Label
     Friend WithEvents LblResults As Label
     Friend WithEvents Label1 As Label
@@ -615,4 +642,5 @@ Partial Class ActiveJobs
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents ToolStripMessage As ToolStripStatusLabel
     Friend WithEvents ToolStripRecordsSelected As ToolStripStatusLabel
+    Friend WithEvents DtaGrdActJob As MetroFramework.Controls.MetroGrid
 End Class

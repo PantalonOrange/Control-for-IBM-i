@@ -23,6 +23,8 @@ Partial Class JobLog
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(JobLog))
         Me.PrgBar = New System.Windows.Forms.ProgressBar()
         Me.LblWait = New System.Windows.Forms.Label()
@@ -31,12 +33,12 @@ Partial Class JobLog
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblResults = New System.Windows.Forms.Label()
         Me.LblSuccess = New System.Windows.Forms.Label()
-        Me.DtaGrdJobLog = New System.Windows.Forms.DataGridView()
         Me.LblJob = New System.Windows.Forms.Label()
         Me.TxtBoxJob = New System.Windows.Forms.TextBox()
         Me.LblMax = New System.Windows.Forms.Label()
         Me.CmbBoxMax = New System.Windows.Forms.ComboBox()
         Me.BtnClose = New System.Windows.Forms.Button()
+        Me.DtaGrdJobLog = New MetroFramework.Controls.MetroGrid()
         CType(Me.DtaGrdJobLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -104,35 +106,6 @@ Partial Class JobLog
         Me.LblSuccess.TabIndex = 18
         Me.LblSuccess.Text = "LblSuccess"
         '
-        'DtaGrdJobLog
-        '
-        Me.DtaGrdJobLog.AllowUserToAddRows = False
-        Me.DtaGrdJobLog.AllowUserToDeleteRows = False
-        Me.DtaGrdJobLog.AllowUserToResizeColumns = False
-        Me.DtaGrdJobLog.AllowUserToResizeRows = False
-        Me.DtaGrdJobLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DtaGrdJobLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DtaGrdJobLog.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DtaGrdJobLog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DtaGrdJobLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DtaGrdJobLog.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.DtaGrdJobLog.Location = New System.Drawing.Point(12, 64)
-        Me.DtaGrdJobLog.MultiSelect = False
-        Me.DtaGrdJobLog.Name = "DtaGrdJobLog"
-        Me.DtaGrdJobLog.ReadOnly = True
-        Me.DtaGrdJobLog.RowHeadersWidth = 62
-        Me.DtaGrdJobLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DtaGrdJobLog.ShowEditingIcon = False
-        Me.DtaGrdJobLog.Size = New System.Drawing.Size(1347, 564)
-        Me.DtaGrdJobLog.TabIndex = 4
-        '
         'LblJob
         '
         Me.LblJob.AutoSize = True
@@ -180,6 +153,62 @@ Partial Class JobLog
         Me.BtnClose.Text = "&Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
+        'DtaGrdJobLog
+        '
+        Me.DtaGrdJobLog.AllowUserToAddRows = False
+        Me.DtaGrdJobLog.AllowUserToDeleteRows = False
+        Me.DtaGrdJobLog.AllowUserToOrderColumns = True
+        Me.DtaGrdJobLog.AllowUserToResizeColumns = False
+        Me.DtaGrdJobLog.AllowUserToResizeRows = False
+        Me.DtaGrdJobLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DtaGrdJobLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DtaGrdJobLog.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DtaGrdJobLog.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DtaGrdJobLog.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.DtaGrdJobLog.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(53, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(133, Byte), Integer), CType(CType(72, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdJobLog.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DtaGrdJobLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(133, Byte), Integer), CType(CType(72, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DtaGrdJobLog.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DtaGrdJobLog.EnableHeadersVisualStyles = False
+        Me.DtaGrdJobLog.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.DtaGrdJobLog.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DtaGrdJobLog.Location = New System.Drawing.Point(4, 67)
+        Me.DtaGrdJobLog.MultiSelect = False
+        Me.DtaGrdJobLog.Name = "DtaGrdJobLog"
+        Me.DtaGrdJobLog.ReadOnly = True
+        Me.DtaGrdJobLog.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(53, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(133, Byte), Integer), CType(CType(72, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdJobLog.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.DtaGrdJobLog.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DtaGrdJobLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DtaGrdJobLog.ShowCellErrors = False
+        Me.DtaGrdJobLog.ShowCellToolTips = False
+        Me.DtaGrdJobLog.ShowEditingIcon = False
+        Me.DtaGrdJobLog.ShowRowErrors = False
+        Me.DtaGrdJobLog.Size = New System.Drawing.Size(1362, 567)
+        Me.DtaGrdJobLog.Style = MetroFramework.MetroColorStyle.Orange
+        Me.DtaGrdJobLog.TabIndex = 5
+        '
         'JobLog
         '
         Me.AcceptButton = Me.BtnGet
@@ -220,10 +249,10 @@ Partial Class JobLog
     Friend WithEvents Label1 As Label
     Friend WithEvents LblResults As Label
     Friend WithEvents LblSuccess As Label
-    Friend WithEvents DtaGrdJobLog As DataGridView
     Friend WithEvents LblJob As Label
     Friend WithEvents TxtBoxJob As TextBox
     Friend WithEvents LblMax As Label
     Friend WithEvents CmbBoxMax As ComboBox
     Friend WithEvents BtnClose As Button
+    Friend WithEvents DtaGrdJobLog As MetroFramework.Controls.MetroGrid
 End Class

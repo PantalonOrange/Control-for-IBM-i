@@ -23,8 +23,10 @@ Partial Class UserProfiles
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UserProfiles))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LblWait = New System.Windows.Forms.Label()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.PrgBar = New System.Windows.Forms.ProgressBar()
@@ -33,7 +35,6 @@ Partial Class UserProfiles
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblResults = New System.Windows.Forms.Label()
         Me.LblSuccess = New System.Windows.Forms.Label()
-        Me.DtaGrdUsrPrf = New System.Windows.Forms.DataGridView()
         Me.LblUsrPrf = New System.Windows.Forms.Label()
         Me.LblUsrCls = New System.Windows.Forms.Label()
         Me.TxtBoxUsrPrf = New System.Windows.Forms.TextBox()
@@ -59,9 +60,10 @@ Partial Class UserProfiles
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripRecordsSelected = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripMessage = New System.Windows.Forms.ToolStripStatusLabel()
-        CType(Me.DtaGrdUsrPrf, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DtaGrdUsrPrf = New MetroFramework.Controls.MetroGrid()
         Me.CntMnuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
+        CType(Me.DtaGrdUsrPrf, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LblWait
@@ -137,35 +139,6 @@ Partial Class UserProfiles
         Me.LblSuccess.Size = New System.Drawing.Size(62, 13)
         Me.LblSuccess.TabIndex = 33
         Me.LblSuccess.Text = "LblSuccess"
-        '
-        'DtaGrdUsrPrf
-        '
-        Me.DtaGrdUsrPrf.AllowUserToAddRows = False
-        Me.DtaGrdUsrPrf.AllowUserToDeleteRows = False
-        Me.DtaGrdUsrPrf.AllowUserToResizeColumns = False
-        Me.DtaGrdUsrPrf.AllowUserToResizeRows = False
-        Me.DtaGrdUsrPrf.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DtaGrdUsrPrf.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DtaGrdUsrPrf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DtaGrdUsrPrf.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DtaGrdUsrPrf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DtaGrdUsrPrf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.DtaGrdUsrPrf.Location = New System.Drawing.Point(6, 81)
-        Me.DtaGrdUsrPrf.MultiSelect = False
-        Me.DtaGrdUsrPrf.Name = "DtaGrdUsrPrf"
-        Me.DtaGrdUsrPrf.ReadOnly = True
-        Me.DtaGrdUsrPrf.RowHeadersWidth = 62
-        Me.DtaGrdUsrPrf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DtaGrdUsrPrf.ShowEditingIcon = False
-        Me.DtaGrdUsrPrf.Size = New System.Drawing.Size(1347, 526)
-        Me.DtaGrdUsrPrf.TabIndex = 10
         '
         'LblUsrPrf
         '
@@ -274,21 +247,21 @@ Partial Class UserProfiles
         '
         Me.ChangeSettingsToolStripMenuItem.Image = CType(resources.GetObject("ChangeSettingsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ChangeSettingsToolStripMenuItem.Name = "ChangeSettingsToolStripMenuItem"
-        Me.ChangeSettingsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.ChangeSettingsToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.ChangeSettingsToolStripMenuItem.Text = "Change Settings"
         '
         'ChangePasswordToolStripMenuItem
         '
         Me.ChangePasswordToolStripMenuItem.Image = CType(resources.GetObject("ChangePasswordToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ChangePasswordToolStripMenuItem.Name = "ChangePasswordToolStripMenuItem"
-        Me.ChangePasswordToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.ChangePasswordToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.ChangePasswordToolStripMenuItem.Text = "Change password"
         '
         'DisableUserToolStripMenuItem
         '
         Me.DisableUserToolStripMenuItem.Image = CType(resources.GetObject("DisableUserToolStripMenuItem.Image"), System.Drawing.Image)
         Me.DisableUserToolStripMenuItem.Name = "DisableUserToolStripMenuItem"
-        Me.DisableUserToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.DisableUserToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.DisableUserToolStripMenuItem.Text = "Disable user"
         '
         'ToolStripSeparator1
@@ -381,6 +354,61 @@ Partial Class UserProfiles
         Me.ToolStripMessage.Size = New System.Drawing.Size(99, 17)
         Me.ToolStripMessage.Text = "ToolStripMessage"
         '
+        'DtaGrdUsrPrf
+        '
+        Me.DtaGrdUsrPrf.AllowUserToAddRows = False
+        Me.DtaGrdUsrPrf.AllowUserToDeleteRows = False
+        Me.DtaGrdUsrPrf.AllowUserToOrderColumns = True
+        Me.DtaGrdUsrPrf.AllowUserToResizeColumns = False
+        Me.DtaGrdUsrPrf.AllowUserToResizeRows = False
+        Me.DtaGrdUsrPrf.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DtaGrdUsrPrf.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DtaGrdUsrPrf.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DtaGrdUsrPrf.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DtaGrdUsrPrf.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.DtaGrdUsrPrf.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(148, Byte), Integer))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(157, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdUsrPrf.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DtaGrdUsrPrf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(157, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DtaGrdUsrPrf.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DtaGrdUsrPrf.EnableHeadersVisualStyles = False
+        Me.DtaGrdUsrPrf.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.DtaGrdUsrPrf.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.DtaGrdUsrPrf.Location = New System.Drawing.Point(4, 81)
+        Me.DtaGrdUsrPrf.Name = "DtaGrdUsrPrf"
+        Me.DtaGrdUsrPrf.ReadOnly = True
+        Me.DtaGrdUsrPrf.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(148, Byte), Integer))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(157, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdUsrPrf.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.DtaGrdUsrPrf.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DtaGrdUsrPrf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DtaGrdUsrPrf.ShowCellErrors = False
+        Me.DtaGrdUsrPrf.ShowCellToolTips = False
+        Me.DtaGrdUsrPrf.ShowEditingIcon = False
+        Me.DtaGrdUsrPrf.ShowRowErrors = False
+        Me.DtaGrdUsrPrf.Size = New System.Drawing.Size(1350, 526)
+        Me.DtaGrdUsrPrf.Style = MetroFramework.MetroColorStyle.Magenta
+        Me.DtaGrdUsrPrf.TabIndex = 10
+        '
         'UserProfiles
         '
         Me.AcceptButton = Me.BtnGet
@@ -388,6 +416,7 @@ Partial Class UserProfiles
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnClose
         Me.ClientSize = New System.Drawing.Size(1360, 634)
+        Me.Controls.Add(Me.LblWait)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TxtBoxGrpPrf)
         Me.Controls.Add(Me.LblGrpPrf)
@@ -395,7 +424,6 @@ Partial Class UserProfiles
         Me.Controls.Add(Me.LblPwdExp)
         Me.Controls.Add(Me.TxtBoxDescription)
         Me.Controls.Add(Me.LblDescription)
-        Me.Controls.Add(Me.LblWait)
         Me.Controls.Add(Me.CmbBoxActive)
         Me.Controls.Add(Me.LblActive)
         Me.Controls.Add(Me.CmbBoxEnabled)
@@ -419,10 +447,10 @@ Partial Class UserProfiles
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Userprofile - Informations"
-        CType(Me.DtaGrdUsrPrf, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CntMnuStrip.ResumeLayout(False)
         Me.StatusStrip.ResumeLayout(False)
         Me.StatusStrip.PerformLayout()
+        CType(Me.DtaGrdUsrPrf, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -436,7 +464,6 @@ Partial Class UserProfiles
     Friend WithEvents Label1 As Label
     Friend WithEvents LblResults As Label
     Friend WithEvents LblSuccess As Label
-    Friend WithEvents DtaGrdUsrPrf As DataGridView
     Friend WithEvents LblUsrPrf As Label
     Friend WithEvents LblUsrCls As Label
     Friend WithEvents TxtBoxUsrPrf As TextBox
@@ -462,4 +489,5 @@ Partial Class UserProfiles
     Friend WithEvents ToolStripRecordsSelected As ToolStripStatusLabel
     Friend WithEvents ToolStripMessage As ToolStripStatusLabel
     Friend WithEvents DisableUserToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DtaGrdUsrPrf As MetroFramework.Controls.MetroGrid
 End Class

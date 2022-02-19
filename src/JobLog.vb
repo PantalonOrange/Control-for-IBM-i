@@ -50,7 +50,7 @@ Public Class JobLog
         Me.Close()
     End Sub
 
-    Private Sub DtaGrdJobLog_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DtaGrdJobLog.CellContentDoubleClick
+    Private Sub DtaGrdJobLog_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DtaGrdJobLog.CellContentDoubleClick
         For Each SelectedRow As DataGridViewRow In DtaGrdJobLog.SelectedRows
             Dim JobLogInfoDetails As New JobLogDetails
             JobLogInfoDetails.MdiParent = Main
@@ -286,6 +286,5 @@ Public Class JobLog
         BtnClose.Enabled = True
         DtaGrdJobLog.Enabled = True
     End Sub
-
 
 End Class
