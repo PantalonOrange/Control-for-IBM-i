@@ -117,6 +117,20 @@
       <DependentUpon>ActiveJobs.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OutputQueueEntries.Designer.vb">
+      <DependentUpon>OutputQueueEntries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OutputQueueEntries.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutputQueueEntriesHelper.vb" />
+    <Compile Include="OutputQueues.Designer.vb">
+      <DependentUpon>OutputQueues.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OutputQueues.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutputQueuesHelper.vb" />
     <Compile Include="Settings.Designer.vb">
       <DependentUpon>Settings.vb</DependentUpon>
     </Compile>
@@ -199,6 +213,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutputQueueEntries.resx">
+      <DependentUpon>OutputQueueEntries.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutputQueues.resx">
+      <DependentUpon>OutputQueues.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.vb</DependentUpon>

@@ -19,6 +19,7 @@ Public Class JobLog
         LblSuccess.Text = "-"
         LblResults.Text = "-"
         LblWait.Visible = False
+        DtaGrdJobLog.Visible = False
         PrgBar.Minimum = 0
         PrgBar.Maximum = 100
         PrgBar.Value = 0
@@ -279,6 +280,7 @@ Public Class JobLog
         BtnGet.Enabled = False
         BtnClose.Enabled = False
         DtaGrdJobLog.Enabled = False
+        DtaGrdJobLog.Visible = True
         DisplayInformation("Please wait, collecting data...")
         StartProcessGETJoblog(JoblogWebservice, TxtBoxJob.Text)
         RemoveInformation()

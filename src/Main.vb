@@ -61,6 +61,20 @@ Public Class Main
         UsrInfoForm.Show()
     End Sub
 
+    Private Sub OutputQueuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputQueuesToolStripMenuItem.Click, TlStrpOutQ.Click
+        'Show output queue informations
+        Dim OutQInfoForm As New OutputQueues
+        OutQInfoForm.MdiParent = Me
+        OutQInfoForm.Show()
+    End Sub
+
+    Private Sub OutputQueueEntriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputQueueEntriesToolStripMenuItem.Click, TlStrpOutQEntries.Click
+        'Show output queue entries
+        Dim OutQEntryForm As New OutputQueueEntries
+        OutQEntryForm.MdiParent = Me
+        OutQEntryForm.Show()
+    End Sub
+
     Private Sub InfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InfoToolStripMenuItem.Click
         'Show informations about app
         MessageBox.Show("Control for IBM i® - Version: " + Login.Version + vbCrLf + "Erstellt von Christian Brunner" + vbCrLf + "Copyright (c)2021,2022 Pantalon Orange OSS" + vbCrLf +

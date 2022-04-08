@@ -53,10 +53,10 @@ Public Class ActiveJobs
             MessageBox.Show("Please take at least one selection", "No selection found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             CmbBoxSbs.Select()
         Else
-            'Start communication, etrieve json stream and fill datagridview
             BtnGet.Enabled = False
             BtnClose.Enabled = False
             DtaGrdActJob.Enabled = False
+            'Start communication, retrieve json stream and fill datagridview
             ActiveJobWebservice = Main.Host.Trim() + "/activejobs"
             DisplayInformation("Please wait, collecting data...")
             StartProcessGETActiveJobs(ActiveJobWebservice, CmbBoxJobTyp.Text, TxtBoxJobNameShort.Text, TxtBoxUsr.Text, CmbBoxJobSts.Text,
@@ -82,9 +82,9 @@ Public Class ActiveJobs
             e.CellStyle.BackColor = Color.White
         End If
 
+        'Change colors on base of the job-status
         If DtaGrdActJob.Rows(e.RowIndex).Cells(3).Value = "MSGW" Then
-            e.CellStyle.ForeColor = Color.White
-            e.CellStyle.BackColor = Color.OrangeRed
+            e.CellStyle.ForeColor = Color.DarkRed
         ElseIf DtaGrdActJob.Rows(e.RowIndex).Cells(3).Value = "LCKW" Then
             e.CellStyle.ForeColor = Color.MediumVioletRed
         ElseIf DtaGrdActJob.Rows(e.RowIndex).Cells(3).Value = "DSC" Then
@@ -93,6 +93,7 @@ Public Class ActiveJobs
             e.CellStyle.ForeColor = Color.DarkGreen
         End If
 
+        'Change cell formats
         Select Case e.ColumnIndex
             Case 0 'Position
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight

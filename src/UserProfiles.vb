@@ -23,6 +23,7 @@ Public Class UserProfiles
         ToolStripRecordsSelected.Text = ""
         ToolStripRecordsSelected.Visible = False
         ToolStripMessage.Visible = False
+        DtaGrdUsrPrf.Visible = False
         PrgBar.Visible = False
         FillCmbBoxes()
     End Sub
@@ -83,7 +84,7 @@ Public Class UserProfiles
         CmbBoxUsrCls.Items.AddRange(File.ReadAllLines(Application.StartupPath + "\settings\usrcls.txt"))
     End Sub
 
-    Private Sub DtaGrdJobLog_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DtaGrdUsrPrf.CellFormatting
+    Private Sub DtaGrdUsrPrf_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DtaGrdUsrPrf.CellFormatting
         If e.RowIndex Mod 2 = 0 Then
             'Every second row
             e.CellStyle.ForeColor = Color.Black
@@ -239,12 +240,14 @@ Public Class UserProfiles
     End Sub
 
     Public Sub RunGetProcess()
-        'Start communication, etrieve json stream and fill datagridview
+        'Start communication, retrieve json stream and fill datagridview
         BtnGet.Enabled = False
         BtnClose.Enabled = False
+        DtaGrdUsrPrf.Visible = True
         DtaGrdUsrPrf.Enabled = False
+        ToolStripMessage.Text = Nothing
         DisplayInformation("Please wait, collecting data...")
-        StartProcessGETJoblog(UsrPrfWebservice, TxtBoxUsrPrf.Text, CmbBoxUsrCls.Text, CmbBoxEnabled.Text, CmbBoxActive.Text,
+        StartProcessGETUsrPrf(UsrPrfWebservice, TxtBoxUsrPrf.Text, CmbBoxUsrCls.Text, CmbBoxEnabled.Text, CmbBoxActive.Text,
                               TxtBoxDescription.Text, CmbBoxPwdExp.Text, TxtBoxGrpPrf.Text)
         RemoveInformation()
         BtnGet.Enabled = True
@@ -252,10 +255,10 @@ Public Class UserProfiles
         DtaGrdUsrPrf.Enabled = True
     End Sub
 
-    Private Sub StartProcessGETJoblog(ByVal pURL As String, ByVal pUsrPrf As String, ByVal pUsrCls As String,
+    Private Sub StartProcessGETUsrPrf(ByVal pURL As String, ByVal pUsrPrf As String, ByVal pUsrCls As String,
                                       ByVal pEnabled As String, ByVal pActive As String, ByVal pTextDescription As String,
                                       ByVal pExpPwd As String, ByVal pGrpPrf As String)
-        Dim GetJobLogs As New DoRestStuffGet
+        Dim GetUsrPrfs As New DoRestStuffGet
         Dim URL As String = pURL.Trim() + "?"
         If pUsrPrf <> "" Then
             URL = URL.Trim() + "usr=" + pUsrPrf.Trim() + "&"
@@ -286,8 +289,8 @@ Public Class UserProfiles
         End If
 
         Try
-            GetJobLogs.GetJSONData(URL, Main.Credentials.User, Main.Credentials.Password)
-            ResponseStream = GetJobLogs._returnJSONStream
+            GetUsrPrfs.GetJSONData(URL, Main.Credentials.User, Main.Credentials.Password)
+            ResponseStream = GetUsrPrfs._returnJSONStream
             If Not String.IsNullOrEmpty(ResponseStream.Response) Then
                 If ResponseStream.Code = HttpStatusCode.OK Then
                     ParseJsonStream(ResponseStream.Response)

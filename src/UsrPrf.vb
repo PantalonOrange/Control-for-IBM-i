@@ -51,7 +51,6 @@ Public Class UsrPrf
         End If
     End Sub
 
-
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
         If Mode = 0 Then
             'Get data from userprofile

@@ -233,6 +233,7 @@ Partial Class ActiveJobs
         '
         'CntMnuDspJobLog
         '
+        Me.CntMnuDspJobLog.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CntMnuDspJobLog.Image = CType(resources.GetObject("CntMnuDspJobLog.Image"), System.Drawing.Image)
         Me.CntMnuDspJobLog.Name = "CntMnuDspJobLog"
         Me.CntMnuDspJobLog.Size = New System.Drawing.Size(181, 30)

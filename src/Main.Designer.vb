@@ -33,6 +33,7 @@ Partial Class Main
         Me.ActiveJobsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.JobLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UsrInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OutputQueuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StsStrpMain = New System.Windows.Forms.StatusStrip()
@@ -46,8 +47,14 @@ Partial Class Main
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.TlStrpJobLog = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TlStrpOutQ = New System.Windows.Forms.ToolStripButton()
         Me.MsgwSearchTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BackgroundMsgwSearch = New System.ComponentModel.BackgroundWorker()
+        Me.OutputQueueEntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TlStrpOutQEntries = New System.Windows.Forms.ToolStripButton()
         Me.MnuStrpMain.SuspendLayout()
         Me.StsStrpMain.SuspendLayout()
         Me.MnuToolStrip.SuspendLayout()
@@ -75,24 +82,24 @@ Partial Class Main
         '
         Me.ChangeSettingsToolStripMenuItem.Image = CType(resources.GetObject("ChangeSettingsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ChangeSettingsToolStripMenuItem.Name = "ChangeSettingsToolStripMenuItem"
-        Me.ChangeSettingsToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.ChangeSettingsToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
         Me.ChangeSettingsToolStripMenuItem.Text = "Change settings"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(156, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(185, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Image = CType(resources.GetObject("ExitToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
         'OperationsToolStripMenuItem
         '
-        Me.OperationsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActiveJobsToolStripMenuItem, Me.JobLogsToolStripMenuItem, Me.UsrInfoToolStripMenuItem})
+        Me.OperationsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActiveJobsToolStripMenuItem, Me.ToolStripSeparator7, Me.UsrInfoToolStripMenuItem, Me.ToolStripSeparator5, Me.OutputQueuesToolStripMenuItem, Me.OutputQueueEntriesToolStripMenuItem, Me.ToolStripSeparator6, Me.JobLogsToolStripMenuItem})
         Me.OperationsToolStripMenuItem.Name = "OperationsToolStripMenuItem"
         Me.OperationsToolStripMenuItem.Size = New System.Drawing.Size(77, 22)
         Me.OperationsToolStripMenuItem.Text = "&Operations"
@@ -103,7 +110,7 @@ Partial Class Main
         Me.ActiveJobsToolStripMenuItem.Name = "ActiveJobsToolStripMenuItem"
         Me.ActiveJobsToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.ActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.ActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(259, 30)
         Me.ActiveJobsToolStripMenuItem.Text = "&Active jobs"
         '
         'JobLogsToolStripMenuItem
@@ -112,7 +119,7 @@ Partial Class Main
         Me.JobLogsToolStripMenuItem.Name = "JobLogsToolStripMenuItem"
         Me.JobLogsToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.J), System.Windows.Forms.Keys)
-        Me.JobLogsToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.JobLogsToolStripMenuItem.Size = New System.Drawing.Size(259, 30)
         Me.JobLogsToolStripMenuItem.Text = "Job logs"
         '
         'UsrInfoToolStripMenuItem
@@ -121,8 +128,17 @@ Partial Class Main
         Me.UsrInfoToolStripMenuItem.Name = "UsrInfoToolStripMenuItem"
         Me.UsrInfoToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.U), System.Windows.Forms.Keys)
-        Me.UsrInfoToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.UsrInfoToolStripMenuItem.Size = New System.Drawing.Size(259, 30)
         Me.UsrInfoToolStripMenuItem.Text = "User informations"
+        '
+        'OutputQueuesToolStripMenuItem
+        '
+        Me.OutputQueuesToolStripMenuItem.Image = CType(resources.GetObject("OutputQueuesToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.OutputQueuesToolStripMenuItem.Name = "OutputQueuesToolStripMenuItem"
+        Me.OutputQueuesToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+            Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.OutputQueuesToolStripMenuItem.Size = New System.Drawing.Size(259, 30)
+        Me.OutputQueuesToolStripMenuItem.Text = "Output queues"
         '
         'ToolStripMenuItem1
         '
@@ -171,13 +187,13 @@ Partial Class Main
         'ToolStripStsLblMsgwSearch
         '
         Me.ToolStripStsLblMsgwSearch.Name = "ToolStripStsLblMsgwSearch"
-        Me.ToolStripStsLblMsgwSearch.Size = New System.Drawing.Size(171, 19)
-        Me.ToolStripStsLblMsgwSearch.Text = "Searching for MSGW on host ..."
+        Me.ToolStripStsLblMsgwSearch.Size = New System.Drawing.Size(256, 19)
+        Me.ToolStripStsLblMsgwSearch.Text = "Searching for jobs with status MSGW on host ..."
         '
         'MnuToolStrip
         '
         Me.MnuToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MnuToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TlStrpActJob, Me.ToolStripSeparator2, Me.TlStrpUsrPrf, Me.ToolStripSeparator3, Me.TlStrpJobLog, Me.ToolStripSeparator4})
+        Me.MnuToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TlStrpActJob, Me.ToolStripSeparator2, Me.TlStrpUsrPrf, Me.ToolStripSeparator3, Me.TlStrpOutQ, Me.TlStrpOutQEntries, Me.ToolStripSeparator4, Me.TlStrpJobLog})
         Me.MnuToolStrip.Location = New System.Drawing.Point(0, 24)
         Me.MnuToolStrip.Name = "MnuToolStrip"
         Me.MnuToolStrip.Size = New System.Drawing.Size(1206, 31)
@@ -226,6 +242,16 @@ Partial Class Main
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 31)
         '
+        'TlStrpOutQ
+        '
+        Me.TlStrpOutQ.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TlStrpOutQ.Image = CType(resources.GetObject("TlStrpOutQ.Image"), System.Drawing.Image)
+        Me.TlStrpOutQ.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.TlStrpOutQ.Name = "TlStrpOutQ"
+        Me.TlStrpOutQ.Size = New System.Drawing.Size(28, 28)
+        Me.TlStrpOutQ.Text = "ToolStripButton1"
+        Me.TlStrpOutQ.ToolTipText = "Output queues"
+        '
         'MsgwSearchTimer
         '
         Me.MsgwSearchTimer.Enabled = True
@@ -235,6 +261,40 @@ Partial Class Main
         '
         Me.BackgroundMsgwSearch.WorkerReportsProgress = True
         Me.BackgroundMsgwSearch.WorkerSupportsCancellation = True
+        '
+        'OutputQueueEntriesToolStripMenuItem
+        '
+        Me.OutputQueueEntriesToolStripMenuItem.Image = CType(resources.GetObject("OutputQueueEntriesToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.OutputQueueEntriesToolStripMenuItem.Name = "OutputQueueEntriesToolStripMenuItem"
+        Me.OutputQueueEntriesToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+            Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
+        Me.OutputQueueEntriesToolStripMenuItem.Size = New System.Drawing.Size(259, 30)
+        Me.OutputQueueEntriesToolStripMenuItem.Text = "Output queue entries"
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(256, 6)
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(256, 6)
+        '
+        'ToolStripSeparator7
+        '
+        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(256, 6)
+        '
+        'TlStrpOutQEntries
+        '
+        Me.TlStrpOutQEntries.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TlStrpOutQEntries.Image = CType(resources.GetObject("TlStrpOutQEntries.Image"), System.Drawing.Image)
+        Me.TlStrpOutQEntries.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.TlStrpOutQEntries.Name = "TlStrpOutQEntries"
+        Me.TlStrpOutQEntries.Size = New System.Drawing.Size(28, 28)
+        Me.TlStrpOutQEntries.Text = "ToolStripButton1"
+        Me.TlStrpOutQEntries.ToolTipText = "Output queue entries"
         '
         'Main
         '
@@ -287,4 +347,11 @@ Partial Class Main
     Friend WithEvents MsgwSearchTimer As Timer
     Friend WithEvents BackgroundMsgwSearch As System.ComponentModel.BackgroundWorker
     Friend WithEvents ToolStripStsLblMsgwSearch As ToolStripStatusLabel
+    Friend WithEvents OutputQueuesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TlStrpOutQ As ToolStripButton
+    Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents OutputQueueEntriesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Friend WithEvents TlStrpOutQEntries As ToolStripButton
 End Class
