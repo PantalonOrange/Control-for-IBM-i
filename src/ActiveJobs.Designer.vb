@@ -79,6 +79,7 @@ Partial Class ActiveJobs
         Me.ToolStripRecordsSelected = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripMessage = New System.Windows.Forms.ToolStripStatusLabel()
         Me.DtaGrdActJob = New MetroFramework.Controls.MetroGrid()
+        Me.DisplaySpooledFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CntMnu.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.DtaGrdActJob, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -201,61 +202,61 @@ Partial Class ActiveJobs
         'CntMnu
         '
         Me.CntMnu.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CntMnu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuEndJob, Me.CntMnuMsgw, Me.CntMnuExcCmd, Me.ToolStripSeparator1, Me.CntMnuDspJobLog, Me.CntMnuDspUsrPrf, Me.ToolStripSeparator2, Me.GroupFilter, Me.ToolStripSeparator3, Me.GroupOperations})
+        Me.CntMnu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuEndJob, Me.CntMnuMsgw, Me.CntMnuExcCmd, Me.ToolStripSeparator1, Me.CntMnuDspJobLog, Me.CntMnuDspUsrPrf, Me.DisplaySpooledFilesToolStripMenuItem, Me.ToolStripSeparator2, Me.GroupFilter, Me.ToolStripSeparator3, Me.GroupOperations})
         Me.CntMnu.Name = "CntMnu"
-        Me.CntMnu.Size = New System.Drawing.Size(182, 232)
+        Me.CntMnu.Size = New System.Drawing.Size(190, 284)
         '
         'CntMnuEndJob
         '
         Me.CntMnuEndJob.Image = CType(resources.GetObject("CntMnuEndJob.Image"), System.Drawing.Image)
         Me.CntMnuEndJob.Name = "CntMnuEndJob"
-        Me.CntMnuEndJob.Size = New System.Drawing.Size(181, 30)
+        Me.CntMnuEndJob.Size = New System.Drawing.Size(189, 30)
         Me.CntMnuEndJob.Text = "&End job"
         '
         'CntMnuMsgw
         '
         Me.CntMnuMsgw.Image = CType(resources.GetObject("CntMnuMsgw.Image"), System.Drawing.Image)
         Me.CntMnuMsgw.Name = "CntMnuMsgw"
-        Me.CntMnuMsgw.Size = New System.Drawing.Size(181, 30)
+        Me.CntMnuMsgw.Size = New System.Drawing.Size(189, 30)
         Me.CntMnuMsgw.Text = "&Send reply"
         '
         'CntMnuExcCmd
         '
         Me.CntMnuExcCmd.Image = CType(resources.GetObject("CntMnuExcCmd.Image"), System.Drawing.Image)
         Me.CntMnuExcCmd.Name = "CntMnuExcCmd"
-        Me.CntMnuExcCmd.Size = New System.Drawing.Size(181, 30)
+        Me.CntMnuExcCmd.Size = New System.Drawing.Size(189, 30)
         Me.CntMnuExcCmd.Text = "E&xecute command"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(178, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(186, 6)
         '
         'CntMnuDspJobLog
         '
         Me.CntMnuDspJobLog.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CntMnuDspJobLog.Image = CType(resources.GetObject("CntMnuDspJobLog.Image"), System.Drawing.Image)
         Me.CntMnuDspJobLog.Name = "CntMnuDspJobLog"
-        Me.CntMnuDspJobLog.Size = New System.Drawing.Size(181, 30)
+        Me.CntMnuDspJobLog.Size = New System.Drawing.Size(189, 30)
         Me.CntMnuDspJobLog.Text = "Display job log"
         '
         'CntMnuDspUsrPrf
         '
         Me.CntMnuDspUsrPrf.Image = CType(resources.GetObject("CntMnuDspUsrPrf.Image"), System.Drawing.Image)
         Me.CntMnuDspUsrPrf.Name = "CntMnuDspUsrPrf"
-        Me.CntMnuDspUsrPrf.Size = New System.Drawing.Size(181, 30)
+        Me.CntMnuDspUsrPrf.Size = New System.Drawing.Size(189, 30)
         Me.CntMnuDspUsrPrf.Text = "Display userprofile"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(178, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(186, 6)
         '
         'GroupFilter
         '
         Me.GroupFilter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuFltUsrJob, Me.CntMnuFltFct, Me.CntMnuFltSbs, Me.CntMnuFltJobTyp, Me.CntMnuFltIPAdr})
         Me.GroupFilter.Name = "GroupFilter"
-        Me.GroupFilter.Size = New System.Drawing.Size(181, 30)
+        Me.GroupFilter.Size = New System.Drawing.Size(189, 30)
         Me.GroupFilter.Text = "Filters"
         '
         'CntMnuFltUsrJob
@@ -296,13 +297,13 @@ Partial Class ActiveJobs
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(178, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(186, 6)
         '
         'GroupOperations
         '
         Me.GroupOperations.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CntMnuSndBrkMsg, Me.ToolStripSeparator4, Me.CntMnuStrPrt, Me.CntMnuEndPrt, Me.ToolStripSeparator5, Me.CntMnuHldJob, Me.CntMnuRlsJob, Me.ToolStripSeparator6, Me.CntMnuHldOutQ, Me.CntMnuRlsOutQ})
         Me.GroupOperations.Name = "GroupOperations"
-        Me.GroupOperations.Size = New System.Drawing.Size(181, 30)
+        Me.GroupOperations.Size = New System.Drawing.Size(189, 30)
         Me.GroupOperations.Text = "&Operations"
         '
         'CntMnuSndBrkMsg
@@ -546,6 +547,13 @@ Partial Class ActiveJobs
         Me.DtaGrdActJob.Style = MetroFramework.MetroColorStyle.Green
         Me.DtaGrdActJob.TabIndex = 10
         '
+        'DisplaySpooledFilesToolStripMenuItem
+        '
+        Me.DisplaySpooledFilesToolStripMenuItem.Image = CType(resources.GetObject("DisplaySpooledFilesToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.DisplaySpooledFilesToolStripMenuItem.Name = "DisplaySpooledFilesToolStripMenuItem"
+        Me.DisplaySpooledFilesToolStripMenuItem.Size = New System.Drawing.Size(189, 30)
+        Me.DisplaySpooledFilesToolStripMenuItem.Text = "Display spooled files"
+        '
         'ActiveJobs
         '
         Me.AcceptButton = Me.BtnGet
@@ -644,4 +652,5 @@ Partial Class ActiveJobs
     Friend WithEvents ToolStripMessage As ToolStripStatusLabel
     Friend WithEvents ToolStripRecordsSelected As ToolStripStatusLabel
     Friend WithEvents DtaGrdActJob As MetroFramework.Controls.MetroGrid
+    Friend WithEvents DisplaySpooledFilesToolStripMenuItem As ToolStripMenuItem
 End Class

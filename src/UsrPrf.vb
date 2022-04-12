@@ -74,6 +74,7 @@ Public Class UsrPrf
         ActiveJobInfoForm.MdiParent = Main
         ActiveJobInfoForm.TxtBoxUsr.Text = TxtBoxUsrPrf.Text
         ActiveJobInfoForm.Show()
+        ActiveJobInfoForm.DtaGrdActJob.Select()
         ActiveJobInfoForm.BtnGet.PerformClick()
     End Sub
 

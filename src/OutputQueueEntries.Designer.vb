@@ -51,11 +51,13 @@ Partial Class OutputQueueEntries
         Me.LblMax = New System.Windows.Forms.Label()
         Me.CntMnuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteSpooledFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.HoldSpooledFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReleaseSpooledFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChangeOutputQueueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ChangeOutputQueueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.DisplayActiveJobsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DtaGrdOutQ, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip.SuspendLayout()
         Me.CntMnuStrip.SuspendLayout()
@@ -307,47 +309,60 @@ Partial Class OutputQueueEntries
         'CntMnuStrip
         '
         Me.CntMnuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CntMnuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteSpooledFileToolStripMenuItem, Me.ToolStripSeparator1, Me.HoldSpooledFileToolStripMenuItem, Me.ReleaseSpooledFileToolStripMenuItem, Me.ToolStripSeparator2, Me.ChangeOutputQueueToolStripMenuItem})
+        Me.CntMnuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteSpooledFileToolStripMenuItem, Me.ToolStripSeparator1, Me.HoldSpooledFileToolStripMenuItem, Me.ReleaseSpooledFileToolStripMenuItem, Me.ToolStripSeparator2, Me.ChangeOutputQueueToolStripMenuItem, Me.ToolStripSeparator3, Me.DisplayActiveJobsToolStripMenuItem})
         Me.CntMnuStrip.Name = "CntMnuStrip"
-        Me.CntMnuStrip.Size = New System.Drawing.Size(199, 136)
+        Me.CntMnuStrip.Size = New System.Drawing.Size(208, 194)
         '
         'DeleteSpooledFileToolStripMenuItem
         '
         Me.DeleteSpooledFileToolStripMenuItem.Image = CType(resources.GetObject("DeleteSpooledFileToolStripMenuItem.Image"), System.Drawing.Image)
         Me.DeleteSpooledFileToolStripMenuItem.Name = "DeleteSpooledFileToolStripMenuItem"
-        Me.DeleteSpooledFileToolStripMenuItem.Size = New System.Drawing.Size(198, 30)
+        Me.DeleteSpooledFileToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete
+        Me.DeleteSpooledFileToolStripMenuItem.Size = New System.Drawing.Size(207, 30)
         Me.DeleteSpooledFileToolStripMenuItem.Text = "Delete spooled file"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(204, 6)
         '
         'HoldSpooledFileToolStripMenuItem
         '
         Me.HoldSpooledFileToolStripMenuItem.Image = CType(resources.GetObject("HoldSpooledFileToolStripMenuItem.Image"), System.Drawing.Image)
         Me.HoldSpooledFileToolStripMenuItem.Name = "HoldSpooledFileToolStripMenuItem"
-        Me.HoldSpooledFileToolStripMenuItem.Size = New System.Drawing.Size(198, 30)
+        Me.HoldSpooledFileToolStripMenuItem.Size = New System.Drawing.Size(207, 30)
         Me.HoldSpooledFileToolStripMenuItem.Text = "Hold spooled file"
         '
         'ReleaseSpooledFileToolStripMenuItem
         '
         Me.ReleaseSpooledFileToolStripMenuItem.Image = CType(resources.GetObject("ReleaseSpooledFileToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ReleaseSpooledFileToolStripMenuItem.Name = "ReleaseSpooledFileToolStripMenuItem"
-        Me.ReleaseSpooledFileToolStripMenuItem.Size = New System.Drawing.Size(198, 30)
+        Me.ReleaseSpooledFileToolStripMenuItem.Size = New System.Drawing.Size(207, 30)
         Me.ReleaseSpooledFileToolStripMenuItem.Text = "Release spooled file"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(204, 6)
         '
         'ChangeOutputQueueToolStripMenuItem
         '
         Me.ChangeOutputQueueToolStripMenuItem.Image = CType(resources.GetObject("ChangeOutputQueueToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ChangeOutputQueueToolStripMenuItem.Name = "ChangeOutputQueueToolStripMenuItem"
-        Me.ChangeOutputQueueToolStripMenuItem.Size = New System.Drawing.Size(198, 30)
+        Me.ChangeOutputQueueToolStripMenuItem.Size = New System.Drawing.Size(207, 30)
         Me.ChangeOutputQueueToolStripMenuItem.Text = "Change output queue"
         '
-        'ToolStripSeparator1
+        'ToolStripSeparator3
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(195, 6)
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(204, 6)
         '
-        'ToolStripSeparator2
+        'DisplayActiveJobsToolStripMenuItem
         '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(195, 6)
+        Me.DisplayActiveJobsToolStripMenuItem.Image = CType(resources.GetObject("DisplayActiveJobsToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.DisplayActiveJobsToolStripMenuItem.Name = "DisplayActiveJobsToolStripMenuItem"
+        Me.DisplayActiveJobsToolStripMenuItem.Size = New System.Drawing.Size(207, 30)
+        Me.DisplayActiveJobsToolStripMenuItem.Text = "Display active jobs"
         '
         'OutputQueueEntries
         '
@@ -420,4 +435,6 @@ Partial Class OutputQueueEntries
     Friend WithEvents ChangeOutputQueueToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents DisplayActiveJobsToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -127,16 +127,47 @@ Public Class OutputQueues
         Next
     End Sub
 
+    Private Sub ClearOutputQueueToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearOutputQueueToolStripMenuItem.Click
+        'Clear entries for selected output queues
+        Dim Result As DialogResult
+        For Each SelectedRow As DataGridViewRow In DtaGrdOutQ.SelectedRows
+            Result = MessageBox.Show("Please confirm the clear-request for output queue: " + vbCrLf +
+                                     DtaGrdOutQ.Rows(SelectedRow.Index).Cells(0).Value.ToString().Trim(), "Clear all entries for output queue?",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If Result = System.Windows.Forms.DialogResult.Yes Then
+                DisplayInformation("Please wait, process clear output queue on host...")
+                ExecuteCommandOnHost("CLROUTQ OUTQ(" + DtaGrdOutQ.Rows(SelectedRow.Index).Cells(1).Value.ToString().Trim() +
+                                     "/" + DtaGrdOutQ.Rows(SelectedRow.Index).Cells(0).Value.ToString().Trim() + ")")
+                RemoveInformation()
+            End If
+        Next
+    End Sub
+
+    Private Sub DisplayActiveJobToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayActiveJobToolStripMenuItem.Click
+        'Display active job information for each selected output queue with running job
+        For Each SelectedRow As DataGridViewRow In DtaGrdOutQ.SelectedRows
+            If DtaGrdOutQ.Rows(SelectedRow.Index).Cells(8).Value.ToString() <> "" Then
+                Dim ActiveJobsForm As New ActiveJobs
+                ActiveJobsForm.MdiParent = Main
+                ActiveJobsForm.TxtBoxJobNameShort.Text = DtaGrdOutQ.Rows(SelectedRow.Index).Cells(0).Value.ToString()
+                ActiveJobsForm.Show()
+                ActiveJobsForm.DtaGrdActJob.Select()
+                ActiveJobsForm.BtnGet.PerformClick()
+            End If
+        Next
+    End Sub
+
     Private Sub DisplayJoblogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayJoblogToolStripMenuItem.Click
         'Display joblog for each selection
         For Each SelectedRow As DataGridViewRow In DtaGrdOutQ.SelectedRows
             If DtaGrdOutQ.Rows(SelectedRow.Index).Cells(8).Value.ToString() <> "" Then
-                Dim JobLogEntry As New JobLog
-                JobLogEntry.MdiParent = Main
-                JobLogEntry.TxtBoxJob.Text = DtaGrdOutQ.Rows(SelectedRow.Index).Cells(8).Value.ToString()
-                JobLogEntry.TxtBoxJob.ReadOnly = True
-                JobLogEntry.Show()
-                JobLogEntry.BtnGet.PerformClick()
+                Dim JoblogForm As New JobLog
+                JoblogForm.MdiParent = Main
+                JoblogForm.TxtBoxJob.Text = DtaGrdOutQ.Rows(SelectedRow.Index).Cells(8).Value.ToString()
+                JoblogForm.TxtBoxJob.ReadOnly = True
+                JoblogForm.Show()
+                JoblogForm.DtaGrdJobLog.Select()
+                JoblogForm.BtnGet.PerformClick()
             End If
         Next
     End Sub
@@ -144,12 +175,14 @@ Public Class OutputQueues
     Private Sub DisplayEntriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayEntriesToolStripMenuItem.Click, DtaGrdOutQ.DoubleClick
         'Display output queue entries for each selection
         For Each SelectedRow As DataGridViewRow In DtaGrdOutQ.SelectedRows
-            Dim OutputQueueEntry As New OutputQueueEntries
-            OutputQueueEntry.MdiParent = Main
-            OutputQueueEntry.TxtBoxOutQName.Text = DtaGrdOutQ.Rows(SelectedRow.Index).Cells(0).Value.ToString()
-            OutputQueueEntry.TxtBoxOutQLib.Text = DtaGrdOutQ.Rows(SelectedRow.Index).Cells(1).Value.ToString()
-            OutputQueueEntry.Show()
-            OutputQueueEntry.BtnGet.PerformClick()
+            Dim OutQEntryForm As New OutputQueueEntries
+            OutQEntryForm.MdiParent = Main
+            OutQEntryForm.TxtBoxOutQName.Text = DtaGrdOutQ.Rows(SelectedRow.Index).Cells(0).Value.ToString()
+            OutQEntryForm.TxtBoxOutQLib.Text = DtaGrdOutQ.Rows(SelectedRow.Index).Cells(1).Value.ToString()
+            OutQEntryForm.JobNameLongFilter = Nothing
+            OutQEntryForm.Show()
+            OutQEntryForm.DtaGrdOutQ.Select()
+            OutQEntryForm.BtnGet.PerformClick()
         Next
     End Sub
 

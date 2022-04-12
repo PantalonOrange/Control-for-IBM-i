@@ -193,11 +193,12 @@ Public Class UserProfiles
     Private Sub ActiveJobsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ActiveJobsToolStripMenuItem.Click
         'Show active jobs for selected userprofile
         For Each SelectedRow As DataGridViewRow In DtaGrdUsrPrf.SelectedRows
-            Dim ActiveJobs As New ActiveJobs
-            ActiveJobs.MdiParent = Main
-            ActiveJobs.TxtBoxUsr.Text = DtaGrdUsrPrf.Rows(SelectedRow.Index).Cells(1).Value
-            ActiveJobs.Show()
-            ActiveJobs.BtnGet.PerformClick()
+            Dim ActiveJobsForm As New ActiveJobs
+            ActiveJobsForm.MdiParent = Main
+            ActiveJobsForm.TxtBoxUsr.Text = DtaGrdUsrPrf.Rows(SelectedRow.Index).Cells(1).Value
+            ActiveJobsForm.Show()
+            ActiveJobsForm.DtaGrdActJob.Select()
+            ActiveJobsForm.BtnGet.PerformClick()
         Next
     End Sub
 

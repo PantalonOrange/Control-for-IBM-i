@@ -13,6 +13,8 @@ Public Class ActiveJobs
     Private ResponseStream As New ResponseFromServer_T
     Private ActiveJobWebservice As String = Main.Host.Trim() + "/activejobs"
 
+    Public JobNameLongFilter As String
+
     Private Sub ActiveJobs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
         Me.KeyPreview = True
@@ -49,7 +51,7 @@ Public Class ActiveJobs
 
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
         If CmbBoxJobSts.Text = "" And TxtBoxUsr.Text = "" And CmbBoxSbs.Text = "" And TxtBoxFunction.Text = "" And
-            TxtBoxJobNameShort.Text = "" And CmbBoxJobTyp.Text = "" And TxtBoxIPAdr.Text = "" Then
+            TxtBoxJobNameShort.Text = "" And JobNameLongFilter = "" And CmbBoxJobTyp.Text = "" And TxtBoxIPAdr.Text = "" Then
             MessageBox.Show("Please take at least one selection", "No selection found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             CmbBoxSbs.Select()
         Else
@@ -59,12 +61,13 @@ Public Class ActiveJobs
             'Start communication, retrieve json stream and fill datagridview
             ActiveJobWebservice = Main.Host.Trim() + "/activejobs"
             DisplayInformation("Please wait, collecting data...")
-            StartProcessGETActiveJobs(ActiveJobWebservice, CmbBoxJobTyp.Text, TxtBoxJobNameShort.Text, TxtBoxUsr.Text, CmbBoxJobSts.Text,
+            StartProcessGETActiveJobs(ActiveJobWebservice, CmbBoxJobTyp.Text, TxtBoxJobNameShort.Text, JobNameLongFilter, TxtBoxUsr.Text, CmbBoxJobSts.Text,
                                       CmbBoxSbs.Text, TxtBoxFunction.Text, TxtBoxIPAdr.Text)
             RemoveInformation()
             BtnGet.Enabled = True
             BtnClose.Enabled = True
             DtaGrdActJob.Enabled = True
+            JobNameLongFilter = Nothing
         End If
     End Sub
 
@@ -103,18 +106,18 @@ Public Class ActiveJobs
             Case 3 'job status
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             Case 6 'authorization name
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             Case 8 'function type
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             Case 9 'function
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             Case 10 'temporary Storage used
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 e.CellStyle.Format = "N0"
             Case 11 'ip address
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             Case 12 'subsystem
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
         End Select
     End Sub
 
@@ -178,7 +181,26 @@ Public Class ActiveJobs
             JoblogForm.TxtBoxJob.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value
             JoblogForm.TxtBoxJob.ReadOnly = True
             JoblogForm.CmbBoxMax.Text = "50"
+            JoblogForm.DtaGrdJobLog.Select()
             JoblogForm.BtnGet.PerformClick()
+        Next
+    End Sub
+
+    Private Sub DisplaySpooledFilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplaySpooledFilesToolStripMenuItem.Click
+        'Display spooled files for selected job
+        Dim Result As DialogResult
+        For Each SelectedRow As DataGridViewRow In DtaGrdActJob.SelectedRows
+            Result = MessageBox.Show("This query my took a while. Execute?", "Question about query?",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If Result = System.Windows.Forms.DialogResult.Yes Then
+                Dim OutQEntryForm As New OutputQueueEntries
+                OutQEntryForm.MdiParent = Main
+                OutQEntryForm.Show()
+                OutQEntryForm.JobNameLongFilter = DtaGrdActJob.Rows(SelectedRow.Index).Cells(1).Value
+                OutQEntryForm.DtaGrdOutQ.Select()
+                OutQEntryForm.BtnGet.PerformClick()
+                Exit For
+            End If
         Next
     End Sub
 
@@ -208,6 +230,7 @@ Public Class ActiveJobs
             TxtBoxIPAdr.Text = ""
             ToolStripMessage.Visible = True
             ToolStripMessage.Text = "Set filter to selected 'user': " + TxtBoxUsr.Text.Trim()
+            Me.DtaGrdActJob.Select()
             Me.BtnGet.PerformClick()
             Exit For
         Next
@@ -225,6 +248,7 @@ Public Class ActiveJobs
             TxtBoxIPAdr.Text = ""
             ToolStripMessage.Visible = True
             ToolStripMessage.Text = "Set filter to selected 'function': " + TxtBoxFunction.Text.Trim()
+            Me.DtaGrdActJob.Select()
             Me.BtnGet.PerformClick()
             Exit For
         Next
@@ -242,6 +266,7 @@ Public Class ActiveJobs
             TxtBoxIPAdr.Text = ""
             ToolStripMessage.Visible = True
             ToolStripMessage.Text = "Set filter to selected 'subsystem': " + CmbBoxSbs.Text.Trim()
+            Me.DtaGrdActJob.Select()
             Me.BtnGet.PerformClick()
             Exit For
         Next
@@ -259,6 +284,7 @@ Public Class ActiveJobs
             TxtBoxIPAdr.Text = ""
             ToolStripMessage.Visible = True
             ToolStripMessage.Text = "Set filter to selected 'job type': " + CmbBoxJobTyp.Text.Trim()
+            Me.DtaGrdActJob.Select()
             Me.BtnGet.PerformClick()
             Exit For
         Next
@@ -279,6 +305,7 @@ Public Class ActiveJobs
                 TxtBoxIPAdr.Text = DtaGrdActJob.Rows(SelectedRow.Index).Cells(11).Value
                 ToolStripMessage.Visible = True
                 ToolStripMessage.Text = "Set filter to selected 'client-ip-address': " + TxtBoxIPAdr.Text.Trim()
+                Me.DtaGrdActJob.Select()
                 Me.BtnGet.PerformClick()
             End If
             Exit For
@@ -408,8 +435,8 @@ Public Class ActiveJobs
     End Sub
 
     Private Sub StartProcessGETActiveJobs(ByVal pURL As String, ByVal pJobTyp As String, ByVal pJobNameShort As String,
-                                      ByVal pSelUsr As String, ByVal pSelJobSts As String, ByVal pSelSubSys As String,
-                                      ByVal pSelFct As String, ByVal pClientIP As String)
+                                            ByVal pJobNameLong As String, ByVal pSelUsr As String, ByVal pSelJobSts As String,
+                                            ByVal pSelSubSys As String, ByVal pSelFct As String, ByVal pClientIP As String)
         Dim GetActiveJobs As New DoRestStuffGet
         Dim URL As String = pURL.Trim() + "?"
         If pJobTyp <> "" Then
@@ -417,6 +444,9 @@ Public Class ActiveJobs
         End If
         If pJobNameShort <> "" Then
             URL = URL.Trim() + "jobshort=" + pJobNameShort.Trim() + "&"
+        End If
+        If pJobNameLong <> "" Then
+            URL = URL.Trim() + "job=" + pJobNameLong.Trim() + "&"
         End If
         If pSelUsr <> "" Then
             URL = URL.Trim() + "usr=" + pSelUsr.Trim() + "&"

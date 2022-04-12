@@ -13,6 +13,8 @@ Public Class OutputQueueEntries
     Private ResponseStream As New ResponseFromServer_T
     Private OutQWebservice As String = Main.Host.Trim() + "/outqentries"
 
+    Public JobNameLongFilter As String
+
     Private Sub OutputQueueEntries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Initial load
         Me.KeyPreview = True
@@ -33,6 +35,8 @@ Public Class OutputQueueEntries
                 Me.BtnGet.PerformClick()
             Case Keys.F12
                 Me.BtnClose.PerformClick()
+            Case Keys.Delete
+                PerformDeleteSpooledFile()
         End Select
     End Sub
 
@@ -47,7 +51,7 @@ Public Class OutputQueueEntries
     End Sub
 
     Private Sub BtnGet_Click(sender As Object, e As EventArgs) Handles BtnGet.Click
-        If TxtBoxOutQName.Text = "" And TxtBoxOutQLib.Text = "" And TxtBoxUsr.Text = "" And TxtBoxSplF.Text = "" Then
+        If TxtBoxOutQName.Text = "" And TxtBoxOutQLib.Text = "" And TxtBoxUsr.Text = "" And TxtBoxSplF.Text = "" And JobNameLongFilter = "" Then
             MessageBox.Show("Please take at least one selection", "No selection found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             TxtBoxOutQName.Select()
         Else
@@ -124,18 +128,7 @@ Public Class OutputQueueEntries
 
     Private Sub DeleteSpooledFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteSpooledFileToolStripMenuItem.Click
         'Delete selcted spooled files
-        Dim Result As DialogResult
-        For Each SelectedRow As DataGridViewRow In DtaGrdOutQ.SelectedRows
-            Result = MessageBox.Show("Please confirm the delete-request for spool: " + vbCrLf +
-                                     DtaGrdOutQ.Rows(SelectedRow.Index).Cells(3).Value.ToString().Trim(), "Delete spooled file?",
-                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If Result = System.Windows.Forms.DialogResult.Yes Then
-                DisplayInformation("Please wait, process delete spooled file on host...")
-                DeleteSpooledFile(DtaGrdOutQ.Rows(SelectedRow.Index).Cells(3).Value.ToString(), DtaGrdOutQ.Rows(SelectedRow.Index).Cells(11).Value.ToString(),
-                                  DtaGrdOutQ.Rows(SelectedRow.Index).Cells(14).Value.ToString())
-                RemoveInformation()
-            End If
-        Next
+        PerformDeleteSpooledFile()
     End Sub
 
     Private Sub HoldSpooledFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HoldSpooledFileToolStripMenuItem.Click
@@ -171,6 +164,20 @@ Public Class OutputQueueEntries
         End If
     End Sub
 
+    Private Sub DisplayActiveJobsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayActiveJobsToolStripMenuItem.Click
+        'Go to active jobs with created job as filter
+        For Each SelectedRow As DataGridViewRow In DtaGrdOutQ.SelectedRows
+            If DtaGrdOutQ.Rows(SelectedRow.Index).Cells(11).Value.ToString() <> "" Then
+                Dim ActiveJobsForm As New ActiveJobs
+                ActiveJobsForm.MdiParent = Main
+                ActiveJobsForm.JobNameLongFilter = DtaGrdOutQ.Rows(SelectedRow.Index).Cells(11).Value.ToString()
+                ActiveJobsForm.Show()
+                ActiveJobsForm.DtaGrdActJob.Select()
+                ActiveJobsForm.BtnGet.PerformClick()
+            End If
+        Next
+    End Sub
+
     Private Sub DisplayInformation(ByVal pMessage As String)
         PrgBar.Visible = True
         PrgBar.Refresh()
@@ -182,6 +189,22 @@ Public Class OutputQueueEntries
         PrgBar.Visible = False
         PrgBar.Refresh()
         LblWait.Visible = False
+    End Sub
+
+    Private Sub PerformDeleteSpooledFile()
+        Dim Result As DialogResult
+        For Each SelectedRow As DataGridViewRow In DtaGrdOutQ.SelectedRows
+            Result = MessageBox.Show("Please confirm the delete-request for spool: " + vbCrLf +
+                                     DtaGrdOutQ.Rows(SelectedRow.Index).Cells(3).Value.ToString().Trim() + vbCrLf +
+                                     "There is no undo for this operation!", "Delete spooled file?",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If Result = System.Windows.Forms.DialogResult.Yes Then
+                DisplayInformation("Please wait, process delete spooled file on host...")
+                DeleteSpooledFile(DtaGrdOutQ.Rows(SelectedRow.Index).Cells(3).Value.ToString(), DtaGrdOutQ.Rows(SelectedRow.Index).Cells(11).Value.ToString(),
+                                  DtaGrdOutQ.Rows(SelectedRow.Index).Cells(14).Value.ToString())
+                RemoveInformation()
+            End If
+        Next
     End Sub
 
     Private Sub DeleteSpooledFile(ByVal pSpooledFileName As String, ByVal pJobName As String, ByVal pFileNumber As String)
@@ -208,7 +231,8 @@ Public Class OutputQueueEntries
         DtaGrdOutQ.Enabled = False
         ToolStripMessage.Text = Nothing
         DisplayInformation("Please wait, collecting data...")
-        StartProcessGETOutQInfo(OutQWebservice, TxtBoxOutQName.Text, TxtBoxOutQLib.Text, TxtBoxUsr.Text, TxtBoxSplF.Text, CmbBoxMax.Text)
+        StartProcessGETOutQInfo(OutQWebservice, TxtBoxOutQName.Text, TxtBoxOutQLib.Text, TxtBoxUsr.Text, JobNameLongFilter, TxtBoxSplF.Text, CmbBoxMax.Text)
+        JobNameLongFilter = Nothing
         RemoveInformation()
         BtnGet.Enabled = True
         BtnClose.Enabled = True
@@ -216,7 +240,7 @@ Public Class OutputQueueEntries
     End Sub
 
     Private Sub StartProcessGETOutQInfo(ByVal pURL As String, ByVal pOutQName As String, ByVal pOutQLib As String, ByVal pUser As String,
-                                        ByVal pSpooledFile As String, ByVal pLimit As String)
+                                        ByVal pJobNameLong As String, ByVal pSpooledFile As String, ByVal pLimit As String)
         Dim GetOutQEntry As New DoRestStuffGet
         Dim URL As String = pURL.Trim() + "?"
         If pOutQName <> "" Then
@@ -230,6 +254,9 @@ Public Class OutputQueueEntries
         End If
         If pSpooledFile <> "" Then
             URL = URL.Trim() + "splf=" + pSpooledFile.Trim() + "&"
+        End If
+        If pJobNameLong <> "" Then
+            URL = URL.Trim() + "job=" + pJobNameLong.Trim() + "&"
         End If
         If pLimit <> "" Then
             URL = URL.Trim() + "limit=" + pLimit.Trim()

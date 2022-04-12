@@ -23,9 +23,9 @@ Partial Class OutputQueues
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OutputQueues))
         Me.DtaGrdOutQ = New MetroFramework.Controls.MetroGrid()
         Me.ToolStripRecordsSelected = New System.Windows.Forms.ToolStripStatusLabel()
@@ -50,6 +50,9 @@ Partial Class OutputQueues
         Me.DisplayEntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.DisplayJoblogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClearOutputQueueToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.DisplayActiveJobToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DtaGrdOutQ, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip.SuspendLayout()
         Me.CntMnuStrip.SuspendLayout()
@@ -68,23 +71,23 @@ Partial Class OutputQueues
         Me.DtaGrdOutQ.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DtaGrdOutQ.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.DtaGrdOutQ.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(173, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(206, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DtaGrdOutQ.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(173, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(206, Byte), Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdOutQ.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DtaGrdOutQ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(206, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DtaGrdOutQ.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(206, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DtaGrdOutQ.DefaultCellStyle = DataGridViewCellStyle8
         Me.DtaGrdOutQ.EnableHeadersVisualStyles = False
         Me.DtaGrdOutQ.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.DtaGrdOutQ.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -92,14 +95,14 @@ Partial Class OutputQueues
         Me.DtaGrdOutQ.Name = "DtaGrdOutQ"
         Me.DtaGrdOutQ.ReadOnly = True
         Me.DtaGrdOutQ.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(173, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(206, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DtaGrdOutQ.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(173, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(206, Byte), Integer))
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DtaGrdOutQ.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.DtaGrdOutQ.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DtaGrdOutQ.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DtaGrdOutQ.ShowCellErrors = False
@@ -244,48 +247,67 @@ Partial Class OutputQueues
         'CntMnuStrip
         '
         Me.CntMnuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.CntMnuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HoldOutqueueToolStripMenuItem, Me.ReleaseOutqueueToolStripMenuItem, Me.ToolStripSeparator1, Me.DisplayEntriesToolStripMenuItem, Me.ToolStripSeparator2, Me.DisplayJoblogToolStripMenuItem})
+        Me.CntMnuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HoldOutqueueToolStripMenuItem, Me.ReleaseOutqueueToolStripMenuItem, Me.ToolStripSeparator1, Me.DisplayEntriesToolStripMenuItem, Me.ToolStripSeparator2, Me.DisplayActiveJobToolStripMenuItem, Me.DisplayJoblogToolStripMenuItem, Me.ToolStripSeparator3, Me.ClearOutputQueueToolStripMenuItem})
         Me.CntMnuStrip.Name = "CntMnuStrip"
-        Me.CntMnuStrip.Size = New System.Drawing.Size(176, 136)
+        Me.CntMnuStrip.Size = New System.Drawing.Size(197, 202)
         '
         'HoldOutqueueToolStripMenuItem
         '
         Me.HoldOutqueueToolStripMenuItem.Image = CType(resources.GetObject("HoldOutqueueToolStripMenuItem.Image"), System.Drawing.Image)
         Me.HoldOutqueueToolStripMenuItem.Name = "HoldOutqueueToolStripMenuItem"
-        Me.HoldOutqueueToolStripMenuItem.Size = New System.Drawing.Size(175, 30)
-        Me.HoldOutqueueToolStripMenuItem.Text = "Hold outqueue"
+        Me.HoldOutqueueToolStripMenuItem.Size = New System.Drawing.Size(196, 30)
+        Me.HoldOutqueueToolStripMenuItem.Text = "Hold output queue"
         '
         'ReleaseOutqueueToolStripMenuItem
         '
         Me.ReleaseOutqueueToolStripMenuItem.Image = CType(resources.GetObject("ReleaseOutqueueToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ReleaseOutqueueToolStripMenuItem.Name = "ReleaseOutqueueToolStripMenuItem"
-        Me.ReleaseOutqueueToolStripMenuItem.Size = New System.Drawing.Size(175, 30)
-        Me.ReleaseOutqueueToolStripMenuItem.Text = "Release outqueue"
+        Me.ReleaseOutqueueToolStripMenuItem.Size = New System.Drawing.Size(196, 30)
+        Me.ReleaseOutqueueToolStripMenuItem.Text = "Release output queue"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(172, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(193, 6)
         '
         'DisplayEntriesToolStripMenuItem
         '
         Me.DisplayEntriesToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DisplayEntriesToolStripMenuItem.Image = CType(resources.GetObject("DisplayEntriesToolStripMenuItem.Image"), System.Drawing.Image)
         Me.DisplayEntriesToolStripMenuItem.Name = "DisplayEntriesToolStripMenuItem"
-        Me.DisplayEntriesToolStripMenuItem.Size = New System.Drawing.Size(175, 30)
+        Me.DisplayEntriesToolStripMenuItem.Size = New System.Drawing.Size(196, 30)
         Me.DisplayEntriesToolStripMenuItem.Text = "Display entries"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(172, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(193, 6)
         '
         'DisplayJoblogToolStripMenuItem
         '
         Me.DisplayJoblogToolStripMenuItem.Image = CType(resources.GetObject("DisplayJoblogToolStripMenuItem.Image"), System.Drawing.Image)
         Me.DisplayJoblogToolStripMenuItem.Name = "DisplayJoblogToolStripMenuItem"
-        Me.DisplayJoblogToolStripMenuItem.Size = New System.Drawing.Size(175, 30)
+        Me.DisplayJoblogToolStripMenuItem.Size = New System.Drawing.Size(196, 30)
         Me.DisplayJoblogToolStripMenuItem.Text = "Display job log"
+        '
+        'ClearOutputQueueToolStripMenuItem
+        '
+        Me.ClearOutputQueueToolStripMenuItem.Image = CType(resources.GetObject("ClearOutputQueueToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.ClearOutputQueueToolStripMenuItem.Name = "ClearOutputQueueToolStripMenuItem"
+        Me.ClearOutputQueueToolStripMenuItem.Size = New System.Drawing.Size(196, 30)
+        Me.ClearOutputQueueToolStripMenuItem.Text = "Clear output queue"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(193, 6)
+        '
+        'DisplayActiveJobToolStripMenuItem
+        '
+        Me.DisplayActiveJobToolStripMenuItem.Image = CType(resources.GetObject("DisplayActiveJobToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.DisplayActiveJobToolStripMenuItem.Name = "DisplayActiveJobToolStripMenuItem"
+        Me.DisplayActiveJobToolStripMenuItem.Size = New System.Drawing.Size(196, 30)
+        Me.DisplayActiveJobToolStripMenuItem.Text = "Display active jobs"
         '
         'OutputQueues
         '
@@ -347,4 +369,7 @@ Partial Class OutputQueues
     Friend WithEvents DisplayEntriesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents DisplayJoblogToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ClearOutputQueueToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents DisplayActiveJobToolStripMenuItem As ToolStripMenuItem
 End Class
